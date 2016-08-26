@@ -12,7 +12,7 @@
 #import "UpdateHeadResponse.h"
 #import "UserInfoResponse.h"
 #import "AFAppDotNetAPIClient.h"
-#import "MJExtension.h"
+#import <MJExtension/MJExtension.h>
 #import "Constant.h"
 #import "MsgResponse.h"
 #import "FailServerResponse.h"

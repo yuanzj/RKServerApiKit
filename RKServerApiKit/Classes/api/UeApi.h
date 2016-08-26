@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "UeListResponse.h"
-#import "MJExtension.h"
+#import <MJExtension/MJExtension.h>
 #import "AFAppDotNetAPIClient.h"
 #import "UeInfo.h"
 #import "AccessoryUE.h"
