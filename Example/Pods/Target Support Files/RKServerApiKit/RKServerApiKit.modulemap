@@ -1,0 +1,6 @@
+framework module RKServerApiKit {
+  umbrella header "RKServerApiKit-umbrella.h"
+
+  export *
+  module * { export * }
+}
