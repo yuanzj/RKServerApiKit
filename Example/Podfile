@@ -1,0 +1,11 @@
+use_frameworks!
+
+target 'RKServerApiKit_Example' do
+  pod 'RKServerApiKit', :path => '../'
+
+  target 'RKServerApiKit_Tests' do
+    inherit! :search_paths
+
+    
+  end
+end
