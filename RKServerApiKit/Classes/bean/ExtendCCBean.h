@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <CocoaSecurity/CocoaSecurity.h>
-#import "ByteConvert.h"
+#import "RKSByteConvert.h"
 #import "BatteryStatusInRedis.h"
 
 @interface ExtendCCBean : NSObject

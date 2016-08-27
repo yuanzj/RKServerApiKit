@@ -35,8 +35,8 @@
 #import "UserInfoResponse.h"
 #import "UeService.h"
 #import "UserService.h"
-#import "ByteConvert.h"
 #import "Common.h"
+#import "RKSByteConvert.h"
 
 FOUNDATION_EXPORT double RKServerApiKitVersionNumber;
 FOUNDATION_EXPORT const unsigned char RKServerApiKitVersionString[];

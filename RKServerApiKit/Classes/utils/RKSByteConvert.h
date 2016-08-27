@@ -1,5 +1,5 @@
 //
-//  ByteConvert.h
+//  RKSByteConvert.h
 //  RKServerApi-iOS
 //
 //  Created by caoyy on 16/7/28.
@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface ByteConvert : NSObject
+@interface RKSByteConvert : NSObject
 + (int) bytesToUint:(Byte[]) array ;
 + (int) bytesToUshort:(Byte[]) b offset:(int) offset;
 + (int) bytesToUshort:(Byte[]) b;

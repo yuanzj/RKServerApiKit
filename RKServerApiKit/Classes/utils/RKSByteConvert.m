@@ -1,14 +1,14 @@
 //
-//  ByteConvert.m
+//  RKSByteConvert.m
 //  RKServerApi-iOS
 //
 //  Created by caoyy on 16/7/28.
 //  Copyright © 2016年 roky. All rights reserved.
 //
 
-#import "ByteConvert.h"
+#import "RKSByteConvert.h"
 
-@implementation ByteConvert
+@implementation RKSByteConvert
 
 + (int)  bytesToUint:(Byte[]) array {
     return ((long) (array[3] & 0xff))

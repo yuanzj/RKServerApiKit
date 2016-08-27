@@ -17,7 +17,7 @@
     if (self.travelMiles) {
         Byte temp[4];
         [[[[CocoaSecurityDecoder alloc] init] hex:self.travelMiles] getBytes:temp length:4];
-        return [ByteConvert bytesToUint:temp];
+        return [RKSByteConvert bytesToUint:temp];
     } else {
         return 0;
     }
