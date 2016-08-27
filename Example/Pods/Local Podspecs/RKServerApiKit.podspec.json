@@ -1,9 +1,9 @@
 {
   "name": "RKServerApiKit",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "summary": "A short description of RKServerApiKit.",
   "description": "TODO: Add long description of the pod here.",
-  "homepage": "https://github.com/<GITHUB_USERNAME>/RKServerApiKit",
+  "homepage": "https://github.com/yuanzj/RKServerApiKit",
   "license": {
     "type": "MIT",
     "file": "LICENSE"
@@ -12,8 +12,8 @@
     "yuanzhijian": "jswxyzj@qq.com"
   },
   "source": {
-    "git": "https://github.com/<GITHUB_USERNAME>/RKServerApiKit.git",
-    "tag": "0.1.0"
+    "git": "https://github.com/yuanzj/RKServerApiKit.git",
+    "tag": "0.1.1"
   },
   "platforms": {
     "ios": "8.0"

@@ -12,12 +12,12 @@
  * 2.AFNetworking acceptableContentTypes类型增加text/plain
  */
 #import <Foundation/Foundation.h>
-#import "AFURLSessionManager.h"
+#import <AFNetworking/AFURLSessionManager.h>
 #import "ApiNotNeedSessionIdDic.h"
 #import "Constant.h"
 #import "Validator.h"
 #import "BaseResponse.h"
-#import "MJExtension.h"
+#import <MJExtension/MJExtension.h>
 #import "UserService.h"
 #import "User.h"
 
