@@ -7,11 +7,29 @@
 //
 
 #import "UeService.h"
+#import "RealmManager.h"
+
 
 @implementation UeService
 
 +(NSURLSessionDataTask *)getUEListWithPageNo:(int)pageNo pageCount:(int)pageCount block:(void (^)(UeListResponse *_ueListResponse, NSError *error)) block{
-    return [UeApi getUEListWithPageNo:pageNo pageCount:pageCount block:block];
+    return [UeApi getUEListWithPageNo:pageNo pageCount:pageCount block:^(UeListResponse *_ueListResponse, NSError *error){
+        if (_ueListResponse) {
+            if(_ueListResponse.state == 0){
+                
+                NSArray* data = _ueListResponse.data;
+                if (data && data.count > 0) {
+                    [RealmManager clearUeInfoList];
+                    [RealmManager saveUeInfoList:data];
+                }
+                
+            }
+            
+            block(_ueListResponse, nil);
+        } else {
+            block(nil, error);
+        }
+    }];
 }
 
 +(NSURLSessionDataTask *)deleteUeWithUeSn:(NSString*)ueSn block:(void (^)(BaseResponse *_baseResponse, NSError *error)) block{

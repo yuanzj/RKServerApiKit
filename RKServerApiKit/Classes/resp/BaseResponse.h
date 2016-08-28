@@ -8,6 +8,9 @@
 
 #import <Foundation/Foundation.h>
 
+
+#define RKSAPIResponseSuccess 0
+
 @interface BaseResponse : NSObject
 
 @property (assign, nonatomic) int state;

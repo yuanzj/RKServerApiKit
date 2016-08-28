@@ -66,7 +66,7 @@ NSString * const USER = @"USER";
     NSString *appVersion = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"];
     return [UserApi loginWithMobile:mobile password:password ctype:ctype deviceId:deviceId appVersion:appVersion block:^(UserResponse *_mUserResponse, NSError *error){
         if (_mUserResponse) {
-            block(_mUserResponse, nil);
+           
             if(_mUserResponse.state == 0){
                 LoginUser *loginUser = _mUserResponse.data;
                 User *mUser = [[User alloc] init];
@@ -78,6 +78,9 @@ NSString * const USER = @"USER";
                 [User setUser:mUser];
                 [RealmManager saveUser:mUser];
             }
+            
+            block(_mUserResponse, nil);
+            
         }else{
             block(nil, error);
         }
@@ -105,7 +108,20 @@ NSString * const USER = @"USER";
 }
 
 +(NSURLSessionDataTask *)getUserDetailWithBlock:(void (^)(UserInfoResponse *_userInfoResponse, NSError *error)) block{
-    return [UserApi getUserDetailWithBlock:block];
+    return [UserApi getUserDetailWithBlock:^(UserInfoResponse *_userInfoResponse, NSError *error){
+        
+        if (_userInfoResponse) {
+            if(_userInfoResponse.state == 0){
+                UserInfo *mUserInfo = _userInfoResponse.data;
+                [UserInfo setUserInfo:mUserInfo];
+                [RealmManager saveUserInfo:mUserInfo];
+            }
+            
+            block(_userInfoResponse, nil);
+        } else {
+            block(nil, error);
+        }
+    }];
 }
 
 +(NSURLSessionDataTask *)getMessageWithBlock:(void (^)(MsgResponse *_msgResponse, NSError *error)) block{

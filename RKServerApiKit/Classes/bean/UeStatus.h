@@ -7,8 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <Realm/Realm.h>
 
-@interface UeStatus : NSObject
+@interface UeStatus  : RLMObject
 
 @property (strong, nonatomic) NSString* address;
 @property (strong, nonatomic) NSString* isOnline;

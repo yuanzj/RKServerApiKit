@@ -7,11 +7,24 @@
 //
 
 #import "UserInfo.h"
+#import "RealmManager.h"
+
+static UserInfo *mUserInfo = nil;
 
 @implementation UserInfo
 
 -(NSString*)description{
     return [NSString stringWithFormat:@"gender: %@ nickname: %@ headImgUrl: %@ mobile %@",_gender,_nickname, _headImgUrl, _mobile];
+}
++ (void)setUserInfo:(UserInfo *)_UserInfo{
+      mUserInfo = _UserInfo;
+}
+
++ (UserInfo *)getUserInfo{
+    if(mUserInfo == nil){
+        mUserInfo = [RealmManager queryUserInfo];
+    }
+    return mUserInfo;
 }
 
 @end

@@ -10,4 +10,16 @@
 
 @implementation UeInfo
 
+-(void)setAccessoryUEs:(NSArray*)__AccessoryUEs{
+    _accessoryUEs = __AccessoryUEs;
+    
+    [self.storeAccessoryUEs addObjects:_accessoryUEs];
+}
+
++ (NSString *)primaryKey {
+    return @"ueSn";
+}
++ (NSArray *)ignoredProperties {
+    return @[@"accessoryUEs"];
+}
 @end

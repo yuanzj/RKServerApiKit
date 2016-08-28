@@ -7,8 +7,9 @@
 //
 
 #import "BaseResponse.h"
+#import <Realm/Realm.h>
 
-@interface Firm : NSObject
+@interface Firm  : RLMObject
 
 //厂商id
 @property (strong, nonatomic) NSString* id;
@@ -26,3 +27,4 @@
 @property (strong, nonatomic) NSString* url;
 
 @end
+

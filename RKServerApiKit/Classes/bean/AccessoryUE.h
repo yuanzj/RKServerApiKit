@@ -7,8 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <Realm/Realm.h>
 
-@interface AccessoryUE : NSObject
+@interface AccessoryUE : RLMObject
 
 @property (strong, nonatomic) NSString* ueSn;
 @property (strong, nonatomic) NSString* ueType;
@@ -18,3 +19,5 @@
 @property (strong, nonatomic) NSString* imei;
 
 @end
+
+RLM_ARRAY_TYPE(AccessoryUE)
