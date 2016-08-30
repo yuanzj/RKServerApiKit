@@ -7,11 +7,13 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <Realm/Realm.h>
 
-@interface AuthCodeData : NSObject
+@interface AuthCodeData : RLMObject
 
-@property (strong, nonatomic) NSString* cTime;
-@property (strong, nonatomic) NSString* eTime;
-@property (strong, nonatomic) NSString* code;
+@property (copy, nonatomic) NSString* ueSn;
+@property (copy, nonatomic) NSString* cTime;
+@property (copy, nonatomic) NSString* eTime;
+@property (copy, nonatomic) NSString* code;
 
 @end

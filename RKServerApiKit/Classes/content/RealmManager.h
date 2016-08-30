@@ -10,6 +10,7 @@
 #import "User.h"
 #import "UserInfo.h"
 #import "UeInfo.h"
+#import "AuthCodeData.h"
 
 @interface RealmManager : NSObject
 
@@ -33,5 +34,10 @@
 +(void)delUeInfo:(UeInfo *)_UeInfo;
 
 + (void)clearUeInfoList;
+
+#pragma mark - AuthCodeData
++ (void)saveAuthCodeData:(AuthCodeData *)_User;
+
++ (void)clearAuthCodeData;
 
 @end

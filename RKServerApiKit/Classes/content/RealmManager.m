@@ -109,4 +109,25 @@
     }
 }
 
+#pragma mark - AuthCodeData
++ (void)saveAuthCodeData:(AuthCodeData *)mAuthCodeData{
+    RLMRealm *realm = [RLMRealm defaultRealm];
+    
+    [realm beginWriteTransaction];
+    [realm addObject:mAuthCodeData];
+    [realm commitWriteTransaction];
+}
+
++ (void)clearAuthCodeData{
+    RLMResults<AuthCodeData *> *mAuthCodeData = [AuthCodeData allObjects];
+    
+    if (mAuthCodeData) {
+        
+        RLMRealm *realm = [RLMRealm defaultRealm];
+        [realm beginWriteTransaction];
+        [realm deleteObjects:mAuthCodeData];
+        [realm commitWriteTransaction];
+    }
+}
+
 @end

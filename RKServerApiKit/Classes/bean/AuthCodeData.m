@@ -9,6 +9,11 @@
 #import "AuthCodeData.h"
 
 @implementation AuthCodeData
+
++ (NSString *)primaryKey {
+    return @"ueSn";
+}
+
 -(NSString*)description{
     return [NSString stringWithFormat:@"cTime: %@ eTime: %@ code: %@", _cTime,_eTime, _code];
 }
