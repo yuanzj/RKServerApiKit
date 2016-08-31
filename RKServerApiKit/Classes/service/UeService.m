@@ -15,7 +15,7 @@
 +(NSURLSessionDataTask *)getUEListWithPageNo:(int)pageNo pageCount:(int)pageCount block:(void (^)(UeListResponse *_ueListResponse, NSError *error)) block{
     return [UeApi getUEListWithPageNo:pageNo pageCount:pageCount block:^(UeListResponse *_ueListResponse, NSError *error){
         if (_ueListResponse) {
-            if(_ueListResponse.state == 0){
+            if(_ueListResponse.state == RKSAPIResponseSuccess){
                 
                 NSArray* data = _ueListResponse.data;
                 if (data && data.count > 0) {
@@ -57,7 +57,21 @@
 }
 
 +(NSURLSessionDataTask *)getAuthorizeCodeWithUeSn:(NSString*)ueSn block:(void (^)(AuthCodeResponse *_authCodeResponse, NSError *error)) block{
-    return [UeApi getAuthorizeCodeWithUeSn:ueSn block:block];
+    return [UeApi getAuthorizeCodeWithUeSn:ueSn block:^(AuthCodeResponse *_AuthCodeResponse, NSError *error){
+        if (_AuthCodeResponse) {
+            if(_AuthCodeResponse.state == RKSAPIResponseSuccess){
+                AuthCodeData *data = _AuthCodeResponse.data;
+                if (data) {
+                    data.ueSn = ueSn;
+                    [RealmManager saveAuthCodeData:data];
+                }
+            }
+            
+            block(_AuthCodeResponse, nil);
+        } else {
+            block(nil, error);
+        }
+    }];
 }
 
 @end
