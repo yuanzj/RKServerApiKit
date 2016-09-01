@@ -217,7 +217,8 @@
 }
 
 +(NSURLSessionDataTask *)getMessageWithBlock:(void (^)(MsgResponse *_msgResponse, NSError *error)) block{
-    return [[AFAppDotNetAPIClient sharedClient] GET:@"get_appmessage" parameters:nil  completionHandler:^(NSURLResponse *response, id JSON, NSError *error) {
+    return [[AFAppDotNetAPIClient sharedClient] GET:@"get_appmessage" parameters:@{@"pageSize":@"50",
+                                                                                   @"page":@"0" } completionHandler:^(NSURLResponse *response, id JSON, NSError *error) {
         if(block){
             if(JSON){
                 [MsgResponse mj_setupObjectClassInArray:^NSDictionary *{

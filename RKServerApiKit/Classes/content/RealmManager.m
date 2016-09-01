@@ -130,4 +130,24 @@
     }
 }
 
++ (void)saveMessageList:(NSArray *)_message{
+    RLMRealm *realm = [RLMRealm defaultRealm];
+    
+    [realm beginWriteTransaction];
+    [realm addObjects:_message];
+    [realm commitWriteTransaction];
+}
+
++ (void)clearMessageList{
+    RLMResults<MsgBean *> *mMsgBean = [MsgBean allObjects];
+    
+    if (mMsgBean) {
+        
+        RLMRealm *realm = [RLMRealm defaultRealm];
+        [realm beginWriteTransaction];
+        [realm deleteObjects:mMsgBean];
+        [realm commitWriteTransaction];
+    }
+}
+
 @end

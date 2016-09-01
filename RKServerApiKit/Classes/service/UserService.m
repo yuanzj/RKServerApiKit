@@ -67,7 +67,7 @@ NSString * const USER = @"USER";
     return [UserApi loginWithMobile:mobile password:password ctype:ctype deviceId:deviceId appVersion:appVersion block:^(UserResponse *_mUserResponse, NSError *error){
         if (_mUserResponse) {
            
-            if(_mUserResponse.state == 0){
+            if(_mUserResponse.state == RKSAPIResponseSuccess){
                 LoginUser *loginUser = _mUserResponse.data;
                 User *mUser = [[User alloc] init];
                 mUser.username = mobile;
@@ -111,7 +111,7 @@ NSString * const USER = @"USER";
     return [UserApi getUserDetailWithBlock:^(UserInfoResponse *_userInfoResponse, NSError *error){
         
         if (_userInfoResponse) {
-            if(_userInfoResponse.state == 0){
+            if(_userInfoResponse.state == RKSAPIResponseSuccess){
                 UserInfo *mUserInfo = _userInfoResponse.data;
                 [UserInfo setUserInfo:mUserInfo];
                 [RealmManager saveUserInfo:mUserInfo];
@@ -125,7 +125,20 @@ NSString * const USER = @"USER";
 }
 
 +(NSURLSessionDataTask *)getMessageWithBlock:(void (^)(MsgResponse *_msgResponse, NSError *error)) block{
-    return [UserApi getMessageWithBlock:block];
+    return [UserApi getMessageWithBlock:^(MsgResponse *msgListResponse, NSError *error){
+        
+        if (msgListResponse) {
+            if(msgListResponse.state == RKSAPIResponseSuccess){
+                NSArray *list = msgListResponse.data;
+                [RealmManager clearMessageList];
+                [RealmManager saveMessageList:list];
+            }
+            
+            block(msgListResponse, nil);
+        } else {
+            block(nil, error);
+        }
+    }];
 }
 
 +(NSURLSessionDataTask *)deleteMessageWithMsgIds:(NSArray*)msgIds block:(void (^)(BaseResponse *_baseResp, NSError *error)) block{

@@ -7,8 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <Realm/Realm.h>
 
-@interface MsgBean : NSObject
+@interface MsgBean : RLMObject
 
 @property (strong, nonatomic) NSString* uid;
 @property (strong, nonatomic) NSString* messageProducer;

@@ -11,6 +11,7 @@
 #import "UserInfo.h"
 #import "UeInfo.h"
 #import "AuthCodeData.h"
+#import "MsgBean.h"
 
 @interface RealmManager : NSObject
 
@@ -29,9 +30,9 @@
 + (UserInfo*)queryUserInfo;
 
 #pragma mark - UeInfo
-+ (void)saveUeInfoList:(UeInfo *)_UeInfo;
++ (void)saveUeInfoList:(NSArray *)_UeInfo;
 
-+(void)delUeInfo:(UeInfo *)_UeInfo;
++ (void)delUeInfo:(UeInfo *)_UeInfo;
 
 + (void)clearUeInfoList;
 
@@ -39,5 +40,11 @@
 + (void)saveAuthCodeData:(AuthCodeData *)_User;
 
 + (void)clearAuthCodeData;
+
+
+#pragma mark - MsgBean
++ (void)saveMessageList:(NSArray *)_message;
+
++ (void)clearMessageList;
 
 @end
