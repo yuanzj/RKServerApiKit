@@ -36,6 +36,7 @@
         [realm beginWriteTransaction];
         [realm deleteObjects:users];
         [realm commitWriteTransaction];
+        [User setUser:nil];
     }
     
 }
