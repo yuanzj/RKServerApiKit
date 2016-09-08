@@ -32,9 +32,9 @@ TODO: Add long description of the pod here.
 
   s.source_files = 'RKServerApiKit/Classes/**/*'
   
-  # s.resource_bundles = {
-  #   'RKServerApiKit' => ['RKServerApiKit/Assets/*.png']
-  # }
+  s.resource_bundles = {
+    'RKServerApiKit' => ['RKServerApiKit/Assets/*.cer']
+  }
 
   # s.public_header_files = 'Pod/Classes/**/*.h'
   # s.frameworks = 'UIKit', 'MapKit'

@@ -19,7 +19,7 @@ PODS:
   - Realm (1.0.2):
     - Realm/Headers (= 1.0.2)
   - Realm/Headers (1.0.2)
-  - RKServerApiKit (0.1.1):
+  - RKServerApiKit (0.1.7):
     - AFNetworking (~> 3.1.0)
     - CocoaSecurity
     - MJExtension
@@ -37,8 +37,8 @@ SPEC CHECKSUMS:
   CocoaSecurity: d288a6f87e0f363823d2cb83e753814a6944f71a
   MJExtension: 5932755f451458eefa24239358817f8d291240c7
   Realm: 9d5c46a4d7d27958530a8dfc58f63a99e5c2cba3
-  RKServerApiKit: b44adf6c93f4a93e49ed82c6590e5872e5c6addc
+  RKServerApiKit: 5d4ac37462f9782389faff3ad0ed057dee016ac0
 
 PODFILE CHECKSUM: 8f6f5bdf202838ed6366166d3260820216feb7bf
 
-COCOAPODS: 1.1.0.beta.1
+COCOAPODS: 1.1.0.beta.2

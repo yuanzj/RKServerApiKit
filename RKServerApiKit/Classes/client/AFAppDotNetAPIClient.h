@@ -22,7 +22,7 @@
 #import "User.h"
 
 #ifdef DEV_SERVER_MODEL
-static NSString * const AFAppDotNetAPIBaseURLString = @"http://testweb.rokyinfo.net:8082/SpiritServiceApp/";
+static NSString * const AFAppDotNetAPIBaseURLString = @"http://61.147.183.178:8081/SpiritServiceApp/";
 #else
 static NSString * const AFAppDotNetAPIBaseURLString = @"http://www.rokyinfo.net:8088/SpiritServiceApp/";
 #endif

@@ -15,12 +15,10 @@ static NSMutableDictionary* apiDic = nil;
 
 + (NSMutableDictionary *)getApiDic{
     if (apiDic == nil) {
-        apiDic = [NSMutableDictionary dictionaryWithObject:[AFAppDotNetAPIBaseURLString stringByAppendingString:@"UserManager/getVeriCode"] forKey:[AFAppDotNetAPIBaseURLString stringByAppendingString:@"UserManager/getVeriCode"]];
-        [apiDic setObject:[AFAppDotNetAPIBaseURLString stringByAppendingString:@"UserManager/checkAccount"] forKey:[AFAppDotNetAPIBaseURLString stringByAppendingString:@"UserManager/checkAccount"]];
-        [apiDic setObject:[AFAppDotNetAPIBaseURLString stringByAppendingString:@"UserManager/setPwd"] forKey:[AFAppDotNetAPIBaseURLString stringByAppendingString:@"UserManager/setPwd"]];
-        [apiDic setObject:[AFAppDotNetAPIBaseURLString stringByAppendingString:@"UserManager/validVeriCode"] forKey:[AFAppDotNetAPIBaseURLString stringByAppendingString:@"UserManager/validVeriCode"]];
-        [apiDic setObject:[AFAppDotNetAPIBaseURLString stringByAppendingString:@"UserManager/register"] forKey:[AFAppDotNetAPIBaseURLString stringByAppendingString:@"UserManager/register"]];
-        [apiDic setObject:[AFAppDotNetAPIBaseURLString stringByAppendingString:@"app_login"] forKey:[AFAppDotNetAPIBaseURLString stringByAppendingString:@"app_login"]];
+        apiDic = [NSMutableDictionary dictionaryWithObject:[AFAppDotNetAPIBaseURLString stringByAppendingString:@"user/getVeriCode"] forKey:[AFAppDotNetAPIBaseURLString stringByAppendingString:@"user/getVeriCode"]];
+        [apiDic setObject:[AFAppDotNetAPIBaseURLString stringByAppendingString:@"user/findPwd"] forKey:[AFAppDotNetAPIBaseURLString stringByAppendingString:@"user/findPwd"]];
+        [apiDic setObject:[AFAppDotNetAPIBaseURLString stringByAppendingString:@"user/register"] forKey:[AFAppDotNetAPIBaseURLString stringByAppendingString:@"user/register"]];
+        [apiDic setObject:[AFAppDotNetAPIBaseURLString stringByAppendingString:@"user/login"] forKey:[AFAppDotNetAPIBaseURLString stringByAppendingString:@"user/login"]];
     }
     return apiDic;
 }

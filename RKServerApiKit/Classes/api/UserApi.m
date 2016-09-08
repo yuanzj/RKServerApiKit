@@ -11,7 +11,7 @@
 @implementation UserApi
 +(NSURLSessionDataTask *)getVeriCodeWithMobile:(NSString*)mobile type:(NSString*)type block:(void (^)(BaseResponse *_baseResp, NSError *error)) block
 {
-    return [[AFAppDotNetAPIClient sharedClient] GET:@"UserManager/getVeriCode" parameters:@{@"mobile":mobile, @"type":type} completionHandler:^(NSURLResponse *response, id JSON, NSError *error) {
+    return [[AFAppDotNetAPIClient sharedClient] GET:@"user/getVeriCode" parameters:@{@"mobile":mobile, @"type":type} completionHandler:^(NSURLResponse *response, id JSON, NSError *error) {
         if(block){
             if(JSON){
                 BaseResponse *mBaseResponse = [BaseResponse mj_objectWithKeyValues:JSON];
@@ -45,7 +45,7 @@
 }
 
 +(NSURLSessionDataTask *)setPasswordWithMobile:(NSString *)mobile password:(NSString *)password locPassword:(NSString *)locPassword veriCode:(NSString *)veriCode block:(void (^)(BaseResponse *, NSError *))block{
-    return [[AFAppDotNetAPIClient sharedClient] GET:@"UserManager/setPwd" parameters:@{@"mobile":mobile, @"password":password, @"lockPassword":locPassword, @"veriCode":veriCode} completionHandler:^(NSURLResponse *response, id JSON, NSError *error) {
+    return [[AFAppDotNetAPIClient sharedClient] GET:@"user/findPwd" parameters:@{@"mobile":mobile, @"password":password, @"veriCode":veriCode} completionHandler:^(NSURLResponse *response, id JSON, NSError *error) {
         if(block){
             if(JSON){
                 BaseResponse *mBaseResponse = [BaseResponse mj_objectWithKeyValues:JSON];
@@ -79,7 +79,7 @@
 }
 
 +(NSURLSessionDataTask *)registerWithMobile:(NSString *)mobile password:(NSString *)password locPassword:(NSString *)locPassword veriCode:(NSString *)veriCode block:(void (^)(BaseResponse *, NSError *))block{
-    return [[AFAppDotNetAPIClient sharedClient] GET:@"UserManager/register" parameters:@{@"mobile":mobile, @"password":   password, @"locPassword":locPassword, @"veriCode":veriCode} completionHandler:^(NSURLResponse *response, id JSON, NSError *error) {
+    return [[AFAppDotNetAPIClient sharedClient] GET:@"user/register" parameters:@{@"mobile":mobile, @"password":   password, @"veriCode":veriCode} completionHandler:^(NSURLResponse *response, id JSON, NSError *error) {
         if(block){
             if(JSON){
                 BaseResponse *mBaseResponse = [BaseResponse mj_objectWithKeyValues:JSON];
@@ -96,7 +96,7 @@
 }
 
 +(NSURLSessionDataTask*)changePwdWithOldPwd:(NSString*)oldpassword newPwd:(NSString*)password type:(NSString*)type block:(void (^)(BaseResponse *, NSError *))block{
-    return [[AFAppDotNetAPIClient sharedClient] GET:@"UserManager/changePwd" parameters:@{@"oldpassword":oldpassword,@"password":password, @"type":type} completionHandler:^(NSURLResponse *response, id JSON, NSError *error) {
+    return [[AFAppDotNetAPIClient sharedClient] GET:@"user/changePwd" parameters:@{@"oldpassword":oldpassword,@"password":password} completionHandler:^(NSURLResponse *response, id JSON, NSError *error) {
         if(block){
             if(JSON){
                 BaseResponse *mBaseResponse = [BaseResponse mj_objectWithKeyValues:JSON];
@@ -115,7 +115,7 @@
 +(NSURLSessionDataTask *)loginWithMobile:(NSString*)mobile password:(NSString*)password ctype:(NSString*)ctype
                                 deviceId:(NSString*)deviceId appVersion:(NSString*)appVersion block:(void (^)(UserResponse *_mUser, NSError *error)) block
 {
-    return [[AFAppDotNetAPIClient sharedClient] GET:@"app_login" parameters:@{@"mobile":mobile, @"password":password,@"ctype":ctype, @"deviceId":deviceId, @"appVersion":appVersion} completionHandler:^(NSURLResponse *response, id JSON, NSError *error) {
+    return [[AFAppDotNetAPIClient sharedClient] GET:@"user/login" parameters:@{@"mobile":mobile, @"password":password, @"deviceId":deviceId, @"appVersion":appVersion} completionHandler:^(NSURLResponse *response, id JSON, NSError *error) {
         if(block){
             if(JSON){
                 UserResponse *mUserResponse = [UserResponse mj_objectWithKeyValues:JSON];
