@@ -41,6 +41,8 @@
 		18D2BE7D1D86975C005A3AAE /* RideRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 18D2BE7B1D86975C005A3AAE /* RideRecord.m */; };
 		18D2BE801D869C7F005A3AAE /* RideRecordDetail.h in Headers */ = {isa = PBXBuildFile; fileRef = 18D2BE7E1D869C7F005A3AAE /* RideRecordDetail.h */; };
 		18D2BE811D869C7F005A3AAE /* RideRecordDetail.m in Sources */ = {isa = PBXBuildFile; fileRef = 18D2BE7F1D869C7F005A3AAE /* RideRecordDetail.m */; };
+		18D2BE841D86B49A005A3AAE /* GeolocationRepository.h in Headers */ = {isa = PBXBuildFile; fileRef = 18D2BE821D86B49A005A3AAE /* GeolocationRepository.h */; };
+		18D2BE851D86B49A005A3AAE /* GeolocationRepository.m in Sources */ = {isa = PBXBuildFile; fileRef = 18D2BE831D86B49A005A3AAE /* GeolocationRepository.m */; };
 		192AC43D2F848129D2CAC66DAAF6CA35 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B1C5C9C1CB90D34939AFC1AB8BE44CF /* Security.framework */; };
 		1974212EFCCFC7EEFA119828A47C0233 /* RLMProperty.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8F86CC295872184985B554E7FE7E23B6 /* RLMProperty.mm */; settings = {COMPILER_FLAGS = "-DREALM_HAVE_CONFIG -DREALM_COCOA_VERSION='@\"1.0.2\"' -D__ASSERTMACROS__"; }; };
 		19E50809BF10A3B67467CB266BF8D4FC /* UeService.m in Sources */ = {isa = PBXBuildFile; fileRef = 405C03E547F07106D36F78CDDF6E2B95 /* UeService.m */; };
@@ -450,6 +452,8 @@
 		18D2BE7B1D86975C005A3AAE /* RideRecord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RideRecord.m; sourceTree = "<group>"; };
 		18D2BE7E1D869C7F005A3AAE /* RideRecordDetail.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RideRecordDetail.h; sourceTree = "<group>"; };
 		18D2BE7F1D869C7F005A3AAE /* RideRecordDetail.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RideRecordDetail.m; sourceTree = "<group>"; };
+		18D2BE821D86B49A005A3AAE /* GeolocationRepository.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GeolocationRepository.h; sourceTree = "<group>"; };
+		18D2BE831D86B49A005A3AAE /* GeolocationRepository.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GeolocationRepository.m; sourceTree = "<group>"; };
 		1BD3B3E0976D52AB456958294FC640C8 /* Pods-RKServerApiKit_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-RKServerApiKit_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		1E60321A034D45194C31A386A890DD03 /* UserInfoResponse.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = UserInfoResponse.h; sourceTree = "<group>"; };
 		21E757FD3348026EC5E5D71C60D4BD0C /* ApiNotNeedSessionIdDic.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = ApiNotNeedSessionIdDic.m; sourceTree = "<group>"; };
@@ -882,6 +886,8 @@
 				18D2BE7B1D86975C005A3AAE /* RideRecord.m */,
 				18D2BE7E1D869C7F005A3AAE /* RideRecordDetail.h */,
 				18D2BE7F1D869C7F005A3AAE /* RideRecordDetail.m */,
+				18D2BE821D86B49A005A3AAE /* GeolocationRepository.h */,
+				18D2BE831D86B49A005A3AAE /* GeolocationRepository.m */,
 			);
 			path = bean;
 			sourceTree = "<group>";
@@ -1447,6 +1453,7 @@
 				68C3524E93577D254E9958BCAA813B5F /* Common.h in Headers */,
 				D48E99EE7862FE31E0B341ABBE4F0D79 /* Constant.h in Headers */,
 				E3D7EC0876CE83D3A9F09933AF7A56F3 /* ExtendCCBean.h in Headers */,
+				18D2BE841D86B49A005A3AAE /* GeolocationRepository.h in Headers */,
 				D71790A79659D00C45FE9131FA9D9B24 /* ExtendCCResponse.h in Headers */,
 				E8453E3F7D153B6277B069ABC029F9EB /* FailServerAddress.h in Headers */,
 				CAA42AE9CA2934C33032CBDADA220C91 /* FailServerResponse.h in Headers */,
@@ -1879,6 +1886,7 @@
 				C4BF9FD0911B6ED28A64CECF90273B62 /* OneDayMilesResponse.m in Sources */,
 				5CECAB12E83B9C50B67931C6C0CE83AD /* RealmManager.m in Sources */,
 				18D2BE791D8693EA005A3AAE /* RideMilesStatistic.m in Sources */,
+				18D2BE851D86B49A005A3AAE /* GeolocationRepository.m in Sources */,
 				18D2BE751D869033005A3AAE /* RideSpeedStatistic.m in Sources */,
 				5A8365DA471DFFF6DAD9E3448B0A840D /* RKSByteConvert.m in Sources */,
 				CDD7C93A7BE4D046D9201B3AAA7B19E3 /* RKServerApiKit-dummy.m in Sources */,
