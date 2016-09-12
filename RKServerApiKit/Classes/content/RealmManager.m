@@ -151,4 +151,98 @@
     }
 }
 
+#pragma mark - RideSpeedStatistic
++ (void)saveRideSpeedStatistic:(NSArray *)_RideSpeedStatistic{
+    RLMRealm *realm = [RLMRealm defaultRealm];
+    
+    [realm beginWriteTransaction];
+    [realm addObjects:_RideSpeedStatistic];
+    [realm commitWriteTransaction];
+}
+
++ (void)clearRideSpeedStatistic{
+    RLMResults<RideSpeedStatistic *> *mMsgBean = [RideSpeedStatistic allObjects];
+    
+    if (mMsgBean) {
+        
+        RLMRealm *realm = [RLMRealm defaultRealm];
+        [realm beginWriteTransaction];
+        [realm deleteObjects:mMsgBean];
+        [realm commitWriteTransaction];
+    }
+}
+
+#pragma mark - RideMilesStatistic
++ (void)saveRideMilesStatistic:(NSArray *)_RideMilesStatistic{
+    RLMRealm *realm = [RLMRealm defaultRealm];
+    
+    [realm beginWriteTransaction];
+    [realm addObjects:_RideMilesStatistic];
+    [realm commitWriteTransaction];
+}
+
++ (void)clearRideMilesStatistic{
+    RLMResults<RideMilesStatistic *> *mMsgBean = [RideMilesStatistic allObjects];
+    
+    if (mMsgBean) {
+        
+        RLMRealm *realm = [RLMRealm defaultRealm];
+        [realm beginWriteTransaction];
+        [realm deleteObjects:mMsgBean];
+        [realm commitWriteTransaction];
+    }
+}
+
+#pragma mark - RideMilesStatistic
++ (void)saveRideRecordList:(NSArray *)_RideRecord{
+    RLMRealm *realm = [RLMRealm defaultRealm];
+    
+    [realm beginWriteTransaction];
+    [realm addObjects:_RideRecord];
+    [realm commitWriteTransaction];
+}
+
++ (void)clearRideRecordList{
+    RLMResults<RideRecord *> *mMsgBean = [RideRecord allObjects];
+    
+    if (mMsgBean) {
+        
+        RLMRealm *realm = [RLMRealm defaultRealm];
+        [realm beginWriteTransaction];
+        [realm deleteObjects:mMsgBean];
+        [realm commitWriteTransaction];
+    }
+}
+
++ (void)saveGeolocationRepository:(GeolocationRepository *)_GeolocationRepository{
+    RLMRealm *realm = [RLMRealm defaultRealm];
+    
+    [realm beginWriteTransaction];
+    [realm addObject:_GeolocationRepository];
+    [realm commitWriteTransaction];
+    
+    //最大缓存上限为 MAX_STORE_LOCATION_INFO 个地理位置
+    RLMResults<GeolocationRepository *> *mGeolocationRepository = [GeolocationRepository allObjects];
+    if (mGeolocationRepository && mGeolocationRepository.count > MAX_STORE_LOCATION_INFO) {
+        
+        NSMutableArray *delObjs = [[NSMutableArray alloc] init];
+        for (int i = 0;i < (mGeolocationRepository.count - MAX_STORE_LOCATION_INFO); i++) {
+            [delObjs addObject:[mGeolocationRepository objectAtIndex:i]];
+        }
+        
+        [realm beginWriteTransaction];
+        [realm deleteObjects:delObjs];
+        [realm commitWriteTransaction];
+        
+    }
+}
+
++ (GeolocationRepository*)queryGeolocationRepositoryWithLat:(NSString*)lat log:(NSString*)lon{
+    
+    RLMResults<GeolocationRepository *> *mGeolocationRepository =  [RideRecord objectsWhere:@"key == '%@'",[NSString stringWithFormat:@"%@%@",lon,lat]];
+    
+    return [mGeolocationRepository firstObject];
+    
+}
+
 @end

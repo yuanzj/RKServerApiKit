@@ -68,21 +68,69 @@
  * 最近7天速度统计
  */
 +(NSURLSessionDataTask *)rideSpeedStatistic:(NSString*)ueSn block:(void (^)(RideSpeedStatisticResponse *_RideSpeedStatistic, NSError *error)) block{
-    return [UeApi rideSpeedStatistic:ueSn block:block];
+    return [UeApi rideSpeedStatistic:ueSn block:^(RideSpeedStatisticResponse *__RideSpeedStatistic, NSError *error){
+        if (__RideSpeedStatistic) {
+            if(__RideSpeedStatistic.state == RKSAPIResponseSuccess){
+                
+                NSArray* data = __RideSpeedStatistic.data4;
+                if (data && data.count > 0) {
+                    [RealmManager clearRideSpeedStatistic];
+                    [RealmManager saveRideSpeedStatistic:data];
+                }
+                
+            }
+            
+            block(__RideSpeedStatistic, nil);
+        } else {
+            block(nil, error);
+        }
+    }];
 }
 
 /**
  * 最近7天里程统计
  */
 +(NSURLSessionDataTask *)rideMilesStatistic:(NSString*)ueSn block:(void (^)(RideMilesStatisticResponse *_RideSpeedStatistic, NSError *error)) block{
-    return [UeApi rideMilesStatistic:ueSn block:block];
+    return [UeApi rideMilesStatistic:ueSn block:^(RideMilesStatisticResponse *_RideSpeedStatistic, NSError *error){
+        if (_RideSpeedStatistic) {
+            if(_RideSpeedStatistic.state == RKSAPIResponseSuccess){
+                
+                NSArray* data = _RideSpeedStatistic.data4;
+                if (data && data.count > 0) {
+                    [RealmManager clearRideMilesStatistic];
+                    [RealmManager saveRideMilesStatistic:data];
+                }
+                
+            }
+            
+            block(_RideSpeedStatistic, nil);
+        } else {
+            block(nil, error);
+        }
+    }];
 }
 
 /**
  * 行车记录概要统计
  */
-+(NSURLSessionDataTask *)getRideRecord:(NSString*)ueSn block:(void (^)(RideRecordResponse *_RideSpeedStatistic, NSError *error)) block{
-    return [UeApi getRideRecord:ueSn block:block];
++(NSURLSessionDataTask *)getRideRecord:(NSString*)ueSn block:(void (^)(RideRecordResponse *_RideRecordResponse, NSError *error)) block{
+    return [UeApi getRideRecord:ueSn block:^(RideRecordResponse *_RideRecordResponse, NSError *error){
+        if (_RideRecordResponse) {
+            if(_RideRecordResponse.state == RKSAPIResponseSuccess){
+                
+                NSArray* data = _RideRecordResponse.data5;
+                if (data && data.count > 0) {
+                    [RealmManager clearRideRecordList];
+                    [RealmManager saveRideRecordList:data];
+                }
+                
+            }
+            
+            block(_RideRecordResponse, nil);
+        } else {
+            block(nil, error);
+        }
+    }];
 }
 
 /**

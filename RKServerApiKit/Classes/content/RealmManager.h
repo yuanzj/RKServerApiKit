@@ -12,6 +12,12 @@
 #import "UeInfo.h"
 #import "AuthCodeData.h"
 #import "MsgBean.h"
+#import "RideSpeedStatistic.h"
+#import "RideMilesStatistic.h"
+#import "RideRecord.h"
+#import "GeolocationRepository.h"
+
+#define MAX_STORE_LOCATION_INFO 100
 
 @interface RealmManager : NSObject
 
@@ -46,5 +52,27 @@
 + (void)saveMessageList:(NSArray *)_message;
 
 + (void)clearMessageList;
+
+#pragma mark - RideSpeedStatistic
++ (void)saveRideSpeedStatistic:(NSArray *)_RideSpeedStatistic;
+
++ (void)clearRideSpeedStatistic;
+
+#pragma mark - RideMilesStatistic
++ (void)saveRideMilesStatistic:(NSArray *)_RideMilesStatistic;
+
++ (void)clearRideMilesStatistic;
+
+#pragma mark - RideRecordList
++ (void)saveRideRecordList:(NSArray *)_RideRecord;
+
++ (void)clearRideRecordList;
+
+#pragma mark - GeolocationRepository
++ (void)saveGeolocationRepository:(GeolocationRepository *)_GeolocationRepository;
+
++ (GeolocationRepository*)queryGeolocationRepositoryWithLat:(NSString*)lat log:(NSString*)log;
+
+
 
 @end

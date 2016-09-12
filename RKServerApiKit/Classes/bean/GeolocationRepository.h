@@ -9,6 +9,7 @@
 
 @interface GeolocationRepository : RLMObject
 
+@property (copy, nonatomic) NSString * key;
 @property (copy, nonatomic) NSString * lon;
 @property (copy, nonatomic) NSString * lat;
 
