@@ -17,7 +17,7 @@
         if (_ueListResponse) {
             if(_ueListResponse.state == RKSAPIResponseSuccess){
                 
-                NSArray* data = _ueListResponse.data;
+                NSArray* data = _ueListResponse.data5;
                 if (data && data.count > 0) {
                     [RealmManager clearUeInfoList];
                     [RealmManager saveUeInfoList:data];
@@ -39,6 +39,59 @@
 +(NSURLSessionDataTask *)bindUeWithUeSn:(NSString*)ueSn vehicleId:(NSString*)vehicleId bindUESn:(NSString*)bindUESn block:(void (^)(BaseResponse *_baseResponse, NSError *error)) block{
     return [UeApi bindUeWithUeSn:ueSn vehicleId:vehicleId bindUESn:bindUESn block:block];
 }
+
+/**
+ * 获取中控名下GPS设备详情
+ */
++(NSURLSessionDataTask *)getGPSDetail:(NSString*)ueSn block:(void (^)(GPSDetailResponse *_GPSDetailResponse, NSError *error)) block{
+    return [UeApi getGPSDetail:ueSn block:block];
+}
+
+/**
+ * 获取中控设备详情
+ */
++(NSURLSessionDataTask *)getCCUDetail:(NSString*)ueSn block:(void (^)(CCUDetailResponse *_GPSDetailResponse, NSError *error)) block{
+    return [UeApi getCCUDetail:ueSn block:block];
+}
+
+/**
+ * 获取指定日期骑行统计
+ */
++(NSURLSessionDataTask *)rideDayStatistic:(NSString*)ueSn time:(NSString*)time block:(void (^)(RideDayStatisticResponse *_RideDayStatisticResponse, NSError *error)) block{
+
+    return [UeApi rideDayStatistic:ueSn time:time block:block];
+
+}
+
+
+/**
+ * 最近7天速度统计
+ */
++(NSURLSessionDataTask *)rideSpeedStatistic:(NSString*)ueSn block:(void (^)(RideSpeedStatisticResponse *_RideSpeedStatistic, NSError *error)) block{
+    return [UeApi rideSpeedStatistic:ueSn block:block];
+}
+
+/**
+ * 最近7天里程统计
+ */
++(NSURLSessionDataTask *)rideMilesStatistic:(NSString*)ueSn block:(void (^)(RideMilesStatisticResponse *_RideSpeedStatistic, NSError *error)) block{
+    return [UeApi rideMilesStatistic:ueSn block:block];
+}
+
+/**
+ * 行车记录概要统计
+ */
++(NSURLSessionDataTask *)getRideRecord:(NSString*)ueSn block:(void (^)(RideRecordResponse *_RideSpeedStatistic, NSError *error)) block{
+    return [UeApi getRideRecord:ueSn block:block];
+}
+
+/**
+ * 获取单词骑行详细信息
+ */
++(NSURLSessionDataTask *)getRideRecordDetail:(NSString*)ueSn startTime:(NSString*)startTime endTime:(NSString*)endTime block:(void (^)(RideRecordDetailResponse *_RideSpeedStatistic, NSError *error)) block{
+    return [UeApi getRideRecordDetail:ueSn startTime:startTime endTime:endTime block:block];
+}
+
 
 +(NSURLSessionDataTask *)queryUeDetailWithUeSn:(NSString*)ueSn block:(void (^)(UeDetailResponse *_ueDetailResponse, NSError *error)) block{
     return [UeApi queryUeDetailWithUeSn:ueSn block:block];

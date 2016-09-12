@@ -27,6 +27,20 @@
 		159AF1EADFF332F27BA14492C7ED039B /* AFAppDotNetAPIClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 85E062D4349DCEEB75F5C0B28CE211EB /* AFAppDotNetAPIClient.m */; };
 		16D990DC091CB03316D9C42D7A52FE7C /* RLMObjectBase.mm in Sources */ = {isa = PBXBuildFile; fileRef = 694C471CAEDD3E1B9AB849B51BB1664D /* RLMObjectBase.mm */; settings = {COMPILER_FLAGS = "-DREALM_HAVE_CONFIG -DREALM_COCOA_VERSION='@\"1.0.2\"' -D__ASSERTMACROS__"; }; };
 		174202BD6AE0E4A41F5CE66E975EAE52 /* UIRefreshControl+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = EA717DF514146155DD2EABC5F98F88DC /* UIRefreshControl+AFNetworking.m */; };
+		18D2BE681D865C4D005A3AAE /* RideDayStatistic.h in Headers */ = {isa = PBXBuildFile; fileRef = 18D2BE661D865C4D005A3AAE /* RideDayStatistic.h */; };
+		18D2BE691D865C4D005A3AAE /* RideDayStatistic.m in Sources */ = {isa = PBXBuildFile; fileRef = 18D2BE671D865C4D005A3AAE /* RideDayStatistic.m */; };
+		18D2BE6C1D86752F005A3AAE /* GPSDetail.h in Headers */ = {isa = PBXBuildFile; fileRef = 18D2BE6A1D86752F005A3AAE /* GPSDetail.h */; };
+		18D2BE6D1D86752F005A3AAE /* GPSDetail.m in Sources */ = {isa = PBXBuildFile; fileRef = 18D2BE6B1D86752F005A3AAE /* GPSDetail.m */; };
+		18D2BE701D868861005A3AAE /* CCUDetail.h in Headers */ = {isa = PBXBuildFile; fileRef = 18D2BE6E1D868861005A3AAE /* CCUDetail.h */; };
+		18D2BE711D868861005A3AAE /* CCUDetail.m in Sources */ = {isa = PBXBuildFile; fileRef = 18D2BE6F1D868861005A3AAE /* CCUDetail.m */; };
+		18D2BE741D869033005A3AAE /* RideSpeedStatistic.h in Headers */ = {isa = PBXBuildFile; fileRef = 18D2BE721D869033005A3AAE /* RideSpeedStatistic.h */; };
+		18D2BE751D869033005A3AAE /* RideSpeedStatistic.m in Sources */ = {isa = PBXBuildFile; fileRef = 18D2BE731D869033005A3AAE /* RideSpeedStatistic.m */; };
+		18D2BE781D8693EA005A3AAE /* RideMilesStatistic.h in Headers */ = {isa = PBXBuildFile; fileRef = 18D2BE761D8693EA005A3AAE /* RideMilesStatistic.h */; };
+		18D2BE791D8693EA005A3AAE /* RideMilesStatistic.m in Sources */ = {isa = PBXBuildFile; fileRef = 18D2BE771D8693EA005A3AAE /* RideMilesStatistic.m */; };
+		18D2BE7C1D86975C005A3AAE /* RideRecord.h in Headers */ = {isa = PBXBuildFile; fileRef = 18D2BE7A1D86975C005A3AAE /* RideRecord.h */; };
+		18D2BE7D1D86975C005A3AAE /* RideRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 18D2BE7B1D86975C005A3AAE /* RideRecord.m */; };
+		18D2BE801D869C7F005A3AAE /* RideRecordDetail.h in Headers */ = {isa = PBXBuildFile; fileRef = 18D2BE7E1D869C7F005A3AAE /* RideRecordDetail.h */; };
+		18D2BE811D869C7F005A3AAE /* RideRecordDetail.m in Sources */ = {isa = PBXBuildFile; fileRef = 18D2BE7F1D869C7F005A3AAE /* RideRecordDetail.m */; };
 		192AC43D2F848129D2CAC66DAAF6CA35 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B1C5C9C1CB90D34939AFC1AB8BE44CF /* Security.framework */; };
 		1974212EFCCFC7EEFA119828A47C0233 /* RLMProperty.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8F86CC295872184985B554E7FE7E23B6 /* RLMProperty.mm */; settings = {COMPILER_FLAGS = "-DREALM_HAVE_CONFIG -DREALM_COCOA_VERSION='@\"1.0.2\"' -D__ASSERTMACROS__"; }; };
 		19E50809BF10A3B67467CB266BF8D4FC /* UeService.m in Sources */ = {isa = PBXBuildFile; fileRef = 405C03E547F07106D36F78CDDF6E2B95 /* UeService.m */; };
@@ -422,6 +436,20 @@
 		182A65A2D56001B81032C55CB370AFAB /* RLMObjectSchema.mm */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.objcpp; name = RLMObjectSchema.mm; path = Realm/RLMObjectSchema.mm; sourceTree = "<group>"; };
 		189536D9521C930379EC20E6B7BDD954 /* schema.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = schema.cpp; path = Realm/ObjectStore/schema.cpp; sourceTree = "<group>"; };
 		18A37F0E112D56F5BC970E4506369100 /* RKSByteConvert.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = RKSByteConvert.m; sourceTree = "<group>"; };
+		18D2BE661D865C4D005A3AAE /* RideDayStatistic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RideDayStatistic.h; sourceTree = "<group>"; };
+		18D2BE671D865C4D005A3AAE /* RideDayStatistic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RideDayStatistic.m; sourceTree = "<group>"; };
+		18D2BE6A1D86752F005A3AAE /* GPSDetail.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GPSDetail.h; sourceTree = "<group>"; };
+		18D2BE6B1D86752F005A3AAE /* GPSDetail.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GPSDetail.m; sourceTree = "<group>"; };
+		18D2BE6E1D868861005A3AAE /* CCUDetail.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCUDetail.h; sourceTree = "<group>"; };
+		18D2BE6F1D868861005A3AAE /* CCUDetail.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCUDetail.m; sourceTree = "<group>"; };
+		18D2BE721D869033005A3AAE /* RideSpeedStatistic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RideSpeedStatistic.h; sourceTree = "<group>"; };
+		18D2BE731D869033005A3AAE /* RideSpeedStatistic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RideSpeedStatistic.m; sourceTree = "<group>"; };
+		18D2BE761D8693EA005A3AAE /* RideMilesStatistic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RideMilesStatistic.h; sourceTree = "<group>"; };
+		18D2BE771D8693EA005A3AAE /* RideMilesStatistic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RideMilesStatistic.m; sourceTree = "<group>"; };
+		18D2BE7A1D86975C005A3AAE /* RideRecord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RideRecord.h; sourceTree = "<group>"; };
+		18D2BE7B1D86975C005A3AAE /* RideRecord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RideRecord.m; sourceTree = "<group>"; };
+		18D2BE7E1D869C7F005A3AAE /* RideRecordDetail.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RideRecordDetail.h; sourceTree = "<group>"; };
+		18D2BE7F1D869C7F005A3AAE /* RideRecordDetail.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RideRecordDetail.m; sourceTree = "<group>"; };
 		1BD3B3E0976D52AB456958294FC640C8 /* Pods-RKServerApiKit_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-RKServerApiKit_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		1E60321A034D45194C31A386A890DD03 /* UserInfoResponse.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = UserInfoResponse.h; sourceTree = "<group>"; };
 		21E757FD3348026EC5E5D71C60D4BD0C /* ApiNotNeedSessionIdDic.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = ApiNotNeedSessionIdDic.m; sourceTree = "<group>"; };
@@ -840,6 +868,20 @@
 				F7F4C809616EE5AE92B4BA93090D5C4E /* User.m */,
 				F5BDF4D47F250964A2DC886AB323BD43 /* UserInfo.h */,
 				EB36828CBE874A8B4F0AFB44F385039A /* UserInfo.m */,
+				18D2BE661D865C4D005A3AAE /* RideDayStatistic.h */,
+				18D2BE671D865C4D005A3AAE /* RideDayStatistic.m */,
+				18D2BE6A1D86752F005A3AAE /* GPSDetail.h */,
+				18D2BE6B1D86752F005A3AAE /* GPSDetail.m */,
+				18D2BE6E1D868861005A3AAE /* CCUDetail.h */,
+				18D2BE6F1D868861005A3AAE /* CCUDetail.m */,
+				18D2BE721D869033005A3AAE /* RideSpeedStatistic.h */,
+				18D2BE731D869033005A3AAE /* RideSpeedStatistic.m */,
+				18D2BE761D8693EA005A3AAE /* RideMilesStatistic.h */,
+				18D2BE771D8693EA005A3AAE /* RideMilesStatistic.m */,
+				18D2BE7A1D86975C005A3AAE /* RideRecord.h */,
+				18D2BE7B1D86975C005A3AAE /* RideRecord.m */,
+				18D2BE7E1D869C7F005A3AAE /* RideRecordDetail.h */,
+				18D2BE7F1D869C7F005A3AAE /* RideRecordDetail.m */,
 			);
 			path = bean;
 			sourceTree = "<group>";
@@ -1394,6 +1436,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				18D2BE781D8693EA005A3AAE /* RideMilesStatistic.h in Headers */,
 				E6CA33683A093220C245DF85693AC4BF /* AccessoryUE.h in Headers */,
 				AE07F61383B9A316D13C3F796CCB2207 /* AFAppDotNetAPIClient.h in Headers */,
 				F0044EDF5EB4BA7E1C388121108EEFB2 /* ApiNotNeedSessionIdDic.h in Headers */,
@@ -1412,18 +1455,22 @@
 				52C31DECF938AE83F02B9C521F3FF1F5 /* FirmwareVersionResponse.h in Headers */,
 				547FDA4662F5AF8CE96CC7F9A24D103D /* HeadImgData.h in Headers */,
 				EC17CBE13E5D4C170F7046A646E34AFD /* MsgBean.h in Headers */,
+				18D2BE701D868861005A3AAE /* CCUDetail.h in Headers */,
 				349CBF4B3E28FC3FD09B4D4CA1732EC3 /* MsgResponse.h in Headers */,
 				C71CC02DF3BB38DAB77B0ED01D8191F4 /* OneDayMiles.h in Headers */,
 				CD418E422FF813402BB0872C61AB41DB /* OneDayMilesResponse.h in Headers */,
 				8694B2BE75AD79AC942ECDDAF541FBDD /* RealmManager.h in Headers */,
 				AA9D2CE7006C6C71D5330C3CF8603B98 /* RKSByteConvert.h in Headers */,
+				18D2BE7C1D86975C005A3AAE /* RideRecord.h in Headers */,
 				596E14AE034D4F0F78D9E2F11D2CF878 /* RKServerApiKit-umbrella.h in Headers */,
 				4480E15D5CF90AB3A6E6DFE544EEB782 /* UeApi.h in Headers */,
+				18D2BE801D869C7F005A3AAE /* RideRecordDetail.h in Headers */,
 				7F68FD28A707053287275DB4FB96E041 /* UeDetailBean.h in Headers */,
 				D956D184B646178BA306E9900A0E5AA5 /* UeDetailResponse.h in Headers */,
 				F8E1FA87B8DF184E7BD6878B0EABFA75 /* UeInfo.h in Headers */,
 				9A569EDB7364E161757FFF621CC1CB41 /* UeListResponse.h in Headers */,
 				CDC34993F230E8F8BC9F4C82A8CFF679 /* UeService.h in Headers */,
+				18D2BE6C1D86752F005A3AAE /* GPSDetail.h in Headers */,
 				2B652223FB92FE92FDE95450337BE4DC /* UeStatus.h in Headers */,
 				D6406AECF8059E3AB245B8130234F021 /* UpdateHeadResponse.h in Headers */,
 				CB44F220DEED27DF2B4FC94CD27FC4A8 /* User.h in Headers */,
@@ -1432,6 +1479,8 @@
 				578894D7628163793AEF94E8489DA379 /* UserInfoResponse.h in Headers */,
 				C4363C6D9657262E673807ADFC641A2B /* UserService.h in Headers */,
 				1F2142707C057E9464BCB745E05AC856 /* Validator.h in Headers */,
+				18D2BE681D865C4D005A3AAE /* RideDayStatistic.h in Headers */,
+				18D2BE741D869033005A3AAE /* RideSpeedStatistic.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1810,12 +1859,15 @@
 				AF6B81C38AE9F68E81061BE583742C22 /* AuthCodeData.m in Sources */,
 				9187A88F5755087E432037F0A854A0F3 /* AuthCodeResponse.m in Sources */,
 				335FA722D99B42EAB45897696D38C07D /* BaseResponse.m in Sources */,
+				18D2BE7D1D86975C005A3AAE /* RideRecord.m in Sources */,
 				3E7A3FCE16C380969BDE58F3F800B41B /* BatteryStatusInRedis.m in Sources */,
 				CB2BCD9D2961430BFC28FC4B72EE32CA /* Common.m in Sources */,
 				9F2D6AA1550C248605775C3BD10182C4 /* Constant.m in Sources */,
 				23F57299A968EDA5DA1FAA6E5775D14B /* ExtendCCBean.m in Sources */,
 				20F27237F717202C3D8118FE0B2715DB /* ExtendCCResponse.m in Sources */,
 				BECE4AC4B878213AD6E17A344C049A9B /* FailServerAddress.m in Sources */,
+				18D2BE691D865C4D005A3AAE /* RideDayStatistic.m in Sources */,
+				18D2BE711D868861005A3AAE /* CCUDetail.m in Sources */,
 				8A820CC4367A33DFBD5CC6A075BCCF27 /* FailServerResponse.m in Sources */,
 				D26FABE237CD0AAE4B74FCCC38C15616 /* Firm.m in Sources */,
 				6DBAD550C0A4587BF45FD123606C7E51 /* FirmwareVersion.m in Sources */,
@@ -1826,6 +1878,8 @@
 				10E6444956BEB3DD633E3D85F01CC21C /* OneDayMiles.m in Sources */,
 				C4BF9FD0911B6ED28A64CECF90273B62 /* OneDayMilesResponse.m in Sources */,
 				5CECAB12E83B9C50B67931C6C0CE83AD /* RealmManager.m in Sources */,
+				18D2BE791D8693EA005A3AAE /* RideMilesStatistic.m in Sources */,
+				18D2BE751D869033005A3AAE /* RideSpeedStatistic.m in Sources */,
 				5A8365DA471DFFF6DAD9E3448B0A840D /* RKSByteConvert.m in Sources */,
 				CDD7C93A7BE4D046D9201B3AAA7B19E3 /* RKServerApiKit-dummy.m in Sources */,
 				314E017BCCBE11F4FFD8D1F5E39D72CD /* UeApi.m in Sources */,
@@ -1837,7 +1891,9 @@
 				540CD46811C243C10922C50A05E6387B /* UeStatus.m in Sources */,
 				D1907891048DC6F290291B076E1DEDCE /* UpdateHeadResponse.m in Sources */,
 				92A283CF889014675F3D5FEA19D5E32E /* User.m in Sources */,
+				18D2BE811D869C7F005A3AAE /* RideRecordDetail.m in Sources */,
 				7C277973D5872A602E65BF43CEBCBA74 /* UserApi.m in Sources */,
+				18D2BE6D1D86752F005A3AAE /* GPSDetail.m in Sources */,
 				2C1DA32B5A4BCB00FC2DB1DCA8254465 /* UserInfo.m in Sources */,
 				3EF9EB25F79E1F8211D356F6F1D2A657 /* UserInfoResponse.m in Sources */,
 				25CA8F36D17273B4EDD4B19023F5CF9B /* UserService.m in Sources */,

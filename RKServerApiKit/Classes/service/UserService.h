@@ -16,17 +16,14 @@
 @interface UserService : NSObject
 extern NSString * const USER;
 
+#pragma mark -
+#pragma mark 用户管理
 /**
  * 获取验证码
  * @param mobile 手机号码
  * @param type  RA：注册 FA：找回密码 CM：变更手机号码
  */
 +(NSURLSessionDataTask *)getVeriCodeWithMobile:(NSString*)mobile type:(NSString*)type block:(void (^)(BaseResponse *_baseResp, NSError *error)) block;
-
-/**
- * 通过手机号码验证该手机账号的合法性
- */
-+(NSURLSessionDataTask *)checkAccount:(NSString*)mobile block:(void (^)(BaseResponse *_baseResp, NSError *error)) block;
 
 /**
  * 找回密码
@@ -37,13 +34,6 @@ extern NSString * const USER;
  */
 +(NSURLSessionDataTask *)setPasswordWithMobile:(NSString*)mobile password:(NSString*)password locPassword:(NSString*)locPassword veriCode:(NSString*)veriCode block:(void (^)(BaseResponse *_baseResp, NSError *error)) block;
 
-/**
- * 检查验证码是否正确
- * @param mobile 用户手机号
- * @param veriCode 验证码
- * @param type  RA：注册 FA：找回密码
- */
-+(NSURLSessionDataTask*)checkVeriCodeWithMobile:(NSString*)mobile veriCode:(NSString*) veriCode type:(NSString*)type block:(void (^)(BaseResponse *_baseResp, NSError *error)) block;
 
 /**
  * 用户注册
@@ -66,15 +56,6 @@ extern NSString * const USER;
  * @param type 0:修改登录密码 1:修改解锁密码
  */
 +(NSURLSessionDataTask*)changePwdWithOldPwd:(NSString*)oldpassword newPwd:(NSString*)password type:(NSString*)type block:(void (^)(BaseResponse *, NSError *))block;
-
-/**
- * 更换绑定手机
- * @param context
- * @param veriCode 验证码
- * @param newMobile 手机号
- * @return
- */
-+(NSURLSessionDataTask *)changeBindedMobileWithVeriCode:(NSString*)veriCode newMobile:(NSString*) newMobile block:(void (^)(BaseResponse *_baseResp, NSError *error)) block;
 
 /**
  * 更新用户性别
@@ -118,6 +99,32 @@ extern NSString * const USER;
  * @return
  */
 +(NSURLSessionDataTask *)deleteMessageWithMsgIds:(NSArray*)msgIds block:(void (^)(BaseResponse *_baseResp, NSError *error)) block;
+
+
+#pragma mark -
+#pragma mark 以下接口废弃
+
+/**
+ * 检查验证码是否正确
+ * @param mobile 用户手机号
+ * @param veriCode 验证码
+ * @param type  RA：注册 FA：找回密码
+ */
++(NSURLSessionDataTask*)checkVeriCodeWithMobile:(NSString*)mobile veriCode:(NSString*) veriCode type:(NSString*)type block:(void (^)(BaseResponse *_baseResp, NSError *error)) block;
+
+/**
+ * 通过手机号码验证该手机账号的合法性
+ */
++(NSURLSessionDataTask *)checkAccount:(NSString*)mobile block:(void (^)(BaseResponse *_baseResp, NSError *error)) block;
+
+/**
+ * 更换绑定手机
+ * @param context
+ * @param veriCode 验证码
+ * @param newMobile 手机号
+ * @return
+ */
++(NSURLSessionDataTask *)changeBindedMobileWithVeriCode:(NSString*)veriCode newMobile:(NSString*) newMobile block:(void (^)(BaseResponse *_baseResp, NSError *error)) block;
 
 /**
  * 获取fail server服务器地址

@@ -13,28 +13,66 @@
 @interface UeService : NSObject
 
 #pragma mark -
-#pragma mark 获取设备列表
+#pragma mark 设备管理
 /**
  * 获取设备列表
  */
 +(NSURLSessionDataTask *)getUEListWithPageNo:(int)pageNo pageCount:(int)pageCount block:(void (^)(UeListResponse *_ueListResponse, NSError *error)) block;
 
-#pragma mark -
-#pragma mark 删除设备
 /**
  * 删除设备
  */
 +(NSURLSessionDataTask *)deleteUeWithUeSn:(NSString*)ueSn block:(void (^)(BaseResponse *_baseResponse, NSError *error)) block;
 
-#pragma mark -
-#pragma mark 绑定设备
+
 /**
  * 绑定设备
  */
 +(NSURLSessionDataTask *)bindUeWithUeSn:(NSString*)ueSn vehicleId:(NSString*)vehicleId bindUESn:(NSString*)bindUESn block:(void (^)(BaseResponse *_baseResponse, NSError *error)) block;
 
+/**
+ * 获取中控名下GPS设备详情
+ */
++(NSURLSessionDataTask *)getGPSDetail:(NSString*)ueSn block:(void (^)(GPSDetailResponse *_GPSDetailResponse, NSError *error)) block;
+
+/**
+ * 获取中控设备详情
+ */
++(NSURLSessionDataTask *)getCCUDetail:(NSString*)ueSn block:(void (^)(CCUDetailResponse *_GPSDetailResponse, NSError *error)) block;
+
+
 #pragma mark -
-#pragma mark 获取设备详情
+#pragma mark 数据统计
+/**
+ * 获取指定日期骑行统计
+ */
++(NSURLSessionDataTask *)rideDayStatistic:(NSString*)ueSn time:(NSString*)time block:(void (^)(RideDayStatisticResponse *_RideDayStatisticResponse, NSError *error)) block;
+
+
+/**
+ * 最近7天速度统计
+ */
++(NSURLSessionDataTask *)rideSpeedStatistic:(NSString*)ueSn block:(void (^)(RideSpeedStatisticResponse *_RideSpeedStatistic, NSError *error)) block;
+
+/**
+ * 最近7天里程统计
+ */
++(NSURLSessionDataTask *)rideMilesStatistic:(NSString*)ueSn block:(void (^)(RideMilesStatisticResponse *_RideSpeedStatistic, NSError *error)) block;
+
+/**
+ * 行车记录概要统计
+ */
++(NSURLSessionDataTask *)getRideRecord:(NSString*)ueSn block:(void (^)(RideRecordResponse *_RideSpeedStatistic, NSError *error)) block;
+
+/**
+ * 获取单词骑行详细信息
+ */
++(NSURLSessionDataTask *)getRideRecordDetail:(NSString*)ueSn startTime:(NSString*)startTime endTime:(NSString*)endTime block:(void (^)(RideRecordDetailResponse *_RideSpeedStatistic, NSError *error)) block;
+
+
+#pragma mark -
+#pragma mark 以下接口废弃
+
 /**
  * 获取设备详情
  */

@@ -11,10 +11,11 @@
 
 @interface UserInfo : RLMObject
 
-@property (strong, nonatomic) NSString* gender;
-@property (strong, nonatomic) NSString* nickname;
-@property (strong, nonatomic) NSString* headImgUrl;
-@property (strong, nonatomic) NSString* mobile;
+@property (copy, nonatomic) NSString* userId;
+@property (copy, nonatomic) NSString* gender;
+@property (copy, nonatomic) NSString* nickname;
+@property (copy, nonatomic) NSString* headImgUrl;
+@property (copy, nonatomic) NSString* mobile;
 
 + (void)setUserInfo:(UserInfo *)_UserInfo;
 

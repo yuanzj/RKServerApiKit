@@ -13,7 +13,7 @@
 
 @interface BaseResponse : NSObject
 
-@property (assign, nonatomic) int state;
-@property (strong, nonatomic) NSString* message;
+@property (nonatomic,assign ) int      state;
+@property (nonatomic,copy   ) NSString * message;
 
 @end

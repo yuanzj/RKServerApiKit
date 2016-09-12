@@ -149,7 +149,7 @@
 }
 
 +(NSURLSessionDataTask *)updateGenderWithGender:(NSString*)gender block:(void (^)(BaseResponse *_baseResp, NSError *error)) block{
-    return [[AFAppDotNetAPIClient sharedClient] GET:@"user/update_gender" parameters:@{@"gender":gender} completionHandler:^(NSURLResponse *response, id JSON, NSError *error) {
+    return [[AFAppDotNetAPIClient sharedClient] GET:@"user/update_user_gender" parameters:@{@"gender":gender} completionHandler:^(NSURLResponse *response, id JSON, NSError *error) {
         if(block){
             if(JSON){
                 BaseResponse *mBaseResponse = [BaseResponse mj_objectWithKeyValues:JSON];
@@ -166,7 +166,7 @@
 }
 
 +(NSURLSessionDataTask *)updateNickNameWithNickname:(NSString*)nickname block:(void (^)(BaseResponse *_baseResp, NSError *error)) block{
-    return [[AFAppDotNetAPIClient sharedClient] GET:@"user/update_nickname" parameters:@{@"nickname":nickname} completionHandler:^(NSURLResponse *response, id JSON, NSError *error) {
+    return [[AFAppDotNetAPIClient sharedClient] GET:@"user/update_user_nickname" parameters:@{@"nickname":nickname} completionHandler:^(NSURLResponse *response, id JSON, NSError *error) {
         if(block){
             if(JSON){
                 BaseResponse *mBaseResponse = [BaseResponse mj_objectWithKeyValues:JSON];
@@ -183,7 +183,7 @@
 }
 
 +(NSURLSessionDataTask *)updateHeadImgWithImage:(UIImage*)image block:(void (^)(UpdateHeadResponse *_updateHeadResponse, NSError *error)) block{
-    return [[AFAppDotNetAPIClient sharedClient] UPLOAD:@"user/update_headimg" parameters:nil image:image completionHandler:^(NSURLResponse *response, id JSON, NSError *error) {
+    return [[AFAppDotNetAPIClient sharedClient] UPLOAD:@"user/update_user_headimg" parameters:nil image:image completionHandler:^(NSURLResponse *response, id JSON, NSError *error) {
         if(block){
             if(JSON){
                 UpdateHeadResponse *mUpdateHeadResponse = [UpdateHeadResponse mj_objectWithKeyValues:JSON];
@@ -200,7 +200,7 @@
 }
 
 +(NSURLSessionDataTask *)getUserDetailWithBlock:(void (^)(UserInfoResponse *_userInfoResponse, NSError *error)) block{
-    return [[AFAppDotNetAPIClient sharedClient] GET:@"user/get_userdetail" parameters:nil completionHandler:^(NSURLResponse *response, id JSON, NSError *error) {
+    return [[AFAppDotNetAPIClient sharedClient] GET:@"user/get_user_detail" parameters:nil completionHandler:^(NSURLResponse *response, id JSON, NSError *error) {
         if(block){
             if(JSON){
                 UserInfoResponse *mUserInfoResponse = [UserInfoResponse mj_objectWithKeyValues:JSON];
