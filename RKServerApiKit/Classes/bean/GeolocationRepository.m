@@ -10,11 +10,5 @@
 
 @implementation GeolocationRepository
 
--(NSString*)key{
-    return [NSString stringWithFormat:@"%@%@",self.lon,self.lat];
-}
-+ (NSString *)primaryKey {
-    return @"key";
-}
 
 @end

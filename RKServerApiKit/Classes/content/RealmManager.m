@@ -215,6 +215,7 @@
 }
 
 + (void)saveGeolocationRepository:(GeolocationRepository *)_GeolocationRepository{
+    
     RLMRealm *realm = [RLMRealm defaultRealm];
     
     [realm beginWriteTransaction];
@@ -239,7 +240,7 @@
 
 + (GeolocationRepository*)queryGeolocationRepositoryWithLat:(NSString*)lat log:(NSString*)lon{
     
-    RLMResults<GeolocationRepository *> *mGeolocationRepository =  [RideRecord objectsWhere:@"key == '%@'",[NSString stringWithFormat:@"%@%@",lon,lat]];
+    RLMResults<GeolocationRepository *> *mGeolocationRepository =  [GeolocationRepository objectsWhere:[NSString stringWithFormat:@"lat = '%@' AND lon = '%@'",lat,lon ]];
     
     return [mGeolocationRepository firstObject];
     
