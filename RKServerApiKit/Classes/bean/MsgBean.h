@@ -11,14 +11,12 @@
 
 @interface MsgBean : RLMObject
 
-@property (strong, nonatomic) NSString* uid;
-@property (strong, nonatomic) NSString* messageProducer;
-@property (strong, nonatomic) NSString* url;
-@property (strong, nonatomic) NSString* type;
-@property (strong, nonatomic) NSString* ueSn;
-@property (assign, nonatomic) int status;
-@property (strong, nonatomic) NSString* content;
-@property (strong, nonatomic) NSString* ueType;
-@property (strong, nonatomic) NSString* createTime;
+@property (copy ,nonatomic) NSString *id;
+
+@property (copy, nonatomic) NSString* messageType;
+
+@property (copy, nonatomic) NSString* content;
+
+@property (copy, nonatomic) NSString* createTime;
 
 @end

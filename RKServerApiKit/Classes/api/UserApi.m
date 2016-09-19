@@ -9,6 +9,7 @@
 #import "UserApi.h"
 
 @implementation UserApi
+
 +(NSURLSessionDataTask *)getVeriCodeWithMobile:(NSString*)mobile type:(NSString*)type block:(void (^)(BaseResponse *_baseResp, NSError *error)) block
 {
     return [[AFAppDotNetAPIClient sharedClient] GET:@"user/getVeriCode" parameters:@{@"mobile":mobile, @"type":type} completionHandler:^(NSURLResponse *response, id JSON, NSError *error) {
@@ -217,7 +218,7 @@
 }
 
 +(NSURLSessionDataTask *)getMessageWithBlock:(void (^)(MsgResponse *_msgResponse, NSError *error)) block{
-    return [[AFAppDotNetAPIClient sharedClient] GET:@"get_appmessage" parameters:@{@"pageSize":@"50",
+    return [[AFAppDotNetAPIClient sharedClient] GET:@"user/get_user_msg" parameters:@{@"pageSize":@"50",
                                                                                    @"page":@"0" } completionHandler:^(NSURLResponse *response, id JSON, NSError *error) {
         if(block){
             if(JSON){

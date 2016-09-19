@@ -119,6 +119,29 @@
 #pragma mark -
 #pragma mark 数据统计
 /**
+ * 获取当前车况
+ */
++(NSURLSessionDataTask *)getCurrentCarStatus:(NSString*)ueSn block:(void (^)(CarStatusResponse *_CarStatusResponse, NSError *error)) block{
+    
+    return [[AFAppDotNetAPIClient sharedClient] GET:@"car/get_current_car_status" parameters:@{@"ueSn":ueSn} completionHandler:^(NSURLResponse *response, id JSON, NSError *error) {
+        if(block){
+            if(JSON){
+                CarStatusResponse *mBaseResponse = [CarStatusResponse mj_objectWithKeyValues:JSON];
+                if(mBaseResponse){
+                    block(mBaseResponse, nil);
+                }else{
+                    block(nil, error);
+                }
+            }else{
+                block(nil, error);
+            }
+        }
+    }];
+    
+}
+
+
+/**
  * 获取指定日期骑行统计
  */
 +(NSURLSessionDataTask *)rideDayStatistic:(NSString*)ueSn time:(NSString*)time block:(void (^)(RideDayStatisticResponse *_RideDayStatisticResponse, NSError *error)) block{
@@ -326,7 +349,7 @@
 }
 
 +(NSURLSessionDataTask *)getAuthorizeCodeWithUeSn:(NSString*)ueSn block:(void (^)(AuthCodeResponse *_authCodeResponse, NSError *error)) block{
-    return [[AFAppDotNetAPIClient sharedClient] GET:@"authorize_code" parameters:@{@"ueSn":ueSn} completionHandler:^(NSURLResponse *response, id JSON, NSError *error) {
+    return [[AFAppDotNetAPIClient sharedClient] GET:@"ue/get_auth_code" parameters:@{@"ueSn":ueSn} completionHandler:^(NSURLResponse *response, id JSON, NSError *error) {
         if(block){
             if(JSON){
                 AuthCodeResponse *_authCodeResponse = [AuthCodeResponse mj_objectWithKeyValues:JSON];

@@ -44,6 +44,12 @@
 #pragma mark -
 #pragma mark 数据统计
 /**
+ * 获取当前车况
+ */
++(NSURLSessionDataTask *)getCurrentCarStatus:(NSString*)ueSn block:(void (^)(CarStatusResponse *_CarStatusResponse, NSError *error)) block;
+
+
+/**
  * 获取指定日期骑行统计
  */
 +(NSURLSessionDataTask *)rideDayStatistic:(NSString*)ueSn time:(NSString*)time block:(void (^)(RideDayStatisticResponse *_RideDayStatisticResponse, NSError *error)) block;
