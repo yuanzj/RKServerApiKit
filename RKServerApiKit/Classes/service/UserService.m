@@ -129,7 +129,7 @@ NSString * const USER = @"USER";
         
         if (msgListResponse) {
             if(msgListResponse.state == RKSAPIResponseSuccess){
-                NSArray *list = msgListResponse.data;
+                NSArray *list = msgListResponse.data5;
                 [RealmManager clearMessageList];
                 [RealmManager saveMessageList:list];
             }

@@ -12,6 +12,6 @@
 
 @interface MsgResponse : BaseResponse
 
-@property (strong, nonatomic) NSArray* data;
+@property (strong, nonatomic) NSArray* data5;
 
 @end

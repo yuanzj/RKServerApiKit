@@ -18,8 +18,8 @@
             if(_ueListResponse.state == RKSAPIResponseSuccess){
                 
                 NSArray* data = _ueListResponse.data5;
+                [RealmManager clearUeInfoList];
                 if (data && data.count > 0) {
-                    [RealmManager clearUeInfoList];
                     [RealmManager saveUeInfoList:data];
                 }
                 
