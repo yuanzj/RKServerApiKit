@@ -39,7 +39,7 @@
 }
 
 +(NSURLSessionDataTask *)deleteUeWithUeSn:(NSString*)ueSn block:(void (^)(BaseResponse *_baseResponse, NSError *error)) block{
-    return [[AFAppDotNetAPIClient sharedClient] GET:@"ue/delete_device" parameters:@{@"ueSn":ueSn} completionHandler:^(NSURLResponse *response, id JSON, NSError *error) {
+    return [[AFAppDotNetAPIClient sharedClient] GET:@"ue/delete_device" parameters:@{@"ueSn":(ueSn ? ueSn : @"")} completionHandler:^(NSURLResponse *response, id JSON, NSError *error) {
         if(block){
             if(JSON){
                 BaseResponse *mBaseResponse = [BaseResponse mj_objectWithKeyValues:JSON];
@@ -56,7 +56,7 @@
 }
 
 +(NSURLSessionDataTask *)bindUeWithUeSn:(NSString*)ueSn vehicleId:(NSString*)vehicleId bindUESn:(NSString*)bindUESn block:(void (^)(BaseResponse *_baseResponse, NSError *error)) block{
-    return [[AFAppDotNetAPIClient sharedClient] GET:@"ue/add_device" parameters:@{@"ueSn":ueSn} completionHandler:^(NSURLResponse *response, id JSON, NSError *error) {
+    return [[AFAppDotNetAPIClient sharedClient] GET:@"ue/add_device" parameters:@{@"ueSn":(ueSn ? ueSn : @"")} completionHandler:^(NSURLResponse *response, id JSON, NSError *error) {
         if(block){
             if(JSON){
                 BaseResponse *mBaseResponse = [BaseResponse mj_objectWithKeyValues:JSON];
@@ -77,7 +77,7 @@
  */
 +(NSURLSessionDataTask *)getGPSDetail:(NSString*)ueSn block:(void (^)(GPSDetailResponse *_GPSDetailResponse, NSError *error)) block{
     
-    return [[AFAppDotNetAPIClient sharedClient] GET:@"ue/get_gps_detail" parameters:@{@"ueSn":ueSn} completionHandler:^(NSURLResponse *response, id JSON, NSError *error) {
+    return [[AFAppDotNetAPIClient sharedClient] GET:@"ue/get_gps_detail" parameters:@{@"ueSn":(ueSn ? ueSn : @"")} completionHandler:^(NSURLResponse *response, id JSON, NSError *error) {
         if(block){
             if(JSON){
                 GPSDetailResponse *mBaseResponse = [GPSDetailResponse mj_objectWithKeyValues:JSON];
@@ -99,7 +99,7 @@
  */
 +(NSURLSessionDataTask *)getCCUDetail:(NSString*)ueSn block:(void (^)(CCUDetailResponse *_GPSDetailResponse, NSError *error)) block{
 
-    return [[AFAppDotNetAPIClient sharedClient] GET:@"ue/get_cc_activetime" parameters:@{@"ueSn":ueSn} completionHandler:^(NSURLResponse *response, id JSON, NSError *error) {
+    return [[AFAppDotNetAPIClient sharedClient] GET:@"ue/get_cc_activetime" parameters:@{@"ueSn":(ueSn ? ueSn : @"")} completionHandler:^(NSURLResponse *response, id JSON, NSError *error) {
         if(block){
             if(JSON){
                 CCUDetailResponse *mBaseResponse = [CCUDetailResponse mj_objectWithKeyValues:JSON];
@@ -123,7 +123,7 @@
  */
 +(NSURLSessionDataTask *)getCurrentCarStatus:(NSString*)ueSn block:(void (^)(CarStatusResponse *_CarStatusResponse, NSError *error)) block{
     
-    return [[AFAppDotNetAPIClient sharedClient] GET:@"car/get_current_car_status" parameters:@{@"ueSn":ueSn} completionHandler:^(NSURLResponse *response, id JSON, NSError *error) {
+    return [[AFAppDotNetAPIClient sharedClient] GET:@"car/get_current_car_status" parameters:@{@"ueSn":(ueSn ? ueSn : @"")} completionHandler:^(NSURLResponse *response, id JSON, NSError *error) {
         if(block){
             if(JSON){
                 CarStatusResponse *mBaseResponse = [CarStatusResponse mj_objectWithKeyValues:JSON];
@@ -146,7 +146,7 @@
  */
 +(NSURLSessionDataTask *)rideDayStatistic:(NSString*)ueSn time:(NSString*)time block:(void (^)(RideDayStatisticResponse *_RideDayStatisticResponse, NSError *error)) block{
 
-    return [[AFAppDotNetAPIClient sharedClient] GET:@"ue/ride_day_statistic" parameters:@{@"ueSn":ueSn, @"time":time} completionHandler:^(NSURLResponse *response, id JSON, NSError *error) {
+    return [[AFAppDotNetAPIClient sharedClient] GET:@"ue/ride_day_statistic" parameters:@{@"ueSn":(ueSn ? ueSn : @""), @"time":time} completionHandler:^(NSURLResponse *response, id JSON, NSError *error) {
         if(block){
             if(JSON){
                 RideDayStatisticResponse *mRideDayStatisticResponse = [RideDayStatisticResponse mj_objectWithKeyValues:JSON];
@@ -167,7 +167,7 @@
  * 最近7天速度统计
  */
 +(NSURLSessionDataTask *)rideSpeedStatistic:(NSString*)ueSn block:(void (^)(RideSpeedStatisticResponse *_RideSpeedStatistic, NSError *error)) block{
-    return [[AFAppDotNetAPIClient sharedClient] GET:@"ue/ride_speed_statistic" parameters:@{@"ueSn":ueSn} completionHandler:^(NSURLResponse *response, id JSON, NSError *error) {
+    return [[AFAppDotNetAPIClient sharedClient] GET:@"ue/ride_speed_statistic" parameters:@{@"ueSn":(ueSn ? ueSn : @"")} completionHandler:^(NSURLResponse *response, id JSON, NSError *error) {
         if(block){
             if(JSON){
                 // Tell MJExtension what type model will be contained in data and accessoryUEs.
@@ -194,7 +194,7 @@
  * 最近7天里程统计
  */
 +(NSURLSessionDataTask *)rideMilesStatistic:(NSString*)ueSn block:(void (^)(RideMilesStatisticResponse *_RideSpeedStatistic, NSError *error)) block{
-    return [[AFAppDotNetAPIClient sharedClient] GET:@"ue/ride_miles_statistic" parameters:@{@"ueSn":ueSn} completionHandler:^(NSURLResponse *response, id JSON, NSError *error) {
+    return [[AFAppDotNetAPIClient sharedClient] GET:@"ue/ride_miles_statistic" parameters:@{@"ueSn":(ueSn ? ueSn : @"")} completionHandler:^(NSURLResponse *response, id JSON, NSError *error) {
         if(block){
             if(JSON){
                 // Tell MJExtension what type model will be contained in data and accessoryUEs.
@@ -222,7 +222,7 @@
  */
 +(NSURLSessionDataTask *)getRideRecord:(NSString*)ueSn block:(void (^)(RideRecordResponse *_RideSpeedStatistic, NSError *error)) block{
 
-    return [[AFAppDotNetAPIClient sharedClient] GET:@"ue/ride_record_statistic" parameters:@{@"ueSn":ueSn} completionHandler:^(NSURLResponse *response, id JSON, NSError *error) {
+    return [[AFAppDotNetAPIClient sharedClient] GET:@"ue/ride_record_statistic" parameters:@{@"ueSn":(ueSn ? ueSn : @"")} completionHandler:^(NSURLResponse *response, id JSON, NSError *error) {
         if(block){
             if(JSON){
                 // Tell MJExtension what type model will be contained in data and accessoryUEs.
@@ -251,7 +251,7 @@
  */
 +(NSURLSessionDataTask *)getRideRecordDetail:(NSString*)ueSn startTime:(NSString*)startTime endTime:(NSString*)endTime block:(void (^)(RideRecordDetailResponse *_RideSpeedStatistic, NSError *error)) block{
 
-    return [[AFAppDotNetAPIClient sharedClient] GET:@"ue/ride_record_detail" parameters:@{@"ueSn":ueSn,@"startTime":startTime,@"endTime":endTime} completionHandler:^(NSURLResponse *response, id JSON, NSError *error) {
+    return [[AFAppDotNetAPIClient sharedClient] GET:@"ue/ride_record_detail" parameters:@{@"ueSn":(ueSn ? ueSn : @""),@"startTime":startTime,@"endTime":endTime} completionHandler:^(NSURLResponse *response, id JSON, NSError *error) {
         if(block){
             if(JSON){
                 // Tell MJExtension what type model will be contained in data and accessoryUEs.
@@ -281,7 +281,7 @@
 
 
 +(NSURLSessionDataTask *)queryUeDetailWithUeSn:(NSString*)ueSn block:(void (^)(UeDetailResponse *_ueDetailResponse, NSError *error)) block{
-    return [[AFAppDotNetAPIClient sharedClient] GET:@"ue/get_cc_activetime" parameters:@{@"ueSn":ueSn} completionHandler:^(NSURLResponse *response, id JSON, NSError *error) {
+    return [[AFAppDotNetAPIClient sharedClient] GET:@"ue/get_cc_activetime" parameters:@{@"ueSn":(ueSn ? ueSn : @"")} completionHandler:^(NSURLResponse *response, id JSON, NSError *error) {
         if(block){
             if(JSON){
                 UeDetailResponse *mUeDetailResponse = [UeDetailResponse mj_objectWithKeyValues:JSON];
@@ -298,7 +298,7 @@
 }
 
 +(NSURLSessionDataTask *)calcMilesWithUeSn:(NSString*)ueSn block:(void (^)(OneDayMilesResponse *_oneDayMilesResponse, NSError *error)) block{
-    return [[AFAppDotNetAPIClient sharedClient] GET:@"rk600/calc_miles" parameters:@{@"ueSn":ueSn} completionHandler:^(NSURLResponse *response, id JSON, NSError *error) {
+    return [[AFAppDotNetAPIClient sharedClient] GET:@"rk600/calc_miles" parameters:@{@"ueSn":(ueSn ? ueSn : @"")} completionHandler:^(NSURLResponse *response, id JSON, NSError *error) {
         if(block){
             if(JSON){
                 OneDayMilesResponse *mOneDayMilesResponse = [OneDayMilesResponse mj_objectWithKeyValues:JSON];
@@ -315,7 +315,7 @@
 }
 
 +(NSURLSessionDataTask *)getExtendCCWithUeSn:(NSString*)ueSn block:(void (^)(ExtendCCResponse *_extendCCResponse, NSError *error)) block{
-    return [[AFAppDotNetAPIClient sharedClient] GET:@"rk600/get_cc_extend" parameters:@{@"ueSn":ueSn} completionHandler:^(NSURLResponse *response, id JSON, NSError *error) {
+    return [[AFAppDotNetAPIClient sharedClient] GET:@"rk600/get_cc_extend" parameters:@{@"ueSn":(ueSn ? ueSn : @"")} completionHandler:^(NSURLResponse *response, id JSON, NSError *error) {
         if(block){
             if(JSON){
                 ExtendCCResponse *mExtendCCResponse = [ExtendCCResponse mj_objectWithKeyValues:JSON];
@@ -332,7 +332,7 @@
 }
 
 +(NSURLSessionDataTask *)getFirmwareversionWithUeSn:(NSString*)ueSn currentVersion:(NSString*)currentVersion hardwareVersion:(NSString*)hardwareVersion block:(void (^)(FirmwareVersionResponse *_firmwareVersionResponse, NSError *error)) block{
-    return [[AFAppDotNetAPIClient sharedClient] GET:@"get_firmwareversion" parameters:@{@"ueSn":ueSn, @"currentVersion":currentVersion, @"hardwareVersion":hardwareVersion} completionHandler:^(NSURLResponse *response, id JSON, NSError *error) {
+    return [[AFAppDotNetAPIClient sharedClient] GET:@"get_firmwareversion" parameters:@{@"ueSn":(ueSn ? ueSn : @""), @"currentVersion":currentVersion, @"hardwareVersion":hardwareVersion} completionHandler:^(NSURLResponse *response, id JSON, NSError *error) {
         if(block){
             if(JSON){
                 FirmwareVersionResponse *_firmwareVersionResponse = [FirmwareVersionResponse mj_objectWithKeyValues:JSON];
@@ -349,7 +349,7 @@
 }
 
 +(NSURLSessionDataTask *)getAuthorizeCodeWithUeSn:(NSString*)ueSn block:(void (^)(AuthCodeResponse *_authCodeResponse, NSError *error)) block{
-    return [[AFAppDotNetAPIClient sharedClient] GET:@"ue/get_auth_code" parameters:@{@"ueSn":ueSn} completionHandler:^(NSURLResponse *response, id JSON, NSError *error) {
+    return [[AFAppDotNetAPIClient sharedClient] GET:@"ue/get_auth_code" parameters:@{@"ueSn":(ueSn ? ueSn : @"")} completionHandler:^(NSURLResponse *response, id JSON, NSError *error) {
         if(block){
             if(JSON){
                 AuthCodeResponse *_authCodeResponse = [AuthCodeResponse mj_objectWithKeyValues:JSON];

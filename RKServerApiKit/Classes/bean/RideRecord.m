@@ -26,14 +26,14 @@
     return [@{@"day":_day,
               @"startTime":_startTime,
               @"endTime":_endTime,
-              @"distance":_distance,
+              @"distance":@(_distance),
               @"totalTime":_totalTime,
               @"startLon":_startLon,
               @"startLat":_startLat,
               @"endLon":_endLon,
               @"endLat":_endLat,
-              @"highestSpeed":_highestSpeed,
-              @"averageSpeed":_averageSpeed} description];
+              @"highestSpeed":@(_highestSpeed),
+              @"averageSpeed":@(_averageSpeed)} description];
 }
 
 @end

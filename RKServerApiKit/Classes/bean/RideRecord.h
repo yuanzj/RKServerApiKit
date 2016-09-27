@@ -15,14 +15,14 @@
 @property (copy, nonatomic) NSString * day;
 @property (copy, nonatomic) NSString * startTime;
 @property (copy, nonatomic) NSString * endTime;
-@property (copy, nonatomic) NSString * distance;
+@property (assign, nonatomic) float distance;
 @property (copy, nonatomic) NSString * totalTime;
 @property (copy, nonatomic) NSString * startLon;
 @property (copy, nonatomic) NSString * startLat;
 @property (copy, nonatomic) NSString * endLon;
 @property (copy, nonatomic) NSString * endLat;
-@property (copy, nonatomic) NSString * highestSpeed;
-@property (copy, nonatomic) NSString * averageSpeed;
+@property (assign, nonatomic) float highestSpeed;
+@property (assign, nonatomic) float averageSpeed;
 
 @end
 
