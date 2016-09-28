@@ -10,7 +10,7 @@
 
 @interface Constant : NSObject
 
-#define DEV_SERVER_MODEL 0
+//#define DEV_SERVER_MODEL 0
 
 #define SESSION_OUT -2
 

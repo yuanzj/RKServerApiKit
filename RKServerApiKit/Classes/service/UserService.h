@@ -93,6 +93,12 @@ extern NSString * const USER;
 +(NSURLSessionDataTask *)getMessageWithBlock:(void (^)(MsgResponse *_msgResponse, NSError *error)) block;
 
 /**
+ * 获取用户推送消息
+ * @param sessionId
+ */
++(NSURLSessionDataTask *)getMessageWithPage:(NSInteger)page pageSize:(NSInteger)size block:(void (^)(MsgResponse *_msgResponse, NSError *error)) block;
+
+/**
  * 删除用户推送消息
  * @param sessionId
  * @param ids 消息id的集合

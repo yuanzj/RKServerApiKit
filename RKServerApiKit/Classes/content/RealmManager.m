@@ -112,11 +112,14 @@
 
 #pragma mark - AuthCodeData
 + (void)saveAuthCodeData:(AuthCodeData *)mAuthCodeData{
-    RLMRealm *realm = [RLMRealm defaultRealm];
-    
-    [realm beginWriteTransaction];
-    [realm addObject:mAuthCodeData];
-    [realm commitWriteTransaction];
+    if (mAuthCodeData.ueSn) {
+        if( ![AuthCodeData objectForPrimaryKey:mAuthCodeData.ueSn]){
+            RLMRealm *realm = [RLMRealm defaultRealm];
+            [realm beginWriteTransaction];
+            [realm addObject:mAuthCodeData];
+            [realm commitWriteTransaction];
+        }
+    }
 }
 
 + (void)clearAuthCodeData{

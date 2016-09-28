@@ -151,6 +151,13 @@
  */
 +(NSURLSessionDataTask *)getMessageWithBlock:(void (^)(MsgResponse *_msgResponse, NSError *error)) block;
 
+
+/**
+ * 获取用户推送消息
+ * @param sessionId
+ */
++(NSURLSessionDataTask *)getMessageWithPage:(NSInteger)page pageSize:(NSInteger)size block:(void (^)(MsgResponse *_msgResponse, NSError *error)) block;
+
 #pragma mark -
 #pragma mark 删除用户推送消息
 /**

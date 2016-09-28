@@ -240,6 +240,33 @@
     }];
 }
 
+/**
+ * 获取用户推送消息
+ * @param sessionId
+ */
++(NSURLSessionDataTask *)getMessageWithPage:(NSInteger)page pageSize:(NSInteger)size block:(void (^)(MsgResponse *_msgResponse, NSError *error)) block{
+    return [[AFAppDotNetAPIClient sharedClient] GET:@"user/get_user_msg" parameters:@{@"pageSize":@(size),
+                                                                                      @"page":@(page) } completionHandler:^(NSURLResponse *response, id JSON, NSError *error) {
+                                                                                          if(block){
+                                                                                              if(JSON){
+                                                                                                  [MsgResponse mj_setupObjectClassInArray:^NSDictionary *{
+                                                                                                      return @{
+                                                                                                               @"data5" : [MsgBean class]
+                                                                                                               };
+                                                                                                  }];
+                                                                                                  MsgResponse *mMsgResponse = [MsgResponse mj_objectWithKeyValues:JSON];
+                                                                                                  if(mMsgResponse){
+                                                                                                      block(mMsgResponse, nil);
+                                                                                                  }else{
+                                                                                                      block(nil, error);
+                                                                                                  }
+                                                                                              }else{
+                                                                                                  block(nil, error);
+                                                                                              }
+                                                                                          }
+                                                                                      }];
+}
+
 +(NSURLSessionDataTask *)deleteMessageWithMsgIds:(NSArray*)msgIds block:(void (^)(BaseResponse *_baseResp, NSError *error)) block{
 //    NSString* ids = @"[";
 //    for(int i = 0; i < msgIds.count; i++){

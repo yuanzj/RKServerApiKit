@@ -141,6 +141,14 @@ NSString * const USER = @"USER";
     }];
 }
 
+/**
+ * 获取用户推送消息
+ * @param sessionId
+ */
++(NSURLSessionDataTask *)getMessageWithPage:(NSInteger)page pageSize:(NSInteger)size block:(void (^)(MsgResponse *_msgResponse, NSError *error)) block{
+    return [UserApi getMessageWithPage:page pageSize:size block:block];
+}
+
 +(NSURLSessionDataTask *)deleteMessageWithMsgIds:(NSArray*)msgIds block:(void (^)(BaseResponse *_baseResp, NSError *error)) block{
     return [UserApi deleteMessageWithMsgIds:msgIds block:block];
 }
