@@ -60,10 +60,16 @@ typedef NS_ENUM(NSUInteger, CurrentCarStatus) {
 @property (copy, nonatomic) NSString * fault;
 @property (copy, nonatomic) NSString * lon;
 @property (copy, nonatomic) NSString * lat;
+@property (copy, nonatomic) NSString * lonlatType;//0:原始坐标 1：百度坐标
 
 @property (copy, nonatomic) NSString * lastReportTime;
 @property (copy, nonatomic) NSString * gpsSatellite;
 @property (copy, nonatomic) NSString * currentCarStatus;
+
+@property (copy, nonatomic) NSString * onlineStatus;
+@property (copy, nonatomic) NSString * outElecStatus;
+@property (copy, nonatomic) NSString * rs485Status;
+
 
 @end
 

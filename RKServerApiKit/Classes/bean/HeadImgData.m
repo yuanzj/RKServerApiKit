@@ -10,6 +10,6 @@
 
 @implementation HeadImgData
 -(NSString*)description{
-    return [NSString stringWithFormat:@"headUrl: %@",_headUrl];
+    return [NSString stringWithFormat:@"headUrl: %@",_headImgUrl];
 }
 @end

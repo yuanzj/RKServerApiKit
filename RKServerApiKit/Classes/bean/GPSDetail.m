@@ -11,7 +11,7 @@
 @implementation GPSDetail
 -(NSString*)description{
     return [@{@"IMEI":_IMEI,
-              @"ICCID":_ICCID,
+              @"ICCID":_iccid,
               @"outElecStatus":_outElecStatus,
               @"activeTime":_activeTime,
               @"warrantyTime":_warrantyTime,

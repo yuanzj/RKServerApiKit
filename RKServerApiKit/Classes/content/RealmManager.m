@@ -219,6 +219,7 @@
 
 + (void)saveGeolocationRepository:(GeolocationRepository *)_GeolocationRepository{
     
+    _GeolocationRepository.insterDate = [NSDate date];
     RLMRealm *realm = [RLMRealm defaultRealm];
     
     [realm beginWriteTransaction];
@@ -226,7 +227,8 @@
     [realm commitWriteTransaction];
     
     //最大缓存上限为 MAX_STORE_LOCATION_INFO 个地理位置
-    RLMResults<GeolocationRepository *> *mGeolocationRepository = [GeolocationRepository allObjects];
+    RLMResults<GeolocationRepository *> *mGeolocationRepository = [[GeolocationRepository allObjects] sortedResultsUsingProperty:@"insterDate" ascending:YES];
+    
     if (mGeolocationRepository && mGeolocationRepository.count > MAX_STORE_LOCATION_INFO) {
         
         NSMutableArray *delObjs = [[NSMutableArray alloc] init];
@@ -247,6 +249,18 @@
     
     return [mGeolocationRepository firstObject];
     
+}
+
++ (void)clearGeolocationRepository{
+    RLMResults<GeolocationRepository *> *mGeolocationRepository = [GeolocationRepository allObjects];
+    
+    if (mGeolocationRepository) {
+        
+        RLMRealm *realm = [RLMRealm defaultRealm];
+        [realm beginWriteTransaction];
+        [realm deleteObjects:mGeolocationRepository];
+        [realm commitWriteTransaction];
+    }
 }
 
 @end

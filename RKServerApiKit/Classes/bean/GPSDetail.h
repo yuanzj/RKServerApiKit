@@ -28,7 +28,7 @@
 
 
 @property (copy, nonatomic) NSString* IMEI;
-@property (copy, nonatomic) NSString* ICCID;
+@property (copy, nonatomic) NSString* iccid;
 @property (copy, nonatomic) NSString* outElecStatus;
 @property (copy, nonatomic) NSString* rs485Status;
 @property (copy, nonatomic) NSString* activeTime;

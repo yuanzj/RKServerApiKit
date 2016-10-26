@@ -17,7 +17,7 @@
 #import "RideRecord.h"
 #import "GeolocationRepository.h"
 
-#define MAX_STORE_LOCATION_INFO 100
+#define MAX_STORE_LOCATION_INFO 1000
 
 @interface RealmManager : NSObject
 
@@ -72,6 +72,8 @@
 + (void)saveGeolocationRepository:(GeolocationRepository *)_GeolocationRepository;
 
 + (GeolocationRepository*)queryGeolocationRepositoryWithLat:(NSString*)lat log:(NSString*)log;
+
++ (void)clearGeolocationRepository;
 
 
 

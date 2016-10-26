@@ -10,6 +10,6 @@
 
 @interface HeadImgData : NSObject
 
-@property (strong, nonatomic) NSString* headUrl;
+@property (strong, nonatomic) NSString* headImgUrl;
 
 @end

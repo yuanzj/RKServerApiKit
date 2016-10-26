@@ -9,10 +9,12 @@
 
 @interface GeolocationRepository : RLMObject
 
-@property (copy, nonatomic) NSString * lon;
-@property (copy, nonatomic) NSString * lat;
+@property  NSString * lon;
+@property  NSString * lat;
 
-@property (copy, nonatomic) NSString * geolocationInfo;
+@property  NSString * geolocationInfo;
+
+@property  NSDate   * insterDate;
 
 @end
 
