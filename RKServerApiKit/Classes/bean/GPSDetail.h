@@ -44,7 +44,7 @@
 @property (copy, nonatomic) NSString* usedFlow;
 @property (copy, nonatomic) NSString* expireDate;
 
-
+@property (copy, nonatomic) NSString* serviceStatus;
 
 @end
 

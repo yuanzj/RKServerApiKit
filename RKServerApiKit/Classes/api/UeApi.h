@@ -91,8 +91,6 @@
  * 获取单词骑行详细信息
  */
 +(NSURLSessionDataTask *)getRideRecordDetail:(NSString*)ueSn startTime:(NSString*)startTime endTime:(NSString*)endTime block:(void (^)(RideRecordDetailResponse *_RideSpeedStatistic, NSError *error)) block;
-
-
 #pragma mark -
 #pragma mark 以下接口废弃
 /**
