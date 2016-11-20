@@ -85,4 +85,136 @@
     }];
 }
 
+/**
+ * 获取可租赁车辆列表
+ */
++(NSURLSessionDataTask *)getRentCarWithBlock:(void (^)(RentCarResponse *_ueListResponse, NSError *error)) block{
+    
+    return [[AFAppDotNetAPIClient sharedClient] GET:@"car_rental/get_all_rental_cars" parameters:nil completionHandler:^(NSURLResponse *response, id JSON, NSError *error) {
+        if(block){
+            if(JSON){
+                // Tell MJExtension what type model will be contained in data and accessoryUEs.
+                [RentCarResponse mj_setupObjectClassInArray:^NSDictionary *{
+                    return @{
+                             @"data4" : [RentCar class]
+                             };
+                }];
+                RentCarResponse *mUeListResponse = [RentCarResponse mj_objectWithKeyValues:JSON];
+                if(mUeListResponse){
+                    block(mUeListResponse, nil);
+                }else{
+                    block(nil, error);
+                }
+            }else{
+                block(nil, error);
+            }
+        }
+    }];
+
+}
+
+/**
+ * 1.1	预约租车
+ */
++(NSURLSessionDataTask *)appointmentCar:(NSString*)ueSn  block:(void (^)(BaseResponse *_ueListResponse, NSError *error)) block{
+    
+    return [[AFAppDotNetAPIClient sharedClient] GET:@"car_rental/appointment_car" parameters:@{@"ueSn":ueSn} completionHandler:^(NSURLResponse *response, id JSON, NSError *error) {
+        if(block){
+            if(JSON){
+                BaseResponse *mBaseResponse = [BaseResponse mj_objectWithKeyValues:JSON];
+                if(mBaseResponse){
+                    block(mBaseResponse, nil);
+                } else {
+                    block(nil, error);
+                }
+            } else {
+                block(nil, error);
+            }
+        }
+    }];
+   
+}
+
+/**
+ * 1.1	取消预约
+ */
++(NSURLSessionDataTask *)cancalAppointment:(NSString*)ueSn  block:(void (^)(BaseResponse *_ueListResponse, NSError *error)) block{
+    
+    return [[AFAppDotNetAPIClient sharedClient] GET:@"car_rental/cancel_appointment" parameters:@{@"ueSn":ueSn} completionHandler:^(NSURLResponse *response, id JSON, NSError *error) {
+        if(block){
+            if(JSON){
+                BaseResponse *mBaseResponse = [BaseResponse mj_objectWithKeyValues:JSON];
+                if(mBaseResponse){
+                    block(mBaseResponse, nil);
+                } else {
+                    block(nil, error);
+                }
+            } else {
+                block(nil, error);
+            }
+        }
+    }];
+    
+}
+/**
+ * 1.1	确认租车
+ */
++(NSURLSessionDataTask *)confirmRental:(NSString*)ueSn  block:(void (^)(BaseResponse *_ueListResponse, NSError *error)) block{
+    return [[AFAppDotNetAPIClient sharedClient] GET:@"car_rental/confirm_rental" parameters:@{@"ueSn":ueSn} completionHandler:^(NSURLResponse *response, id JSON, NSError *error) {
+        if(block){
+            if(JSON){
+                BaseResponse *mBaseResponse = [BaseResponse mj_objectWithKeyValues:JSON];
+                if(mBaseResponse){
+                    block(mBaseResponse, nil);
+                } else {
+                    block(nil, error);
+                }
+            } else {
+                block(nil, error);
+            }
+        }
+    }];
+}
+
+/**
+ * 1.1	确认还车
+ */
++(NSURLSessionDataTask *)confirmReturn:(NSString*)ueSn  block:(void (^)(BaseResponse *_ueListResponse, NSError *error)) block{
+    return [[AFAppDotNetAPIClient sharedClient] GET:@"car_rental/confirm_return" parameters:@{@"ueSn":ueSn} completionHandler:^(NSURLResponse *response, id JSON, NSError *error) {
+        if(block){
+            if(JSON){
+                BaseResponse *mBaseResponse = [BaseResponse mj_objectWithKeyValues:JSON];
+                if(mBaseResponse){
+                    block(mBaseResponse, nil);
+                } else {
+                    block(nil, error);
+                }
+            } else {
+                block(nil, error);
+            }
+        }
+    }];
+}
+
+/**
+ * 1.1	获取当前用户的预约信息
+ */
++(NSURLSessionDataTask *)getAppointmentInfoWithBlock:(void (^)(RentCarItemResponse *_ueListResponse, NSError *error)) block{
+    return [[AFAppDotNetAPIClient sharedClient] GET:@"car_rental/get_appointment_info" parameters:nil completionHandler:^(NSURLResponse *response, id JSON, NSError *error) {
+        if(block){
+            if(JSON){
+                // Tell MJExtension what type model will be contained in data and accessoryUEs.
+                RentCarItemResponse *mUeListResponse = [RentCarItemResponse mj_objectWithKeyValues:JSON];
+                if(mUeListResponse){
+                    block(mUeListResponse, nil);
+                }else{
+                    block(nil, error);
+                }
+            }else{
+                block(nil, error);
+            }
+        }
+    }];
+}
+
 @end

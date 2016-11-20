@@ -26,6 +26,7 @@
 #import "RideRecordDetail.h"
 #import "CarStatusResponse.h"
 #import "UploadParam.h"
+#import "RentCarResponse.h"
 
 @interface CarApi : NSObject
 
@@ -59,5 +60,37 @@
  @return  GPSDetailResponse GPSDetail serviceStatus
  */
 +(NSURLSessionDataTask *)getServiceStatus:(NSString*)ueSn block:(void (^)(GPSDetailResponse *_BaseResponse, NSError *error)) block;
+
+/**
+ * 获取可租赁车辆列表
+ */
++(NSURLSessionDataTask *)getRentCarWithBlock:(void (^)(RentCarResponse *_ueListResponse, NSError *error)) block;
+
+/**
+ * 1.1	预约租车
+ */
++(NSURLSessionDataTask *)appointmentCar:(NSString*)ueSn  block:(void (^)(BaseResponse *_ueListResponse, NSError *error)) block;
+
+/**
+ * 1.1	取消预约
+ */
++(NSURLSessionDataTask *)cancalAppointment:(NSString*)ueSn  block:(void (^)(BaseResponse *_ueListResponse, NSError *error)) block;
+
+/**
+ * 1.1	确认租车
+ */
++(NSURLSessionDataTask *)confirmRental:(NSString*)ueSn  block:(void (^)(BaseResponse *_ueListResponse, NSError *error)) block;
+
+/**
+ * 1.1	确认还车
+ */
++(NSURLSessionDataTask *)confirmReturn:(NSString*)ueSn  block:(void (^)(BaseResponse *_ueListResponse, NSError *error)) block;
+
+/**
+ * 1.1	获取当前用户的预约信息
+ */
++(NSURLSessionDataTask *)getAppointmentInfoWithBlock:(void (^)(RentCarItemResponse *_ueListResponse, NSError *error)) block;
+
+
 
 @end
