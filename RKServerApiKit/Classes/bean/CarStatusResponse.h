@@ -73,6 +73,8 @@ typedef NS_ENUM(NSUInteger, CurrentCarStatus) {
 @property (copy, nonatomic) NSString * outElecStatus;
 @property (copy, nonatomic) NSString * rs485Status;
 
+@property (copy, nonatomic) NSString * horizontalAccuracy;
+
 
 @end
 
