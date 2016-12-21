@@ -46,6 +46,8 @@
 
 @property (copy, nonatomic) NSString* serviceStatus;
 
+@property (copy, nonatomic) NSString* dtuSoftwareVersion;
+
 @end
 
 @interface GPSDetailResponse : BaseResponse
