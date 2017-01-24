@@ -48,6 +48,8 @@
 
 @property (copy, nonatomic) NSString* dtuSoftwareVersion;
 
+@property (copy, nonatomic) NSString* dtuHardwareVersion;
+
 @end
 
 @interface GPSDetailResponse : BaseResponse

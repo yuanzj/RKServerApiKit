@@ -23,6 +23,7 @@
 @property (copy, nonatomic) NSString* voltage;
 @property (copy, nonatomic) NSString* current;
 @property (copy, nonatomic) NSString* remainCapacity;
+@property (copy, nonatomic) NSString* soh;
 @property (copy, nonatomic) NSString* uploadTime;
 @property (copy, nonatomic) NSString* uploadReason;
 @property (copy, nonatomic) NSString* horizontalAccuracy;
