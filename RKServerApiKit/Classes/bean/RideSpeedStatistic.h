@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "BaseResponse.h"
+#import <RKServerApiKit/BaseResponse.h>
 #import <Realm/Realm.h>
 
 @interface RideSpeedStatistic : RLMObject

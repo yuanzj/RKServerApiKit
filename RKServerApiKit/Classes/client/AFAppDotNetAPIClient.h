@@ -20,12 +20,16 @@
 #import <MJExtension/MJExtension.h>
 #import "UserService.h"
 #import "User.h"
+#import "CocoaSecurity.h"
 
 #ifdef DEV_SERVER_MODEL
 static NSString * const AFAppDotNetAPIBaseURLString = @"http://61.147.183.178:8081/SpiritServiceApp/";
 #else
 static NSString * const AFAppDotNetAPIBaseURLString = @"http://app.rokyinfo.net:7080/SpiritServiceApp/";
 #endif
+
+#define FIRM_FIELD @"firm"
+#define FIRM_VALUE @"xr"
 
 @interface AFAppDotNetAPIClient : AFURLSessionManager
 

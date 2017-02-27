@@ -37,7 +37,7 @@
  @param block
  @return
  */
-+(NSURLSessionDataTask *)getVersion:(NSString*)ueSn block:(void (^)(BaseResponse *_BaseResponse, NSError *error)) block;
++(NSURLSessionDataTask *)getVersion:(NSString*)ueSn block:(void (^)(GetUeVersionResponse *_GetUeVersionResponse, NSError *error)) block;
 
 /**
  设置服务开启状态

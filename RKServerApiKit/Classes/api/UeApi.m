@@ -73,28 +73,6 @@
 }
 
 /**
- * 获取中控名下GPS设备详情
- */
-+(NSURLSessionDataTask *)getGPSDetail:(NSString*)ueSn block:(void (^)(GPSDetailResponse *_GPSDetailResponse, NSError *error)) block{
-    
-    return [[AFAppDotNetAPIClient sharedClient] GET:@"ue/get_gps_detail" parameters:@{@"ueSn":(ueSn ? ueSn : @"")} completionHandler:^(NSURLResponse *response, id JSON, NSError *error) {
-        if(block){
-            if(JSON){
-                GPSDetailResponse *mBaseResponse = [GPSDetailResponse mj_objectWithKeyValues:JSON];
-                if(mBaseResponse){
-                    block(mBaseResponse, nil);
-                }else{
-                    block(nil, error);
-                }
-            }else{
-                block(nil, error);
-            }
-        }
-    }];
-    
-}
-
-/**
  * 获取中控设备详情
  */
 +(NSURLSessionDataTask *)getCCUDetail:(NSString*)ueSn block:(void (^)(CCUDetailResponse *_GPSDetailResponse, NSError *error)) block{
@@ -118,28 +96,6 @@
 
 #pragma mark -
 #pragma mark 数据统计
-/**
- * 获取当前车况
- */
-+(NSURLSessionDataTask *)getCurrentCarStatus:(NSString*)ueSn block:(void (^)(CarStatusResponse *_CarStatusResponse, NSError *error)) block{
-    
-    return [[AFAppDotNetAPIClient sharedClient] GET:@"car/get_current_car_status" parameters:@{@"ueSn":(ueSn ? ueSn : @"")} completionHandler:^(NSURLResponse *response, id JSON, NSError *error) {
-        if(block){
-            if(JSON){
-                CarStatusResponse *mBaseResponse = [CarStatusResponse mj_objectWithKeyValues:JSON];
-                if(mBaseResponse){
-                    block(mBaseResponse, nil);
-                }else{
-                    block(nil, error);
-                }
-            }else{
-                block(nil, error);
-            }
-        }
-    }];
-    
-}
-
 
 /**
  * 获取指定日期骑行统计
@@ -363,5 +319,123 @@
         }
     }];
 }
+
+//新增重构接口
+/**
+ 车辆固件版本上传
+ @param ueSn
+ @param UploadParam
+ @param block
+ @return
+ */
++(NSURLSessionDataTask *)carVersionUpload:(NSString*)ueSn upLoadParam:(CarVersionParams*)_UploadParam block:(void (^)(BaseResponse *_BaseResponse, NSError *error)) block{
+    
+    return [[AFAppDotNetAPIClient sharedClient] POST:@"app/car_version_upload" parameters:@{@"ueSn":(ueSn ? ueSn : @""), @"versionInfo":[_UploadParam mj_JSONString]} completionHandler:^(NSURLResponse *response, id JSON, NSError *error) {
+        if(block){
+            if(JSON){
+                BaseResponse *mBaseResponse = [BaseResponse mj_objectWithKeyValues:JSON];
+                if(mBaseResponse){
+                    block(mBaseResponse, nil);
+                } else {
+                    block(nil, error);
+                }
+            } else {
+                block(nil, error);
+            }
+        }
+    }];
+    
+}
+
+/**
+ 获取车辆故障
+ @param ueSn
+ @param block
+ @return CarFaultResponse
+ */
++(NSURLSessionDataTask *)getCarFault:(NSString*)ueSn block:(void (^)(CarFaultResponse *_BaseResponse, NSError *error)) block{
+    return [[AFAppDotNetAPIClient sharedClient] GET:@"app/get_car_fault" parameters:@{@"ueSn":(ueSn ? ueSn : @"")} completionHandler:^(NSURLResponse *response, id JSON, NSError *error) {
+        if(block){
+            if(JSON){
+                CarFaultResponse *mBaseResponse = [CarFaultResponse mj_objectWithKeyValues:JSON];
+                if(mBaseResponse){
+                    block(mBaseResponse, nil);
+                } else {
+                    block(nil, error);
+                }
+            } else {
+                block(nil, error);
+            }
+        }
+    }];
+}
+
+/**
+ * 获取当前车况
+ */
++(NSURLSessionDataTask *)getCurrentCarStatus:(NSString*)ueSn block:(void (^)(CarStatusResponse *_CarStatusResponse, NSError *error)) block{
+    
+    return [[AFAppDotNetAPIClient sharedClient] GET:@"app/get_car_info" parameters:@{@"ueSn":(ueSn ? ueSn : @"")} completionHandler:^(NSURLResponse *response, id JSON, NSError *error) {
+        if(block){
+            if(JSON){
+                CarStatusResponse *mBaseResponse = [CarStatusResponse mj_objectWithKeyValues:JSON];
+                if(mBaseResponse){
+                    block(mBaseResponse, nil);
+                }else{
+                    block(nil, error);
+                }
+            }else{
+                block(nil, error);
+            }
+        }
+    }];
+    
+}
+
+/**
+ 获取车辆固件版本信息
+ @param ueSn
+ @param block
+ @return CarFaultResponse
+ */
++(NSURLSessionDataTask *)getCarVersionInfo:(NSString*)ueSn block:(void (^)(CarVersionInfoResponse *_BaseResponse, NSError *error)) block{
+    return [[AFAppDotNetAPIClient sharedClient] GET:@"app/get_car_version_info" parameters:@{@"ueSn":(ueSn ? ueSn : @"")} completionHandler:^(NSURLResponse *response, id JSON, NSError *error) {
+        if(block){
+            if(JSON){
+                CarVersionInfoResponse *mBaseResponse = [CarVersionInfoResponse mj_objectWithKeyValues:JSON];
+                if(mBaseResponse){
+                    block(mBaseResponse, nil);
+                } else {
+                    block(nil, error);
+                }
+            } else {
+                block(nil, error);
+            }
+        }
+    }];
+}
+
+/**
+ * 获取中控名下GPS设备详情
+ */
++(NSURLSessionDataTask *)getGPSDetail:(NSString*)ueSn block:(void (^)(GPSDetailResponse *_GPSDetailResponse, NSError *error)) block{
+    
+    return [[AFAppDotNetAPIClient sharedClient] GET:@"app/get_data_unit_info" parameters:@{@"ueSn":(ueSn ? ueSn : @"")} completionHandler:^(NSURLResponse *response, id JSON, NSError *error) {
+        if(block){
+            if(JSON){
+                GPSDetailResponse *mBaseResponse = [GPSDetailResponse mj_objectWithKeyValues:JSON];
+                if(mBaseResponse){
+                    block(mBaseResponse, nil);
+                }else{
+                    block(nil, error);
+                }
+            }else{
+                block(nil, error);
+            }
+        }
+    }];
+    
+}
+//新增重构接口
 
 @end

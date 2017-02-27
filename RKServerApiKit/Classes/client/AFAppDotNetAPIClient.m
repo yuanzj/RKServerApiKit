@@ -15,6 +15,8 @@
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
+        configuration.timeoutIntervalForRequest = 5;
+        configuration.timeoutIntervalForResource = 5;
         _sharedClient = [[AFAppDotNetAPIClient alloc] initWithSessionConfiguration:configuration];
     });
     return _sharedClient;
@@ -42,7 +44,11 @@
         }
     }
     
-    NSURLRequest *request = [[AFHTTPRequestSerializer serializer] requestWithMethod:@"GET" URLString:URL parameters:paramsDic error:nil];
+    NSMutableURLRequest *request = [[AFHTTPRequestSerializer serializer] requestWithMethod:@"GET" URLString:URL parameters:paramsDic error:nil];
+    CocoaSecurityEncoder *encoder = [CocoaSecurityEncoder new];
+    NSString *baseString = [encoder base64:[FIRM_VALUE dataUsingEncoding:NSUTF8StringEncoding]];
+//    NSString *hexBaseString = [encoder hex:[baseString dataUsingEncoding:NSUTF8StringEncoding] useLower:NO];
+    [request addValue:baseString forHTTPHeaderField:FIRM_FIELD];
     NSURLSessionDataTask* dataTask =  [[AFAppDotNetAPIClient sharedClient] dataTaskWithRequest:request completionHandler:^(NSURLResponse *response, id responseObject, NSError *error) {
         BaseResponse *mBaseResponse = [BaseResponse mj_objectWithKeyValues:responseObject];
         if (mBaseResponse.state == SESSION_OUT) {
@@ -80,7 +86,10 @@
         }
     }
     
-    NSURLRequest *request = [[AFHTTPRequestSerializer serializer] requestWithMethod:@"POST" URLString:URL parameters:paramsDic error:nil];
+    NSMutableURLRequest *request = [[AFHTTPRequestSerializer serializer] requestWithMethod:@"POST" URLString:URL parameters:paramsDic error:nil];
+    CocoaSecurityEncoder *encoder = [CocoaSecurityEncoder new];
+    NSString *baseString = [encoder base64:[FIRM_VALUE dataUsingEncoding:NSUTF8StringEncoding]];
+    [request addValue:baseString forHTTPHeaderField:FIRM_FIELD];
     NSURLSessionDataTask* dataTask =  [[AFAppDotNetAPIClient sharedClient] dataTaskWithRequest:request completionHandler:^(NSURLResponse *response, id responseObject, NSError *error) {
         BaseResponse *mBaseResponse = [BaseResponse mj_objectWithKeyValues:responseObject];
         if (mBaseResponse.state == SESSION_OUT) {
@@ -129,6 +138,9 @@
         // 上传图片，以文件流的格式
         [formData appendPartWithFileData:imageData name:@"file" fileName:fileName mimeType:@"image/jpeg"];
     } error:nil];
+    CocoaSecurityEncoder *encoder = [CocoaSecurityEncoder new];
+    NSString *baseString = [encoder base64:[FIRM_VALUE dataUsingEncoding:NSUTF8StringEncoding]];
+    [request addValue:baseString forHTTPHeaderField:FIRM_FIELD];
     
     AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
     

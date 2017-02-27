@@ -60,7 +60,7 @@
  @param block
  @return
  */
-+(NSURLSessionDataTask *)getVersion:(NSString*)ueSn block:(void (^)(BaseResponse *_BaseResponse, NSError *error)) block;
++(NSURLSessionDataTask *)getVersion:(NSString*)ueSn block:(void (^)(GetUeVersionResponse *_GetUeVersionResponse, NSError *error)) block;
 
 /**
  设置服务开启状态
@@ -111,7 +111,5 @@
  * 1.1	获取当前用户的预约信息
  */
 +(NSURLSessionDataTask *)getAppointmentInfoWithBlock:(void (^)(RentCarItemResponse *_ueListResponse, NSError *error)) block;
-
-
 
 @end

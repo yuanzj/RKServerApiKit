@@ -43,6 +43,7 @@
 @property (copy, nonatomic) NSString* totalFlow;
 @property (copy, nonatomic) NSString* usedFlow;
 @property (copy, nonatomic) NSString* expireDate;
+@property (copy, nonatomic) NSString* serviceOpenStatus;
 
 @property (copy, nonatomic) NSString* serviceStatus;
 
