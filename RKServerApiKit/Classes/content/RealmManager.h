@@ -16,6 +16,10 @@
 #import "RideMilesStatistic.h"
 #import "RideRecord.h"
 #import "GeolocationRepository.h"
+#import "RideDayStatistic.h"
+#import "RideDayStatisticDb.h"
+#import "RideSpeedStatisticDb.h"
+#import "RideMilesStatisticDb.h"
 
 #define MAX_STORE_LOCATION_INFO 1000
 
@@ -75,6 +79,30 @@
 
 + (void)clearGeolocationRepository;
 
+#pragma mark - RideDayStatistic
++ (void)saveRideDayStatistic:(RideDayStatistic*)rideDayStatistic;
 
++ (void)clearRideDayStatistic;
+
+#pragma mark - RideDayStatisticDb
++ (void)saveRideDayStatisticDb:(RideDayStatisticDb*)rideDayStatisticDb;
+
++ (void)clearRideDayStatisticDbBySn:(NSString*)ueSn;
+
++ (RideDayStatisticDb *)queryRideDayStatisticDbBySn:(NSString*)ueSn;
+
+#pragma mark - RideSpeedStatisticDb
++ (void)clearRideSpeedStatisticDbBySn:(NSString*)ueSn;
+
++ (void)saveRideSpeedStatisticDb:(RideSpeedStatisticDb*) rideSpeedStatisticDb;
+
++ (RideSpeedStatisticDb *)queryRideSpeedStatisticDbBySn:(NSString*)ueSn;
+
+#pragma mark - RideMilesStatisticDb
++ (void)clearRideMilesStatisticDbBySn:(NSString*)ueSn;
+
++ (void)saveRideMilesStatisticDb:(RideMilesStatisticDb*) rideMilesStatisticDb;
+
++ (RideMilesStatisticDb *)queryRideMilesStatisticDbBySn:(NSString*)ueSn;
 
 @end

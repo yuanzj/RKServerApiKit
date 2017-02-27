@@ -8,8 +8,9 @@
 
 #import <Foundation/Foundation.h>
 #import "BaseResponse.h"
+#import <Realm/Realm.h>
 
-@interface RideDayStatistic : NSObject
+@interface RideDayStatistic : RLMObject
 
 @property (copy, nonatomic) NSString* dayTotalMiles;
 @property (copy, nonatomic) NSString* dayTotalTime;

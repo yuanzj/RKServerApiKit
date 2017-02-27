@@ -153,6 +153,10 @@ NSString * const USER = @"USER";
     return [UserApi deleteMessageWithMsgIds:msgIds block:block];
 }
 
++(NSURLSessionDataTask *)deleteBatchMessagesWithMsgIds:(NSArray*)msgIds block:(void (^)(BaseResponse *_baseResp, NSError *error)) block{
+    return [UserApi deleteBatchMessagesWithMsgIds:msgIds block:block];
+}
+
 +(NSURLSessionDataTask *)getFailServerAddressWithBlock:(void (^)(FailServerResponse *_failServerResponse, NSError *error)) block{
     return [UserApi getFailServerAddressWithBlock:block];
 }

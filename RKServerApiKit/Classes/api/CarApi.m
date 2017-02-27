@@ -37,6 +37,56 @@
 }
 
 /**
+ 上报设备版本信息
+ @param ueSn
+ @param ccuType
+ @param ccuSoftVersion
+ @param pcuType
+ @param pcuSoftVersion
+ @param block
+ @return
+ */
++(NSURLSessionDataTask *)versionUpload:(NSString*)ueSn ccuType :(NSString*)ccuType  ccuSoftVersion :(NSString*)ccuSoftVersion pcuType :(NSString*)pcuType pcuSoftVersion :(NSString*)pcuSoftVersion block:(void (^)(BaseResponse *_BaseResponse, NSError *error)) block{
+    return [[AFAppDotNetAPIClient sharedClient] POST:@"car/version_upload" parameters:@{@"ueSn":(ueSn ? ueSn : @""),@"ccuType":ccuType,@"ccuSoftVersion":ccuSoftVersion,@"pcuType":pcuType,@"pcuSoftVersion":pcuSoftVersion} completionHandler:^(NSURLResponse *response, id JSON, NSError *error) {
+        if(block){
+            if(JSON){
+                BaseResponse *mBaseResponse = [BaseResponse mj_objectWithKeyValues:JSON];
+                if(mBaseResponse){
+                    block(mBaseResponse, nil);
+                } else {
+                    block(nil, error);
+                }
+            } else {
+                block(nil, error);
+            }
+        }
+    }];
+}
+
+/**
+ 获取设备版本信息
+ @param ueSn
+ @param block
+ @return
+ */
++(NSURLSessionDataTask *)getVersion:(NSString*)ueSn block:(void (^)(GetUeVersionResponse *getUeVersionResponse, NSError *error)) block{
+    return [[AFAppDotNetAPIClient sharedClient] POST:@"car/get_version" parameters:@{@"ueSn":(ueSn ? ueSn : @"")} completionHandler:^(NSURLResponse *response, id JSON, NSError *error) {
+        if(block){
+            if(JSON){
+                GetUeVersionResponse *getUeVersionResponse = [GetUeVersionResponse mj_objectWithKeyValues:JSON];
+                if(getUeVersionResponse){
+                    block(getUeVersionResponse, nil);
+                } else {
+                    block(nil, error);
+                }
+            } else {
+                block(nil, error);
+            }
+        }
+    }];
+}
+
+/**
  设置服务开启状态
  @param ueSn
  @param imei

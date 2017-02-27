@@ -106,6 +106,13 @@ extern NSString * const USER;
  */
 +(NSURLSessionDataTask *)deleteMessageWithMsgIds:(NSArray*)msgIds block:(void (^)(BaseResponse *_baseResp, NSError *error)) block;
 
+/**
+ * 批量删除用户推送消息
+ * @param sessionId
+ * @param ids 消息id的集合
+ * @return
+ */
++(NSURLSessionDataTask *)deleteBatchMessagesWithMsgIds:(NSArray*)msgIds block:(void (^)(BaseResponse *_baseResp, NSError *error)) block;
 
 #pragma mark -
 #pragma mark 以下接口废弃

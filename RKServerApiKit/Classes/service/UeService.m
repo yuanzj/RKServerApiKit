@@ -8,7 +8,7 @@
 
 #import "UeService.h"
 #import "RealmManager.h"
-
+#import "RideDayStatisticDb.h"
 
 @implementation UeService
 
@@ -41,13 +41,6 @@
 }
 
 /**
- * 获取中控名下GPS设备详情
- */
-+(NSURLSessionDataTask *)getGPSDetail:(NSString*)ueSn block:(void (^)(GPSDetailResponse *_GPSDetailResponse, NSError *error)) block{
-    return [UeApi getGPSDetail:ueSn block:block];
-}
-
-/**
  * 获取中控设备详情
  */
 +(NSURLSessionDataTask *)getCCUDetail:(NSString*)ueSn block:(void (^)(CCUDetailResponse *_GPSDetailResponse, NSError *error)) block{
@@ -55,18 +48,29 @@
 }
 
 /**
- * 获取当前车况
- */
-+(NSURLSessionDataTask *)getCurrentCarStatus:(NSString*)ueSn block:(void (^)(CarStatusResponse *_CarStatusResponse, NSError *error)) block{
-    return [UeApi getCurrentCarStatus:ueSn block:block];
-}
-
-/**
  * 获取指定日期骑行统计
  */
 +(NSURLSessionDataTask *)rideDayStatistic:(NSString*)ueSn time:(NSString*)time block:(void (^)(RideDayStatisticResponse *_RideDayStatisticResponse, NSError *error)) block{
-
-    return [UeApi rideDayStatistic:ueSn time:time block:block];
+    return [UeApi rideDayStatistic:ueSn time:time block:^(RideDayStatisticResponse *_RideDayStatisticResponse, NSError *error) {
+        if (_RideDayStatisticResponse) {
+            if(_RideDayStatisticResponse.state == RKSAPIResponseSuccess){
+                
+                RideDayStatistic* mRideDayStatistic = _RideDayStatisticResponse.data;
+                if (mRideDayStatistic) {
+                    [RealmManager clearRideDayStatisticDbBySn:ueSn];
+                    RideDayStatisticDb * mRideDayStatisticDb = [[RideDayStatisticDb alloc] init];
+                    [mRideDayStatisticDb setUeSn:ueSn];
+                    [mRideDayStatisticDb setRideDayStatistic:mRideDayStatistic];
+                    [RealmManager saveRideDayStatisticDb:mRideDayStatisticDb];
+                }
+                
+            }
+            
+            block(_RideDayStatisticResponse, nil);
+        } else {
+            block(nil, error);
+        }
+    }];
 
 }
 
@@ -81,8 +85,11 @@
                 
                 NSArray* data = __RideSpeedStatistic.data4;
                 if (data && data.count > 0) {
-                    [RealmManager clearRideSpeedStatistic];
-                    [RealmManager saveRideSpeedStatistic:data];
+                    [RealmManager clearRideSpeedStatisticDbBySn:ueSn];
+                    RideSpeedStatisticDb* rideSpeedStatisticDb = [[RideSpeedStatisticDb alloc] init];
+                    [rideSpeedStatisticDb setUeSn:ueSn];
+                    [rideSpeedStatisticDb setRideSpeedStatistics:data];
+                    [RealmManager saveRideSpeedStatisticDb:rideSpeedStatisticDb];
                 }
                 
             }
@@ -104,8 +111,11 @@
                 
                 NSArray* data = _RideSpeedStatistic.data4;
                 if (data && data.count > 0) {
-                    [RealmManager clearRideMilesStatistic];
-                    [RealmManager saveRideMilesStatistic:data];
+                    [RealmManager clearRideMilesStatisticDbBySn:ueSn];
+                    RideMilesStatisticDb* rideMilesStatisticDb = [[RideMilesStatisticDb alloc] init];
+                    [rideMilesStatisticDb setUeSn:ueSn];
+                    [rideMilesStatisticDb setRideMilesStatistics:data];
+                    [RealmManager saveRideMilesStatisticDb:rideMilesStatisticDb];
                 }
                 
             }
@@ -181,5 +191,42 @@
         }
     }];
 }
+
+//新增重构接口
+/**
+ * 车辆固件版本上传
+ */
++(NSURLSessionDataTask *)carVersionUpload:(NSString*)ueSn upLoadParam:(CarVersionParams*)_UploadParam block:(void (^)(BaseResponse *_BaseResponse, NSError *error)) block{
+    return [UeApi carVersionUpload:ueSn upLoadParam:_UploadParam block:block];
+}
+
+/**
+ * 获取车辆故障
+ */
++(NSURLSessionDataTask *)getCarFault:(NSString*)ueSn block:(void (^)(CarFaultResponse *_BaseResponse, NSError *error)) block{
+    return [UeApi getCarFault:ueSn block:block];
+}
+
+/**
+ * 获取当前车况
+ */
++(NSURLSessionDataTask *)getCurrentCarStatus:(NSString*)ueSn block:(void (^)(CarStatusResponse *_CarStatusResponse, NSError *error)) block{
+    return [UeApi getCurrentCarStatus:ueSn block:block];
+}
+
+/**
+ * 获取车辆固件版本信息
+ */
++(NSURLSessionDataTask *)getCarVersionInfo:(NSString*)ueSn block:(void (^)(CarVersionInfoResponse *_BaseResponse, NSError *error)) block{
+    return [UeApi getCarVersionInfo:ueSn block:block];
+}
+
+/**
+ * 获取车辆数据信息
+ */
++(NSURLSessionDataTask *)getGPSDetail:(NSString*)ueSn block:(void (^)(GPSDetailResponse *_GPSDetailResponse, NSError *error)) block{
+    return [UeApi getGPSDetail:ueSn block:block];
+}
+//新增重构接口
 
 @end

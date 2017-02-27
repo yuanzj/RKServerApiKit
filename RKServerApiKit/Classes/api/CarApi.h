@@ -27,6 +27,7 @@
 #import "CarStatusResponse.h"
 #import "UploadParam.h"
 #import "RentCarResponse.h"
+#import "GetUeVersionResponse.h"
 
 @interface CarApi : NSObject
 
@@ -40,6 +41,26 @@
  @return 
  */
 +(NSURLSessionDataTask *)dataUpload:(UploadParam*)_UploadParam block:(void (^)(BaseResponse *_BaseResponse, NSError *error)) block;
+
+/**
+ 上报设备版本信息
+ @param ueSn
+ @param ccuType
+ @param ccuSoftVersion
+ @param pcuType
+ @param pcuSoftVersion
+ @param block
+ @return
+ */
++(NSURLSessionDataTask *)versionUpload:(NSString*)ueSn ccuType :(NSString*)ccuType  ccuSoftVersion :(NSString*)ccuSoftVersion pcuType :(NSString*)pcuType pcuSoftVersion :(NSString*)pcuSoftVersion block:(void (^)(BaseResponse *_BaseResponse, NSError *error)) block;
+
+/**
+ 获取设备版本信息
+ @param ueSn
+ @param block
+ @return
+ */
++(NSURLSessionDataTask *)getVersion:(NSString*)ueSn block:(void (^)(GetUeVersionResponse *_GetUeVersionResponse, NSError *error)) block;
 
 /**
  设置服务开启状态
@@ -90,7 +111,5 @@
  * 1.1	获取当前用户的预约信息
  */
 +(NSURLSessionDataTask *)getAppointmentInfoWithBlock:(void (^)(RentCarItemResponse *_ueListResponse, NSError *error)) block;
-
-
 
 @end

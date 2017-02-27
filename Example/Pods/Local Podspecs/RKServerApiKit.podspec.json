@@ -1,6 +1,6 @@
 {
   "name": "RKServerApiKit",
-  "version": "0.1.7",
+  "version": "3.1.1",
   "summary": "A short description of RKServerApiKit.",
   "description": "TODO: Add long description of the pod here.",
   "homepage": "https://github.com/yuanzj/RKServerApiKit",
@@ -13,7 +13,7 @@
   },
   "source": {
     "git": "https://github.com/yuanzj/RKServerApiKit.git",
-    "tag": "0.1.7"
+    "tag": "3.1.1"
   },
   "platforms": {
     "ios": "8.0"

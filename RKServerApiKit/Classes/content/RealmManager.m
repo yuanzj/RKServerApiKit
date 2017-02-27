@@ -7,6 +7,10 @@
 //
 
 #import "RealmManager.h"
+#import "RideDayStatistic.h"
+#import "RideDayStatisticDb.h"
+#import "RideSpeedStatisticDb.h"
+#import "RideMilesStatisticDb.h"
 
 @implementation RealmManager
 
@@ -154,6 +158,51 @@
     }
 }
 
++ (void)saveRideDayStatistic:(RideDayStatistic*)rideDayStatistic{
+    RLMRealm *realm = [RLMRealm defaultRealm];
+    
+    [realm beginWriteTransaction];
+    [realm addObjects:rideDayStatistic];
+    [realm commitWriteTransaction];
+}
+
++ (void)clearRideDayStatistic{
+    RLMResults<RideDayStatistic *> *mRideDayStatistics = [RideDayStatistic allObjects];
+    
+    if (mRideDayStatistics) {
+        
+        RLMRealm *realm = [RLMRealm defaultRealm];
+        [realm beginWriteTransaction];
+        [realm deleteObjects:mRideDayStatistics];
+        [realm commitWriteTransaction];
+    }
+}
+
+#pragma mark - RideDayStatisticDb
++ (void)saveRideDayStatisticDb:(RideDayStatisticDb*)rideDayStatisticDb{
+    RLMRealm *realm = [RLMRealm defaultRealm];
+    [realm beginWriteTransaction];
+    [realm addObject:rideDayStatisticDb];
+    [realm commitWriteTransaction];
+}
+
++ (void)clearRideDayStatisticDbBySn:(NSString*)ueSn{
+    NSPredicate *pred = [NSPredicate predicateWithFormat:@"ueSn = %@", ueSn];
+    RLMResults<RideDayStatisticDb *> *mRideDayStatisticDb = [RideDayStatisticDb objectsWithPredicate:pred];
+    if (mRideDayStatisticDb) {
+        RLMRealm *realm = [RLMRealm defaultRealm];
+        [realm beginWriteTransaction];
+        [realm deleteObjects:mRideDayStatisticDb];
+        [realm commitWriteTransaction];
+    }
+}
+
++ (RideDayStatisticDb *)queryRideDayStatisticDbBySn:(NSString*)ueSn{
+    NSPredicate *pred = [NSPredicate predicateWithFormat:@"ueSn = %@", ueSn];
+    RLMResults<RideDayStatisticDb *> *mRideDayStatisticDb = [RideDayStatisticDb objectsWithPredicate:pred];
+    return [mRideDayStatisticDb firstObject];
+}
+
 #pragma mark - RideSpeedStatistic
 + (void)saveRideSpeedStatistic:(NSArray *)_RideSpeedStatistic{
     RLMRealm *realm = [RLMRealm defaultRealm];
@@ -175,6 +224,31 @@
     }
 }
 
+#pragma mark - RideSpeedStatisticDb
++ (void)clearRideSpeedStatisticDbBySn:(NSString*)ueSn{
+    NSPredicate *pred = [NSPredicate predicateWithFormat:@"ueSn = %@", ueSn];
+    RLMResults<RideSpeedStatisticDb *> *mRideSpeedStatisticDb = [RideSpeedStatisticDb objectsWithPredicate:pred];
+    if (mRideSpeedStatisticDb) {
+        RLMRealm *realm = [RLMRealm defaultRealm];
+        [realm beginWriteTransaction];
+        [realm deleteObjects:mRideSpeedStatisticDb];
+        [realm commitWriteTransaction];
+    }
+}
+
++ (void)saveRideSpeedStatisticDb:(RideSpeedStatisticDb*) rideSpeedStatisticDb{
+    RLMRealm *realm = [RLMRealm defaultRealm];
+    [realm beginWriteTransaction];
+    [realm addObject:rideSpeedStatisticDb];
+    [realm commitWriteTransaction];
+}
+
++ (RideSpeedStatisticDb *)queryRideSpeedStatisticDbBySn:(NSString*)ueSn{
+    NSPredicate *pred = [NSPredicate predicateWithFormat:@"ueSn = %@", ueSn];
+    RLMResults<RideSpeedStatisticDb *> *mRideSpeedStatisticDb = [RideSpeedStatisticDb objectsWithPredicate:pred];
+    return [mRideSpeedStatisticDb firstObject];
+}
+
 #pragma mark - RideMilesStatistic
 + (void)saveRideMilesStatistic:(NSArray *)_RideMilesStatistic{
     RLMRealm *realm = [RLMRealm defaultRealm];
@@ -194,6 +268,31 @@
         [realm deleteObjects:mMsgBean];
         [realm commitWriteTransaction];
     }
+}
+
+#pragma mark - RideMilesStatisticDb
++ (void)clearRideMilesStatisticDbBySn:(NSString*)ueSn{
+    NSPredicate *pred = [NSPredicate predicateWithFormat:@"ueSn = %@", ueSn];
+    RLMResults<RideMilesStatisticDb *> *mRideMilesStatisticDb = [RideMilesStatisticDb objectsWithPredicate:pred];
+    if (mRideMilesStatisticDb) {
+        RLMRealm *realm = [RLMRealm defaultRealm];
+        [realm beginWriteTransaction];
+        [realm deleteObjects:mRideMilesStatisticDb];
+        [realm commitWriteTransaction];
+    }
+}
+
++ (void)saveRideMilesStatisticDb:(RideMilesStatisticDb*) rideMilesStatisticDb{
+    RLMRealm *realm = [RLMRealm defaultRealm];
+    [realm beginWriteTransaction];
+    [realm addObject:rideMilesStatisticDb];
+    [realm commitWriteTransaction];
+}
+
++ (RideMilesStatisticDb *)queryRideMilesStatisticDbBySn:(NSString*)ueSn{
+    NSPredicate *pred = [NSPredicate predicateWithFormat:@"ueSn = %@", ueSn];
+    RLMResults<RideMilesStatisticDb *> *mRideMilesStatisticDb = [RideMilesStatisticDb objectsWithPredicate:pred];
+    return [mRideMilesStatisticDb firstObject];
 }
 
 #pragma mark - RideMilesStatistic

@@ -292,6 +292,31 @@
     }];
 }
 
++(NSURLSessionDataTask *)deleteBatchMessagesWithMsgIds:(NSArray*)msgIds block:(void (^)(BaseResponse *_baseResp, NSError *error)) block{
+        NSString* ids = @"[";
+        for(int i = 0; i < msgIds.count; i++){
+            ids = [ids stringByAppendingString:[msgIds objectAtIndex:i]];
+            if((i + 1) != msgIds.count){
+                ids = [ids stringByAppendingString:@","];
+            }
+        }
+        ids = [ids stringByAppendingString:@"]"];
+    return [[AFAppDotNetAPIClient sharedClient] POST:@"user/delete_batch_user_msg" parameters:@{@"ids":ids}  completionHandler:^(NSURLResponse *response, id JSON, NSError *error) {
+        if(block){
+            if(JSON){
+                BaseResponse *mBaseResponse = [BaseResponse mj_objectWithKeyValues:JSON];
+                if(mBaseResponse){
+                    block(mBaseResponse, nil);
+                }else{
+                    block(nil, error);
+                }
+            }else{
+                block(nil, error);
+            }
+        }
+    }];
+}
+
 +(NSURLSessionDataTask *)getFailServerAddressWithBlock:(void (^)(FailServerResponse *_failServerResponse, NSError *error)) block{
     return [[AFAppDotNetAPIClient sharedClient] GET:@"ha/get_failserver_address" parameters:nil completionHandler:^(NSURLResponse *response, id JSON, NSError *error) {
         if(block){

@@ -24,16 +24,10 @@
  */
 +(NSURLSessionDataTask *)deleteUeWithUeSn:(NSString*)ueSn block:(void (^)(BaseResponse *_baseResponse, NSError *error)) block;
 
-
 /**
  * 绑定设备
  */
 +(NSURLSessionDataTask *)bindUeWithUeSn:(NSString*)ueSn vehicleId:(NSString*)vehicleId bindUESn:(NSString*)bindUESn block:(void (^)(BaseResponse *_baseResponse, NSError *error)) block;
-
-/**
- * 获取中控名下GPS设备详情
- */
-+(NSURLSessionDataTask *)getGPSDetail:(NSString*)ueSn block:(void (^)(GPSDetailResponse *_GPSDetailResponse, NSError *error)) block;
 
 /**
  * 获取中控设备详情
@@ -43,11 +37,6 @@
 
 #pragma mark -
 #pragma mark 数据统计
-/**
- * 获取当前车况
- */
-+(NSURLSessionDataTask *)getCurrentCarStatus:(NSString*)ueSn block:(void (^)(CarStatusResponse *_CarStatusResponse, NSError *error)) block;
-
 
 /**
  * 获取指定日期骑行统计
@@ -111,5 +100,32 @@
  * @return
  */
 +(NSURLSessionDataTask *)getAuthorizeCodeWithUeSn:(NSString*)ueSn block:(void (^)(AuthCodeResponse *_authCodeResponse, NSError *error)) block;
+
+//新增重构接口
+/**
+ * 车辆固件版本上传
+ */
++(NSURLSessionDataTask *)carVersionUpload:(NSString*)ueSn upLoadParam:(CarVersionParams*)_UploadParam block:(void (^)(BaseResponse *_BaseResponse, NSError *error)) block;
+
+/**
+ * 获取车辆故障
+ */
++(NSURLSessionDataTask *)getCarFault:(NSString*)ueSn block:(void (^)(CarFaultResponse *_BaseResponse, NSError *error)) block;
+
+/**
+ * 获取当前车况
+ */
++(NSURLSessionDataTask *)getCurrentCarStatus:(NSString*)ueSn block:(void (^)(CarStatusResponse *_CarStatusResponse, NSError *error)) block;
+
+/**
+ * 获取车辆固件版本信息
+ */
++(NSURLSessionDataTask *)getCarVersionInfo:(NSString*)ueSn block:(void (^)(CarVersionInfoResponse *_BaseResponse, NSError *error)) block;
+
+/**
+ * 获取车辆数据信息
+ */
++(NSURLSessionDataTask *)getGPSDetail:(NSString*)ueSn block:(void (^)(GPSDetailResponse *_GPSDetailResponse, NSError *error)) block;
+//新增重构接口
 
 @end
