@@ -20,7 +20,7 @@
 #import <MJExtension/MJExtension.h>
 #import "UserService.h"
 #import "User.h"
-#import "CocoaSecurity.h"
+#import <CocoaSecurity/CocoaSecurity.h>
 
 #ifdef DEV_SERVER_MODEL
 static NSString * const AFAppDotNetAPIBaseURLString = @"http://61.147.183.178:8081/SpiritServiceApp/";
