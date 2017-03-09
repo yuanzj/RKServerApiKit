@@ -29,9 +29,10 @@ static NSString * const AFAppDotNetAPIBaseURLString = @"http://app.rokyinfo.net:
 #endif
 
 #define FIRM_FIELD @"firm"
-#define FIRM_VALUE @"xr"
 
 @interface AFAppDotNetAPIClient : AFURLSessionManager
+
+@property (nonatomic, copy             ) NSString *firmValue;
 
 + (instancetype)sharedClient;
 

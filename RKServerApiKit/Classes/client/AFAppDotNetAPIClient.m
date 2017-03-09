@@ -46,7 +46,7 @@
     
     NSMutableURLRequest *request = [[AFHTTPRequestSerializer serializer] requestWithMethod:@"GET" URLString:URL parameters:paramsDic error:nil];
     CocoaSecurityEncoder *encoder = [CocoaSecurityEncoder new];
-    NSString *baseString = [encoder base64:[FIRM_VALUE dataUsingEncoding:NSUTF8StringEncoding]];
+    NSString *baseString = [encoder base64:[self.firmValue dataUsingEncoding:NSUTF8StringEncoding]];
 //    NSString *hexBaseString = [encoder hex:[baseString dataUsingEncoding:NSUTF8StringEncoding] useLower:NO];
     [request addValue:baseString forHTTPHeaderField:FIRM_FIELD];
     NSURLSessionDataTask* dataTask =  [[AFAppDotNetAPIClient sharedClient] dataTaskWithRequest:request completionHandler:^(NSURLResponse *response, id responseObject, NSError *error) {
@@ -88,7 +88,7 @@
     
     NSMutableURLRequest *request = [[AFHTTPRequestSerializer serializer] requestWithMethod:@"POST" URLString:URL parameters:paramsDic error:nil];
     CocoaSecurityEncoder *encoder = [CocoaSecurityEncoder new];
-    NSString *baseString = [encoder base64:[FIRM_VALUE dataUsingEncoding:NSUTF8StringEncoding]];
+    NSString *baseString = [encoder base64:[self.firmValue dataUsingEncoding:NSUTF8StringEncoding]];
     [request addValue:baseString forHTTPHeaderField:FIRM_FIELD];
     NSURLSessionDataTask* dataTask =  [[AFAppDotNetAPIClient sharedClient] dataTaskWithRequest:request completionHandler:^(NSURLResponse *response, id responseObject, NSError *error) {
         BaseResponse *mBaseResponse = [BaseResponse mj_objectWithKeyValues:responseObject];
@@ -139,7 +139,7 @@
         [formData appendPartWithFileData:imageData name:@"file" fileName:fileName mimeType:@"image/jpeg"];
     } error:nil];
     CocoaSecurityEncoder *encoder = [CocoaSecurityEncoder new];
-    NSString *baseString = [encoder base64:[FIRM_VALUE dataUsingEncoding:NSUTF8StringEncoding]];
+    NSString *baseString = [encoder base64:[self.firmValue dataUsingEncoding:NSUTF8StringEncoding]];
     [request addValue:baseString forHTTPHeaderField:FIRM_FIELD];
     
     AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
