@@ -169,4 +169,18 @@ NSString * const USER = @"USER";
 +(NSURLSessionDataTask *)unBindDeviceWithDeviceId:(NSString*)deviceId lock:(void (^)(BaseResponse *_baseResp, NSError *error)) block{
     return [UserApi unBindDeviceWithDeviceId:deviceId block:block];
 }
+
++(NSURLSessionDataTask *)getTokenWithBlock:(void (^)(TokenResponse *_tokenResponse, NSError *error)) block{
+    return [UserApi getTokenWithBlock:^(TokenResponse *_tokenResponse, NSError *error) {
+        if (_tokenResponse) {
+            if(_tokenResponse.state == RKSAPIResponseSuccess){
+                Token* token = _tokenResponse.data;
+                [RealmManager saveToken:token];
+            }
+            block(_tokenResponse, nil);
+        } else {
+            block(nil, error);
+        }
+    }];
+}
 @end

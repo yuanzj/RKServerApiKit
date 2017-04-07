@@ -20,6 +20,7 @@
 #import "RideDayStatisticDb.h"
 #import "RideSpeedStatisticDb.h"
 #import "RideMilesStatisticDb.h"
+#import "TokenResponse.h"
 
 #define MAX_STORE_LOCATION_INFO 1000
 
@@ -31,6 +32,10 @@
 + (void)clearUser;
 
 + (User*)queryUser;
+
++ (Token*)queryToken;
+
++ (void)saveToken:(Token *)_Token;
 
 #pragma mark - UserInfo
 + (void)saveUserInfo:(UserInfo *)_User;

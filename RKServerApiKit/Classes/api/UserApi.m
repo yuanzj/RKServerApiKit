@@ -7,6 +7,7 @@
 //
 
 #import "UserApi.h"
+#import "AFAppUploadAPIClient.h"
 
 @implementation UserApi
 
@@ -363,6 +364,23 @@
                 BaseResponse *mBaseResponse = [BaseResponse mj_objectWithKeyValues:JSON];
                 if(mBaseResponse){
                     block(mBaseResponse, nil);
+                }else{
+                    block(nil, error);
+                }
+            }else{
+                block(nil, error);
+            }
+        }
+    }];
+}
+
++(NSURLSessionDataTask *)getTokenWithBlock:(void (^)(TokenResponse *, NSError *))block {
+    return [[AFAppDotNetAPIClient sharedClient] GET:@"auth/token" parameters:nil completionHandler:^(NSURLResponse *response, id JSON, NSError *error) {
+        if(block){
+            if(JSON){
+                TokenResponse *mTokenResponse = [TokenResponse mj_objectWithKeyValues:JSON];
+                if(mTokenResponse){
+                    block(mTokenResponse, nil);
                 }else{
                     block(nil, error);
                 }
