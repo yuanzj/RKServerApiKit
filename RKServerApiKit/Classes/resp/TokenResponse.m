@@ -20,10 +20,7 @@ static Token *mToken = nil;
 }
 + (Token *)getToken
 {
-    if(mToken == nil){
-        mToken = [RealmManager queryToken];
-    }
-    return mToken;
+    return [RealmManager queryToken];
 }
 @end
 

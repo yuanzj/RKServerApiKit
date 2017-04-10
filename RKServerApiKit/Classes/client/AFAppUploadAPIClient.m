@@ -80,7 +80,7 @@
     [paramsDic setObject:self.serviceId forKey:SERVICE_ID];
     NSMutableURLRequest *request = [[AFHTTPRequestSerializer serializer] requestWithMethod:@"POST" URLString:URL parameters:paramsDic error:nil];
     
-    Token* token = [Token getToken];
+    Token* token = [RealmManager queryToken];
     if (token) {
         [request addValue:token.access_token forHTTPHeaderField:TOKEN];
         NSURLSessionDataTask* dataTask =  [[AFAppUploadAPIClient sharedClient] dataTaskWithRequest:request completionHandler:^(NSURLResponse *response, id responseObject, NSError *error) {
