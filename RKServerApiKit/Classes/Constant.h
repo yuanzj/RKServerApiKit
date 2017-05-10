@@ -14,4 +14,8 @@
 
 #define SESSION_OUT -2
 
+#define TOKEN_OUT -6
+
+#define TOKEN_ERROR -5
+
 @end

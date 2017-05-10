@@ -49,6 +49,25 @@
     return [[User allObjects] firstObject];
 }
 
++ (Token*)queryToken{
+    return [[Token allObjects] firstObject];
+}
+
++ (void)saveToken:(Token *)_Token {
+    // Get the default Realm
+    RLMRealm *realm = [RLMRealm defaultRealm];
+    // You only need to do this once (per thread)
+    
+    // Add to Realm with transaction
+    RLMResults<Token *> *tokens = [Token allObjects];
+    [realm beginWriteTransaction];
+    if (tokens.count > 0) {
+        [realm deleteObjects:tokens];
+    }
+    [realm addObject:_Token];
+    [realm commitWriteTransaction];
+}
+
 #pragma mark - UserInfo
 
 + (void)saveUserInfo:(UserInfo *)_User{

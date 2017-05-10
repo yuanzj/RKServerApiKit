@@ -17,6 +17,7 @@
 #import "MsgResponse.h"
 #import "FailServerResponse.h"
 #import "FailServerAddress.h"
+#import "TokenResponse.h"
 
 @interface UserApi : NSObject
 
@@ -205,5 +206,13 @@
  * @return
  */
 +(NSURLSessionDataTask *)unBindDeviceWithDeviceId:(NSString*)deviceId block:(void (^)(BaseResponse *_baseResp, NSError *error)) block;
+
+#pragma mark -
+#pragma mark 获取token
+/**
+ * 获取上传数据用的token
+ * @param sessionId
+ */
++(NSURLSessionDataTask *)getTokenWithBlock:(void (^)(TokenResponse *_tokenResponse, NSError *error)) block;
 
 @end

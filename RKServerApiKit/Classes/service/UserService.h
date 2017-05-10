@@ -160,4 +160,11 @@ extern NSString * const USER;
  * @return
  */
 +(NSURLSessionDataTask *)unBindDeviceWithDeviceId:(NSString*)deviceId lock:(void (^)(BaseResponse *_baseResp, NSError *error)) block;
+
+#pragma mark -
+#pragma mark 获取token
+/**
+ * 获取上传数据用的token
+ */
++(NSURLSessionDataTask *)getTokenWithBlock:(void (^)(TokenResponse *_tokenResponse, NSError *error)) block;
 @end
