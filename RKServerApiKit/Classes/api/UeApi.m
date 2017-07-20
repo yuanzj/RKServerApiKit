@@ -11,7 +11,7 @@
 @implementation UeApi
 
 +(NSURLSessionDataTask *)getUEListWithPageNo:(int)pageNo pageCount:(int)pageCount block:(void (^)(UeListResponse *_ueListResponse, NSError *error)) block{
-    return [[AFAppDotNetAPIClient sharedClient] GET:@"user/ue_list" parameters:@{@"pageNo":@(pageNo), @"pageCount":@(pageCount)} completionHandler:^(NSURLResponse *response, id JSON, NSError *error) {
+    return [[AFAppDotNetAPIClient sharedClient] GET:@"api-ebike/v3.0/ue/ue_list" parameters:@{@"pageNo":@(pageNo), @"pageCount":@(pageCount)} completionHandler:^(NSURLResponse *response, id JSON, NSError *error) {
         if(block){
             if(JSON){
                 // Tell MJExtension what type model will be contained in data and accessoryUEs.

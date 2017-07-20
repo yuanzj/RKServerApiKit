@@ -32,15 +32,17 @@
     NSString* URL = [AFAppDotNetAPIBaseURLString stringByAppendingString:URLString];
     //parameters转换成NSMutableDictionary
     NSMutableDictionary *paramsDic = [NSMutableDictionary dictionaryWithDictionary:parameters];
+    
     //是否是需要sessionId的接口
     if (![[[ApiNotNeedSessionIdDic getApiDic] allKeys] containsObject:URL]) {
         //没有获取到sessionId则抛出error
-        if ([[Validator getValidSessionId] isKindOfClass:[NSError class]]) {
-            completionHandler(nil, nil, [Validator getValidSessionId]);
+        if ([[Validator getToken] isKindOfClass:[NSError class]]) {
+            completionHandler(nil, nil, [Validator getToken]);
             return nil;
         }else{
             //有sessionId则增加sessionId参数
-            [paramsDic setObject:[Validator getValidSessionId] forKey:@"sessionId"];
+//            [paramsDic setObject:[Validator getValidSessionId] forKey:@"sessionId"];
+            
         }
     }
     
@@ -49,14 +51,17 @@
     NSString *baseString = [encoder base64:[self.firmValue dataUsingEncoding:NSUTF8StringEncoding]];
 //    NSString *hexBaseString = [encoder hex:[baseString dataUsingEncoding:NSUTF8StringEncoding] useLower:NO];
     [request addValue:baseString forHTTPHeaderField:FIRM_FIELD];
+    if ([[Validator getToken] isKindOfClass:[NSString class]]) {
+        NSString *token = [Validator getToken];
+        [request addValue:token forHTTPHeaderField:@"Authorization"];
+    }
     NSURLSessionDataTask* dataTask =  [[AFAppDotNetAPIClient sharedClient] dataTaskWithRequest:request completionHandler:^(NSURLResponse *response, id responseObject, NSError *error) {
-        BaseResponse *mBaseResponse = [BaseResponse mj_objectWithKeyValues:responseObject];
-        if (mBaseResponse.state == SESSION_OUT) {
-            User *_mUser = [User getUser];
-            [UserService loginWithMobile:_mUser.username password:_mUser.password block:^(UserResponse *_mUserResp, NSError *_mUserError) {
-                if(_mUserResp && _mUserResp.state == 0){
+        if (((NSHTTPURLResponse*)response).statusCode == HTTP_CODE_TOKE_OUT) {
+            LoginedUser *_LoginedUser = [RealmManager queryLoginedUser];
+            [UserService loginWithOpenPlatform:_LoginedUser.openType openId:_LoginedUser.openId nickName:_LoginedUser.nickname headimgUrl:_LoginedUser.headimgUrl gender:_LoginedUser.gender province:_LoginedUser.province city:_LoginedUser.city country:_LoginedUser.country block:^(GetAuthTokenResp *_getAuthTokenResp, NSError *error) {
+                if (_getAuthTokenResp && _getAuthTokenResp.token) {
                     [weakClient GET:URLString parameters:parameters completionHandler:completionHandler];
-                }else{
+                } else {
                     completionHandler(response, responseObject, error);
                 }
             }];
@@ -82,7 +87,7 @@
             completionHandler(nil, nil, [Validator getValidSessionId]);
             return nil;
         }else{
-            [paramsDic setObject:[Validator getValidSessionId] forKey:@"sessionId"];
+//            [paramsDic setObject:[Validator getValidSessionId] forKey:@"sessionId"];
         }
     }
     
@@ -90,14 +95,17 @@
     CocoaSecurityEncoder *encoder = [CocoaSecurityEncoder new];
     NSString *baseString = [encoder base64:[self.firmValue dataUsingEncoding:NSUTF8StringEncoding]];
     [request addValue:baseString forHTTPHeaderField:FIRM_FIELD];
+    if ([[Validator getToken] isKindOfClass:[NSString class]]) {
+        NSString *token = [Validator getToken];
+        [request addValue:token forHTTPHeaderField:@"Authorization"];
+    }
     NSURLSessionDataTask* dataTask =  [[AFAppDotNetAPIClient sharedClient] dataTaskWithRequest:request completionHandler:^(NSURLResponse *response, id responseObject, NSError *error) {
-        BaseResponse *mBaseResponse = [BaseResponse mj_objectWithKeyValues:responseObject];
-        if (mBaseResponse.state == SESSION_OUT) {
-            User *_mUser = [User getUser];
-            [UserService loginWithMobile:_mUser.username password:_mUser.password block:^(UserResponse *_mUserResp, NSError *_mUserError) {
-                if(_mUserResp && _mUserResp.state == 0){
+        if (((NSHTTPURLResponse*)response).statusCode == HTTP_CODE_TOKE_OUT) {
+            LoginedUser *_LoginedUser = [RealmManager queryLoginedUser];
+            [UserService loginWithOpenPlatform:_LoginedUser.openType openId:_LoginedUser.openId nickName:_LoginedUser.nickname headimgUrl:_LoginedUser.headimgUrl gender:_LoginedUser.gender province:_LoginedUser.province city:_LoginedUser.city country:_LoginedUser.country block:^(GetAuthTokenResp *_getAuthTokenResp, NSError *error) {
+                if (_getAuthTokenResp && _getAuthTokenResp.token) {
                     [weakClient GET:URLString parameters:parameters completionHandler:completionHandler];
-                }else{
+                } else {
                     completionHandler(response, responseObject, error);
                 }
             }];
@@ -124,7 +132,7 @@
             completionHandler(nil, nil, [Validator getValidSessionId]);
             return nil;
         }else{
-            [paramsDic setObject:[Validator getValidSessionId] forKey:@"sessionId"];
+//            [paramsDic setObject:[Validator getValidSessionId] forKey:@"sessionId"];
         }
     }
     
@@ -141,7 +149,10 @@
     CocoaSecurityEncoder *encoder = [CocoaSecurityEncoder new];
     NSString *baseString = [encoder base64:[self.firmValue dataUsingEncoding:NSUTF8StringEncoding]];
     [request addValue:baseString forHTTPHeaderField:FIRM_FIELD];
-    
+    if ([[Validator getToken] isKindOfClass:[NSString class]]) {
+        NSString *token = [Validator getToken];
+        [request addValue:token forHTTPHeaderField:@"Authorization"];
+    }
     AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
     
     NSURLSessionUploadTask *uploadTask;
@@ -156,13 +167,12 @@
                       //                      });
                   }
                   completionHandler:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
-                      BaseResponse *mBaseResponse = [BaseResponse mj_objectWithKeyValues:responseObject];
-                      if (mBaseResponse.state == SESSION_OUT) {
-                          User *_mUser = [User getUser];
-                          [UserService loginWithMobile:_mUser.username password:_mUser.password block:^(UserResponse *_mUserResp, NSError *_mUserError) {
-                              if(_mUserResp && _mUserResp.state == 0){
+                      if (((NSHTTPURLResponse*)response).statusCode == HTTP_CODE_TOKE_OUT) {
+                          LoginedUser *_LoginedUser = [RealmManager queryLoginedUser];
+                          [UserService loginWithOpenPlatform:_LoginedUser.openType openId:_LoginedUser.openId nickName:_LoginedUser.nickname headimgUrl:_LoginedUser.headimgUrl gender:_LoginedUser.gender province:_LoginedUser.province city:_LoginedUser.city country:_LoginedUser.country block:^(GetAuthTokenResp *_getAuthTokenResp, NSError *error) {
+                              if (_getAuthTokenResp && _getAuthTokenResp.token) {
                                   [weakClient GET:URLString parameters:parameters completionHandler:completionHandler];
-                              }else{
+                              } else {
                                   completionHandler(response, responseObject, error);
                               }
                           }];

@@ -13,7 +13,7 @@
 
 +(NSURLSessionDataTask *)getVeriCodeWithMobile:(NSString*)mobile type:(NSString*)type block:(void (^)(BaseResponse *_baseResp, NSError *error)) block
 {
-    return [[AFAppDotNetAPIClient sharedClient] GET:@"user/getVeriCode" parameters:@{@"mobile":mobile, @"type":type} completionHandler:^(NSURLResponse *response, id JSON, NSError *error) {
+    return [[AFAppDotNetAPIClient sharedClient] GET:@"api-user/v3.0/users/getVeriCode" parameters:@{@"mobile":mobile, @"type":type} completionHandler:^(NSURLResponse *response, id JSON, NSError *error) {
         if(block){
             if(JSON){
                 BaseResponse *mBaseResponse = [BaseResponse mj_objectWithKeyValues:JSON];
@@ -47,7 +47,7 @@
 }
 
 +(NSURLSessionDataTask *)setPasswordWithMobile:(NSString *)mobile password:(NSString *)password locPassword:(NSString *)locPassword veriCode:(NSString *)veriCode block:(void (^)(BaseResponse *, NSError *))block{
-    return [[AFAppDotNetAPIClient sharedClient] GET:@"user/findPwd" parameters:@{@"mobile":mobile, @"password":password, @"veriCode":veriCode} completionHandler:^(NSURLResponse *response, id JSON, NSError *error) {
+    return [[AFAppDotNetAPIClient sharedClient] GET:@"api-user/v3.0/users/findPwd" parameters:@{@"mobile":mobile, @"password":password, @"veriCode":veriCode} completionHandler:^(NSURLResponse *response, id JSON, NSError *error) {
         if(block){
             if(JSON){
                 BaseResponse *mBaseResponse = [BaseResponse mj_objectWithKeyValues:JSON];
@@ -81,7 +81,7 @@
 }
 
 +(NSURLSessionDataTask *)registerWithMobile:(NSString *)mobile password:(NSString *)password locPassword:(NSString *)locPassword veriCode:(NSString *)veriCode block:(void (^)(BaseResponse *, NSError *))block{
-    return [[AFAppDotNetAPIClient sharedClient] GET:@"user/register" parameters:@{@"mobile":mobile, @"password":   password, @"veriCode":veriCode} completionHandler:^(NSURLResponse *response, id JSON, NSError *error) {
+    return [[AFAppDotNetAPIClient sharedClient] GET:@"api-user/v3.0/users/register" parameters:@{@"mobile":mobile, @"password":   password, @"veriCode":veriCode} completionHandler:^(NSURLResponse *response, id JSON, NSError *error) {
         if(block){
             if(JSON){
                 BaseResponse *mBaseResponse = [BaseResponse mj_objectWithKeyValues:JSON];
@@ -98,7 +98,7 @@
 }
 
 +(NSURLSessionDataTask*)changePwdWithOldPwd:(NSString*)oldpassword newPwd:(NSString*)password type:(NSString*)type block:(void (^)(BaseResponse *, NSError *))block{
-    return [[AFAppDotNetAPIClient sharedClient] GET:@"user/changePwd" parameters:@{@"oldpassword":oldpassword,@"password":password} completionHandler:^(NSURLResponse *response, id JSON, NSError *error) {
+    return [[AFAppDotNetAPIClient sharedClient] GET:@"api-user/v3.0/users/changePwd" parameters:@{@"oldpassword":oldpassword,@"password":password} completionHandler:^(NSURLResponse *response, id JSON, NSError *error) {
         if(block){
             if(JSON){
                 BaseResponse *mBaseResponse = [BaseResponse mj_objectWithKeyValues:JSON];
@@ -151,7 +151,7 @@
 }
 
 +(NSURLSessionDataTask *)updateGenderWithGender:(NSString*)gender block:(void (^)(BaseResponse *_baseResp, NSError *error)) block{
-    return [[AFAppDotNetAPIClient sharedClient] GET:@"user/update_user_gender" parameters:@{@"gender":gender} completionHandler:^(NSURLResponse *response, id JSON, NSError *error) {
+    return [[AFAppDotNetAPIClient sharedClient] GET:@"api-user/v3.0/users/update_user_gender" parameters:@{@"gender":gender} completionHandler:^(NSURLResponse *response, id JSON, NSError *error) {
         if(block){
             if(JSON){
                 BaseResponse *mBaseResponse = [BaseResponse mj_objectWithKeyValues:JSON];
@@ -168,7 +168,7 @@
 }
 
 +(NSURLSessionDataTask *)updateNickNameWithNickname:(NSString*)nickname block:(void (^)(BaseResponse *_baseResp, NSError *error)) block{
-    return [[AFAppDotNetAPIClient sharedClient] GET:@"user/update_user_nickname" parameters:@{@"nickname":nickname} completionHandler:^(NSURLResponse *response, id JSON, NSError *error) {
+    return [[AFAppDotNetAPIClient sharedClient] GET:@"api-user/v3.0/users/update_user_nickname" parameters:@{@"nickname":nickname} completionHandler:^(NSURLResponse *response, id JSON, NSError *error) {
         if(block){
             if(JSON){
                 BaseResponse *mBaseResponse = [BaseResponse mj_objectWithKeyValues:JSON];
@@ -185,7 +185,7 @@
 }
 
 +(NSURLSessionDataTask *)updateHeadImgWithImage:(UIImage*)image block:(void (^)(UpdateHeadResponse *_updateHeadResponse, NSError *error)) block{
-    return [[AFAppDotNetAPIClient sharedClient] UPLOAD:@"user/update_user_headimg" parameters:nil image:image completionHandler:^(NSURLResponse *response, id JSON, NSError *error) {
+    return [[AFAppDotNetAPIClient sharedClient] UPLOAD:@"api-user/v3.0/users/update_user_headimg" parameters:nil image:image completionHandler:^(NSURLResponse *response, id JSON, NSError *error) {
         if(block){
             if(JSON){
                 UpdateHeadResponse *mUpdateHeadResponse = [UpdateHeadResponse mj_objectWithKeyValues:JSON];
@@ -219,7 +219,7 @@
 }
 
 +(NSURLSessionDataTask *)getMessageWithBlock:(void (^)(MsgResponse *_msgResponse, NSError *error)) block{
-    return [[AFAppDotNetAPIClient sharedClient] GET:@"user/get_user_msg" parameters:@{@"pageSize":@"50",
+    return [[AFAppDotNetAPIClient sharedClient] GET:@"api-user/v3.0/users/get_user_msg" parameters:@{@"pageSize":@"50",
                                                                                    @"page":@"0" } completionHandler:^(NSURLResponse *response, id JSON, NSError *error) {
         if(block){
             if(JSON){
@@ -277,7 +277,7 @@
 //        }
 //    }
 //    ids = [ids stringByAppendingString:@"]"];
-    return [[AFAppDotNetAPIClient sharedClient] GET:@"user/delete_user_msg" parameters:@{@"msgId":msgIds[0]}  completionHandler:^(NSURLResponse *response, id JSON, NSError *error) {
+    return [[AFAppDotNetAPIClient sharedClient] GET:@"api-user/v3.0/users/delete_user_msg" parameters:@{@"msgId":msgIds[0]}  completionHandler:^(NSURLResponse *response, id JSON, NSError *error) {
         if(block){
             if(JSON){
                 BaseResponse *mBaseResponse = [BaseResponse mj_objectWithKeyValues:JSON];
@@ -302,7 +302,7 @@
             }
         }
         ids = [ids stringByAppendingString:@"]"];
-    return [[AFAppDotNetAPIClient sharedClient] POST:@"user/delete_batch_user_msg" parameters:@{@"ids":ids}  completionHandler:^(NSURLResponse *response, id JSON, NSError *error) {
+    return [[AFAppDotNetAPIClient sharedClient] POST:@"api-user/v3.0/users/delete_batch_user_msg" parameters:@{@"ids":ids}  completionHandler:^(NSURLResponse *response, id JSON, NSError *error) {
         if(block){
             if(JSON){
                 BaseResponse *mBaseResponse = [BaseResponse mj_objectWithKeyValues:JSON];
@@ -381,6 +381,23 @@
                 TokenResponse *mTokenResponse = [TokenResponse mj_objectWithKeyValues:JSON];
                 if(mTokenResponse){
                     block(mTokenResponse, nil);
+                }else{
+                    block(nil, error);
+                }
+            }else{
+                block(nil, error);
+            }
+        }
+    }];
+}
+
++(NSURLSessionDataTask *)loginWithOpenPlatform:(NSString*)openType openId:(NSString*)openId nickName:(NSString*)nickname headimgUrl:(NSString*)headimgUrl gender:(NSString*)gender province:(NSString*)province city:(NSString*)city country:(NSString*)country block:(void (^)(GetAuthTokenResp *_getAuthTokenResp, NSError *error)) block {
+    return [[AFAppDotNetAPIClient sharedClient] POST:@"auth/open_platform" parameters:@{@"openType":openType, @"openId":openId, @"nickname":nickname, @"headimgUrl":headimgUrl, @"gender":gender, @"province":province, @"city":city, @"country":country}  completionHandler:^(NSURLResponse *response, id JSON, NSError *error) {
+        if(block){
+            if(JSON){
+                GetAuthTokenResp *mGetAuthTokenResp = [GetAuthTokenResp mj_objectWithKeyValues:JSON];
+                if(mGetAuthTokenResp){
+                    block(mGetAuthTokenResp, nil);
                 }else{
                     block(nil, error);
                 }

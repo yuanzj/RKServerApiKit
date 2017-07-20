@@ -183,4 +183,32 @@ NSString * const USER = @"USER";
         }
     }];
 }
+
++(NSURLSessionDataTask *)loginWithOpenPlatform:(NSString*)openType openId:(NSString*)openId nickName:(NSString*)nickname headimgUrl:(NSString*)headimgUrl gender:(NSString*)gender province:(NSString*)province city:(NSString*)city country:(NSString*)country block:(void (^)(GetAuthTokenResp *_getAuthTokenResp, NSError *error)) block {
+    return [UserApi loginWithOpenPlatform:openType openId:openId nickName:nickname headimgUrl:headimgUrl gender:gender province:province city:city country:country block:^(GetAuthTokenResp *_getAuthTokenResp, NSError *error) {
+        if (_getAuthTokenResp && _getAuthTokenResp.token) {
+            LoginedUser *loginedUser = [[LoginedUser alloc] init];
+            loginedUser.nickname = nickname;
+            loginedUser.openType = openType;
+            loginedUser.openId = openId;
+            loginedUser.headimgUrl = headimgUrl;
+            loginedUser.gender = gender;
+            loginedUser.province = province;
+            loginedUser.city = city;
+            loginedUser.country = country;
+            loginedUser.token = _getAuthTokenResp.token;
+            NSArray *authTokenArray = [_getAuthTokenResp.token componentsSeparatedByString:@"."];
+            if (authTokenArray && authTokenArray.count >= 2) {
+                NSString *base64Str = [authTokenArray objectAtIndex:1];
+                CocoaSecurityDecoder *decoder = [CocoaSecurityDecoder new];
+                NSString *json = [[NSString alloc] initWithData:[[NSData alloc] initWithBase64EncodedString:base64Str options:0] encoding:NSUTF8StringEncoding];
+            }
+            [RealmManager saveLoginedUser:loginedUser];
+            block(_getAuthTokenResp, nil);
+        } else {
+            block(nil, error);
+        }
+    }];
+}
+
 @end

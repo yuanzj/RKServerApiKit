@@ -12,6 +12,7 @@
 #import "Common.h"
 #import "MsgResponse.h"
 #import "FailServerResponse.h"
+#import "GetAuthTokenResp.h"
 
 @interface UserService : NSObject
 extern NSString * const USER;
@@ -167,4 +168,10 @@ extern NSString * const USER;
  * 获取上传数据用的token
  */
 +(NSURLSessionDataTask *)getTokenWithBlock:(void (^)(TokenResponse *_tokenResponse, NSError *error)) block;
+
+/**
+ * 第三方平台登录
+ * @param sessionId
+ */
++(NSURLSessionDataTask *)loginWithOpenPlatform:(NSString*)openType openId:(NSString*)openId nickName:(NSString*)nickname headimgUrl:(NSString*)headimgUrl gender:(NSString*)gender province:(NSString*)province city:(NSString*)city country:(NSString*)country block:(void (^)(GetAuthTokenResp *_getAuthTokenResp, NSError *error)) block;
 @end

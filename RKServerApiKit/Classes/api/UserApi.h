@@ -18,6 +18,7 @@
 #import "FailServerResponse.h"
 #import "FailServerAddress.h"
 #import "TokenResponse.h"
+#import "GetAuthTokenResp.h"
 
 @interface UserApi : NSObject
 
@@ -215,4 +216,9 @@
  */
 +(NSURLSessionDataTask *)getTokenWithBlock:(void (^)(TokenResponse *_tokenResponse, NSError *error)) block;
 
+/**
+ * 第三方平台登录
+ * @param sessionId
+ */
++(NSURLSessionDataTask *)loginWithOpenPlatform:(NSString*)openType openId:(NSString*)openId nickName:(NSString*)nickname headimgUrl:(NSString*)headimgUrl gender:(NSString*)gender province:(NSString*)province city:(NSString*)city country:(NSString*)country block:(void (^)(GetAuthTokenResp *_getAuthTokenResp, NSError *error)) block;
 @end

@@ -36,6 +36,9 @@
 @property (strong, nonatomic) NSString    * photoUrl;
 @property (strong, nonatomic) NSString    * nickname;
 @property (strong, nonatomic) NSString    * vehicleTypeId;
+
+////订单id
+@property (strong, nonatomic) NSString    * orderId;
 //中控设备拥有的附属设备
 @property (strong, nonatomic) NSArray     * accessoryUEs;
 
