@@ -28,6 +28,7 @@
 #import "CarFaultResponse.h"
 #import "CarVersionInfoResponse.h"
 #import "CarVersionParams.h"
+#import "Order.h"
 
 @interface UeApi : NSObject
 
@@ -149,5 +150,15 @@
  */
 +(NSURLSessionDataTask *)getGPSDetail:(NSString*)ueSn block:(void (^)(GPSDetailResponse *_GPSDetailResponse, NSError *error)) block;
 //新增重构接口
+
+/**
+ * 添加车辆
+ */
++(NSURLSessionDataTask *)addEbikeWithUeSn:(NSString*)ueSn addModel:(NSString*)addModel block:(void (^)(NSURLResponse *response, NSError *error)) block;
+
+/**
+ * 获取订单
+ */
++(NSURLSessionDataTask *)getOrder:(NSString*)orderId block:(void (^)(Order *mOrder, NSError *error)) block;
 
 @end

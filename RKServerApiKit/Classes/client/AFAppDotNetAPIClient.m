@@ -83,8 +83,8 @@
     
     NSMutableDictionary *paramsDic = [NSMutableDictionary dictionaryWithDictionary:parameters];
     if (![[[ApiNotNeedSessionIdDic getApiDic] allKeys] containsObject:URL]) {
-        if ([[Validator getValidSessionId] isKindOfClass:[NSError class]]) {
-            completionHandler(nil, nil, [Validator getValidSessionId]);
+        if ([[Validator getToken] isKindOfClass:[NSError class]]) {
+            completionHandler(nil, nil, [Validator getToken]);
             return nil;
         }else{
 //            [paramsDic setObject:[Validator getValidSessionId] forKey:@"sessionId"];
@@ -128,8 +128,8 @@
     
     NSMutableDictionary *paramsDic = [NSMutableDictionary dictionaryWithDictionary:parameters];
     if (![[[ApiNotNeedSessionIdDic getApiDic] allKeys] containsObject:URL]) {
-        if ([[Validator getValidSessionId] isKindOfClass:[NSError class]]) {
-            completionHandler(nil, nil, [Validator getValidSessionId]);
+        if ([[Validator getToken] isKindOfClass:[NSError class]]) {
+            completionHandler(nil, nil, [Validator getToken]);
             return nil;
         }else{
 //            [paramsDic setObject:[Validator getValidSessionId] forKey:@"sessionId"];

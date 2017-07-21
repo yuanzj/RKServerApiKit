@@ -375,7 +375,7 @@
  */
 +(NSURLSessionDataTask *)getCurrentCarStatus:(NSString*)ueSn block:(void (^)(CarStatusResponse *_CarStatusResponse, NSError *error)) block{
     
-    return [[AFAppDotNetAPIClient sharedClient] GET:@"app/get_car_info" parameters:@{@"ueSn":(ueSn ? ueSn : @"")} completionHandler:^(NSURLResponse *response, id JSON, NSError *error) {
+    return [[AFAppDotNetAPIClient sharedClient] GET:@"api-ebike/v3.0/app/get_car_info" parameters:@{@"ueSn":(ueSn ? ueSn : @"")} completionHandler:^(NSURLResponse *response, id JSON, NSError *error) {
         if(block){
             if(JSON){
                 CarStatusResponse *mBaseResponse = [CarStatusResponse mj_objectWithKeyValues:JSON];
@@ -437,5 +437,33 @@
     
 }
 //新增重构接口
+
++(NSURLSessionDataTask *)addEbikeWithUeSn:(NSString*)ueSn addModel:(NSString*)addModel block:(void (^)(NSURLResponse *response, NSError *error)) block{
+    return [[AFAppDotNetAPIClient sharedClient] POST:@"api-ebike/v3.1/relations/add" parameters:@{@"ueSn":(ueSn ? ueSn : @""), @"addModel":(addModel ? addModel : @"")} completionHandler:^(NSURLResponse *response, id JSON, NSError *error) {
+        if(block){
+            block(response, error);
+        }
+    }];
+}
+
+/**
+ * 获取订单
+ */
++(NSURLSessionDataTask *)getOrder:(NSString*)orderId block:(void (^)(Order *mOrder, NSError *error)) block{
+    return [[AFAppDotNetAPIClient sharedClient] GET:[@"api-order/v3.1/orders/" stringByAppendingString:orderId] parameters:nil completionHandler:^(NSURLResponse *response, id JSON, NSError *error) {
+        if(block){
+            if(JSON){
+                Order *mOrder = [Order mj_objectWithKeyValues:JSON];
+                if(mOrder){
+                    block(mOrder, nil);
+                }else{
+                    block(nil, error);
+                }
+            }else{
+                block(nil, error);
+            }
+        }
+    }];
+}
 
 @end

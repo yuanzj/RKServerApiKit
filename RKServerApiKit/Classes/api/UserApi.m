@@ -201,13 +201,13 @@
     }];
 }
 
-+(NSURLSessionDataTask *)getUserDetailWithBlock:(void (^)(UserInfoResponse *_userInfoResponse, NSError *error)) block{
-    return [[AFAppDotNetAPIClient sharedClient] GET:@"user/get_user_detail" parameters:nil completionHandler:^(NSURLResponse *response, id JSON, NSError *error) {
++(NSURLSessionDataTask *)getUserDetailWithBlock:(void (^)(UserInfo *_userInfo, NSError *error)) block{
+    return [[AFAppDotNetAPIClient sharedClient] GET:@"api-user/v3.1/users/detail" parameters:nil completionHandler:^(NSURLResponse *response, id JSON, NSError *error) {
         if(block){
             if(JSON){
-                UserInfoResponse *mUserInfoResponse = [UserInfoResponse mj_objectWithKeyValues:JSON];
-                if(mUserInfoResponse){
-                    block(mUserInfoResponse, nil);
+                UserInfo *mUserInfo = [UserInfo mj_objectWithKeyValues:JSON];
+                if(mUserInfo){
+                    block(mUserInfo, nil);
                 }else{
                     block(nil, error);
                 }

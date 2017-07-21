@@ -85,7 +85,7 @@ extern NSString * const USER;
  * @param context
  * @return
  */
-+(NSURLSessionDataTask *)getUserDetailWithBlock:(void (^)(UserInfoResponse *_userInfoResponse, NSError *error)) block;
++(NSURLSessionDataTask *)getUserDetailWithBlock:(void (^)(UserInfo *_userInfo, NSError *error)) block;
 
 /**
  * 获取用户推送消息

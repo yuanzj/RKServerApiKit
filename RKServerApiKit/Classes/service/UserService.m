@@ -107,20 +107,16 @@ NSString * const USER = @"USER";
     return [UserApi updateHeadImgWithImage:image block:block];
 }
 
-+(NSURLSessionDataTask *)getUserDetailWithBlock:(void (^)(UserInfoResponse *_userInfoResponse, NSError *error)) block{
-    return [UserApi getUserDetailWithBlock:^(UserInfoResponse *_userInfoResponse, NSError *error){
++(NSURLSessionDataTask *)getUserDetailWithBlock:(void (^)(UserInfo *_userInfo, NSError *error)) block{
+    return [UserApi getUserDetailWithBlock:^(UserInfo *_userInfo, NSError *error){
         
-        if (_userInfoResponse) {
-            if(_userInfoResponse.state == RKSAPIResponseSuccess){
-                UserInfo *mUserInfo = _userInfoResponse.data;
-                [UserInfo setUserInfo:mUserInfo];
-                [RealmManager saveUserInfo:mUserInfo];
-            }
-            
-            block(_userInfoResponse, nil);
+        if (_userInfo) {
+            [RealmManager saveUserInfo:_userInfo];
+            block(_userInfo, nil);
         } else {
             block(nil, error);
         }
+        
     }];
 }
 
