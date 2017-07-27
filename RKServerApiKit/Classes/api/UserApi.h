@@ -19,6 +19,7 @@
 #import "FailServerAddress.h"
 #import "TokenResponse.h"
 #import "GetAuthTokenResp.h"
+#import "ErrorResp.h"
 
 @interface UserApi : NSObject
 
@@ -221,4 +222,9 @@
  * @param sessionId
  */
 +(NSURLSessionDataTask *)loginWithOpenPlatform:(NSString*)openType openId:(NSString*)openId nickName:(NSString*)nickname headimgUrl:(NSString*)headimgUrl gender:(NSString*)gender province:(NSString*)province city:(NSString*)city country:(NSString*)country block:(void (^)(GetAuthTokenResp *_getAuthTokenResp, NSError *error)) block;
+
+/**
+ * 关联手机号
+ */
++(NSURLSessionDataTask *)bindPhoneNum:(NSString*)phoneNumber password:(NSString*)password block:(void (^)(NSURLResponse *response, ErrorResp *errorResp, NSError *error)) block;
 @end

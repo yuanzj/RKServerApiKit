@@ -229,7 +229,7 @@
 }
 //新增重构接口
 
-+(NSURLSessionDataTask *)addEbikeWithUeSn:(NSString*)ueSn addModel:(NSString*)addModel block:(void (^)(NSURLResponse *response, NSError *error)) block{
++(NSURLSessionDataTask *)addEbikeWithUeSn:(NSString*)ueSn addModel:(NSString*)addModel block:(void (^)(NSURLResponse *response, ErrorResp *errorResp, NSError *error)) block{
     return [UeApi addEbikeWithUeSn:ueSn addModel:addModel block:block];
 }
 

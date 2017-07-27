@@ -400,4 +400,17 @@
     return [[LoginedUser allObjects] firstObject];
 }
 
++ (void)clearLoginedUser{
+    // Delete all objects from the realm
+    RLMResults<LoginedUser *> *loginedUsers = [LoginedUser allObjects];
+    
+    if (loginedUsers) {
+        RLMRealm *realm = [RLMRealm defaultRealm];
+        [realm beginWriteTransaction];
+        [realm deleteObjects:loginedUsers];
+        [realm commitWriteTransaction];
+    }
+    
+}
+
 @end

@@ -207,4 +207,8 @@ NSString * const USER = @"USER";
     }];
 }
 
++(NSURLSessionDataTask *)bindPhoneNum:(NSString*)phoneNumber password:(NSString*)password block:(void (^)(NSURLResponse *response, ErrorResp *errorResp, NSError *error)) block {
+    return [UserApi bindPhoneNum:phoneNumber password:password block:block];
+}
+
 @end

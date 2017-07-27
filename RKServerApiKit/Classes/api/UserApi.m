@@ -375,7 +375,7 @@
 }
 
 +(NSURLSessionDataTask *)getTokenWithBlock:(void (^)(TokenResponse *, NSError *))block {
-    return [[AFAppDotNetAPIClient sharedClient] GET:@"auth/token" parameters:nil completionHandler:^(NSURLResponse *response, id JSON, NSError *error) {
+    return [[AFAppDotNetAPIClient sharedClient] GET:@"api-ebike/v3.0/auth/token" parameters:nil completionHandler:^(NSURLResponse *response, id JSON, NSError *error) {
         if(block){
             if(JSON){
                 TokenResponse *mTokenResponse = [TokenResponse mj_objectWithKeyValues:JSON];
@@ -403,6 +403,26 @@
                 }
             }else{
                 block(nil, error);
+            }
+        }
+    }];
+}
+
++(NSURLSessionDataTask *)bindPhoneNum:(NSString*)phoneNumber password:(NSString*)password block:(void (^)(NSURLResponse *response, ErrorResp *errorResp, NSError *error)) block {
+    id params = @{};
+    if (phoneNumber) {
+        params = @{@"phoneNumber":(phoneNumber ? phoneNumber : @"")};
+    }
+    if (password) {
+        params = @{@"phoneNumber":(phoneNumber ? phoneNumber : @""), @"password":(password ? password : @"")};
+    }
+    return [[AFAppDotNetAPIClient sharedClient] POST:@"api-user/v3.1/users/relation_tel" parameters:params completionHandler:^(NSURLResponse *response, id JSON, NSError *error) {
+        if(block){
+            if (JSON) {
+                ErrorResp *mErrorResp = [ErrorResp mj_objectWithKeyValues:JSON];
+                block(response, mErrorResp, error);
+            } else {
+                block(response, nil, error);
             }
         }
     }];

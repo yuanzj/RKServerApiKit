@@ -115,4 +115,6 @@
 
 + (LoginedUser*)queryLoginedUser;
 
++ (void)clearLoginedUser;
+
 @end
