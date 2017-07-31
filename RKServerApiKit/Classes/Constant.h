@@ -18,4 +18,6 @@
 
 #define TOKEN_ERROR -5
 
+#define HTTP_CODE_TOKE_OUT 401
+
 @end

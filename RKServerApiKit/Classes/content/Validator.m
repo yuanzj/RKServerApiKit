@@ -20,4 +20,13 @@
     }
 }
 
++ (id)getToken {
+    LoginedUser *_LoginedUser = [RealmManager queryLoginedUser];
+    if (_LoginedUser) {
+        return _LoginedUser.token;
+    } else {
+        return [NSError errorWithDomain:@"interface service" code:0 userInfo:@{NSLocalizedDescriptionKey: @"用户未登录"}];
+    }
+}
+
 @end

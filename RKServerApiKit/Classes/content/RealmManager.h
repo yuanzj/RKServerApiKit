@@ -21,6 +21,7 @@
 #import "RideSpeedStatisticDb.h"
 #import "RideMilesStatisticDb.h"
 #import "TokenResponse.h"
+#import "LoginedUser.h"
 
 #define MAX_STORE_LOCATION_INFO 1000
 
@@ -109,5 +110,11 @@
 + (void)saveRideMilesStatisticDb:(RideMilesStatisticDb*) rideMilesStatisticDb;
 
 + (RideMilesStatisticDb *)queryRideMilesStatisticDbBySn:(NSString*)ueSn;
+
++ (void)saveLoginedUser:(LoginedUser *)_LoginedUser;
+
++ (LoginedUser*)queryLoginedUser;
+
++ (void)clearLoginedUser;
 
 @end

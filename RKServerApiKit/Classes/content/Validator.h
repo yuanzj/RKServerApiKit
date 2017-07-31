@@ -13,4 +13,6 @@
 
 +(id)getValidSessionId;
 
++(id)getToken;
+
 @end

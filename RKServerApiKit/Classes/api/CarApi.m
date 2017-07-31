@@ -95,7 +95,7 @@
  @return
  */
 +(NSURLSessionDataTask *)setServiceStatus:(NSString*)ueSn imei :(NSString*)imei  serviceStatus :(NSString*)serviceStatus  block:(void (^)(BaseResponse *_BaseResponse, NSError *error)) block{
-    return [[AFAppDotNetAPIClient sharedClient] POST:@"car/set_service_status" parameters:@{@"ueSn":(ueSn ? ueSn : @""),@"imei":imei,@"serviceStatus":serviceStatus} completionHandler:^(NSURLResponse *response, id JSON, NSError *error) {
+    return [[AFAppDotNetAPIClient sharedClient] POST:@"api-ebike/v3.0/app/set_service_status" parameters:@{@"ueSn":(ueSn ? ueSn : @""),@"imei":imei,@"serviceStatus":serviceStatus} completionHandler:^(NSURLResponse *response, id JSON, NSError *error) {
         if(block){
             if(JSON){
                 BaseResponse *mBaseResponse = [BaseResponse mj_objectWithKeyValues:JSON];

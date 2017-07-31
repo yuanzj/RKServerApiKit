@@ -18,6 +18,8 @@
 #import "FailServerResponse.h"
 #import "FailServerAddress.h"
 #import "TokenResponse.h"
+#import "GetAuthTokenResp.h"
+#import "ErrorResp.h"
 
 @interface UserApi : NSObject
 
@@ -142,7 +144,7 @@
  * @param sessionId
  * @return
  */
-+(NSURLSessionDataTask *)getUserDetailWithBlock:(void (^)(UserInfoResponse *_userInfoResponse, NSError *error)) block;
++(NSURLSessionDataTask *)getUserDetailWithBlock:(void (^)(UserInfo *_userInfo, NSError *error)) block;
 
 #pragma mark -
 #pragma mark 获取用户推送消息
@@ -215,4 +217,14 @@
  */
 +(NSURLSessionDataTask *)getTokenWithBlock:(void (^)(TokenResponse *_tokenResponse, NSError *error)) block;
 
+/**
+ * 第三方平台登录
+ * @param sessionId
+ */
++(NSURLSessionDataTask *)loginWithOpenPlatform:(NSString*)openType openId:(NSString*)openId nickName:(NSString*)nickname headimgUrl:(NSString*)headimgUrl gender:(NSString*)gender province:(NSString*)province city:(NSString*)city country:(NSString*)country block:(void (^)(GetAuthTokenResp *_getAuthTokenResp, NSError *error)) block;
+
+/**
+ * 关联手机号
+ */
++(NSURLSessionDataTask *)bindPhoneNum:(NSString*)phoneNumber password:(NSString*)password block:(void (^)(NSURLResponse *response, ErrorResp *errorResp, NSError *error)) block;
 @end

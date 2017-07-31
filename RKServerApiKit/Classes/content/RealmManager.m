@@ -381,4 +381,36 @@
     }
 }
 
++ (void)saveLoginedUser:(LoginedUser *)_LoginedUser {
+    // Get the default Realm
+    RLMRealm *realm = [RLMRealm defaultRealm];
+    // You only need to do this once (per thread)
+    
+    // Add to Realm with transaction
+    RLMResults<LoginedUser *> *loginedUsers = [LoginedUser allObjects];
+    [realm beginWriteTransaction];
+    if (loginedUsers.count > 0) {
+        [realm deleteObjects:loginedUsers];
+    }
+    [realm addObject:_LoginedUser];
+    [realm commitWriteTransaction];
+}
+
++ (LoginedUser*)queryLoginedUser{
+    return [[LoginedUser allObjects] firstObject];
+}
+
++ (void)clearLoginedUser{
+    // Delete all objects from the realm
+    RLMResults<LoginedUser *> *loginedUsers = [LoginedUser allObjects];
+    
+    if (loginedUsers) {
+        RLMRealm *realm = [RLMRealm defaultRealm];
+        [realm beginWriteTransaction];
+        [realm deleteObjects:loginedUsers];
+        [realm commitWriteTransaction];
+    }
+    
+}
+
 @end

@@ -229,4 +229,15 @@
 }
 //新增重构接口
 
++(NSURLSessionDataTask *)addEbikeWithUeSn:(NSString*)ueSn addModel:(NSString*)addModel block:(void (^)(NSURLResponse *response, ErrorResp *errorResp, NSError *error)) block{
+    return [UeApi addEbikeWithUeSn:ueSn addModel:addModel block:block];
+}
+
+/**
+ * 获取订单
+ */
++(NSURLSessionDataTask *)getOrder:(NSString*)orderId block:(void (^)(Order *mOrder, NSError *error)) block{
+    return [UeApi getOrder:orderId block:block];
+}
+
 @end
