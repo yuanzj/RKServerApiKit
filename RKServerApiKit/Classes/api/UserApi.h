@@ -20,6 +20,7 @@
 #import "TokenResponse.h"
 #import "GetAuthTokenResp.h"
 #import "ErrorResp.h"
+#import "EbikeStoreResp.h"
 
 @interface UserApi : NSObject
 
@@ -227,4 +228,11 @@
  * 关联手机号
  */
 +(NSURLSessionDataTask *)bindPhoneNum:(NSString*)phoneNumber password:(NSString*)password block:(void (^)(NSURLResponse *response, ErrorResp *errorResp, NSError *error)) block;
+
+
+
+/**
+ * 获取网点接口
+ */
++(NSURLSessionDataTask *)getEbikeStores:(NSString*)leftBottomLat leftBottomLng:(NSString*)leftBottomLng rightTopLat:(NSString*)rightTopLat rightTopLng:(NSString*)rightTopLng type:(NSString*)type page:(NSString*)page limit:(NSString*)limit block:(void (^)(EbikeStoreResp *_EbikeStoreResp, NSError *error)) block;
 @end

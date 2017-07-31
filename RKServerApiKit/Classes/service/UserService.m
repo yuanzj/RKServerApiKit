@@ -211,4 +211,8 @@ NSString * const USER = @"USER";
     return [UserApi bindPhoneNum:phoneNumber password:password block:block];
 }
 
++(NSURLSessionDataTask *)getEbikeStores:(NSString*)leftBottomLat leftBottomLng:(NSString*)leftBottomLng rightTopLat:(NSString*)rightTopLat rightTopLng:(NSString*)rightTopLng type:(NSString*)type page:(NSString*)page limit:(NSString*)limit block:(void (^)(EbikeStoreResp *_EbikeStoreResp, NSError *error)) block {
+    return [UserApi getEbikeStores:leftBottomLat leftBottomLng:leftBottomLng rightTopLat:rightTopLat rightTopLng:rightTopLng type:type page:page limit:limit block:block];
+}
+
 @end
