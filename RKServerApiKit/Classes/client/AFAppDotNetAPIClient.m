@@ -117,6 +117,127 @@
     return dataTask;
 }
 
+- (NSURLSessionDataTask*)PUT:(NSString *)URLString
+                  parameters:(id)parameters
+           completionHandler:(void (^)(NSURLResponse *response, id responseObject, NSError *error))completionHandler{
+    
+    __weak AFAppDotNetAPIClient *weakClient = self;
+    
+    NSString* URL = [AFAppDotNetAPIBaseURLString stringByAppendingString:URLString];
+    
+    NSMutableDictionary *paramsDic = [NSMutableDictionary dictionaryWithDictionary:parameters];
+    if (![[[ApiNotNeedSessionIdDic getApiDic] allKeys] containsObject:URL]) {
+        if ([[Validator getToken] isKindOfClass:[NSError class]]) {
+            completionHandler(nil, nil, [Validator getToken]);
+            return nil;
+        }else{
+            //            [paramsDic setObject:[Validator getValidSessionId] forKey:@"sessionId"];
+        }
+    }
+    
+    NSMutableURLRequest *request = [[AFHTTPRequestSerializer serializer] requestWithMethod:@"PUT" URLString:URL parameters:paramsDic error:nil];
+    CocoaSecurityEncoder *encoder = [CocoaSecurityEncoder new];
+    NSString *baseString = [encoder base64:[self.firmValue dataUsingEncoding:NSUTF8StringEncoding]];
+    [request addValue:baseString forHTTPHeaderField:FIRM_FIELD];
+    if ([[Validator getToken] isKindOfClass:[NSString class]]) {
+        NSString *token = [Validator getToken];
+        [request addValue:token forHTTPHeaderField:@"Authorization"];
+    }
+    NSURLSessionDataTask* dataTask =  [[AFAppDotNetAPIClient sharedClient] dataTaskWithRequest:request completionHandler:^(NSURLResponse *response, id responseObject, NSError *error) {
+        if (((NSHTTPURLResponse*)response).statusCode == HTTP_CODE_TOKE_OUT) {
+            LoginedUser *_LoginedUser = [RealmManager queryLoginedUser];
+            [UserService loginWithOpenPlatform:_LoginedUser.openType openId:_LoginedUser.openId nickName:_LoginedUser.nickname headimgUrl:_LoginedUser.headimgUrl gender:_LoginedUser.gender province:_LoginedUser.province city:_LoginedUser.city country:_LoginedUser.country block:^(GetAuthTokenResp *_getAuthTokenResp, NSError *error) {
+                if (_getAuthTokenResp && _getAuthTokenResp.token) {
+                    [weakClient GET:URLString parameters:parameters completionHandler:completionHandler];
+                } else {
+                    completionHandler(response, responseObject, error);
+                }
+            }];
+        }else{
+            completionHandler(response, responseObject, error);
+        }
+    }];
+    [dataTask resume];
+    return dataTask;
+}
+
+- (NSURLSessionDataTask*)POST_JSON:(NSString *)URLString
+                   parameters:(id)parameters
+            completionHandler:(void (^)(NSURLResponse *response, id responseObject, NSError *error))completionHandler{
+    
+    __weak AFAppDotNetAPIClient *weakClient = self;
+    
+    NSString* URL = [AFAppDotNetAPIBaseURLString stringByAppendingString:URLString];
+    
+    NSMutableDictionary *paramsDic = [NSMutableDictionary dictionaryWithDictionary:parameters];
+    if (![[[ApiNotNeedSessionIdDic getApiDic] allKeys] containsObject:URL]) {
+        if ([[Validator getToken] isKindOfClass:[NSError class]]) {
+            completionHandler(nil, nil, [Validator getToken]);
+            return nil;
+        }else{
+            //            [paramsDic setObject:[Validator getValidSessionId] forKey:@"sessionId"];
+        }
+    }
+    
+    NSMutableURLRequest *request = [[AFJSONRequestSerializer serializer] requestWithMethod:@"POST" URLString:URL parameters:paramsDic error:nil];
+    CocoaSecurityEncoder *encoder = [CocoaSecurityEncoder new];
+    NSString *baseString = [encoder base64:[self.firmValue dataUsingEncoding:NSUTF8StringEncoding]];
+    [request addValue:baseString forHTTPHeaderField:FIRM_FIELD];
+    if ([[Validator getToken] isKindOfClass:[NSString class]]) {
+        NSString *token = [Validator getToken];
+        [request addValue:token forHTTPHeaderField:@"Authorization"];
+    }
+    NSURLSessionDataTask* dataTask =  [[AFAppDotNetAPIClient sharedClient] dataTaskWithRequest:request completionHandler:^(NSURLResponse *response, id responseObject, NSError *error) {
+        NSLog(@"cyytest statusCode:%ld",(long)((NSHTTPURLResponse*)response).statusCode);
+        if (((NSHTTPURLResponse*)response).statusCode == HTTP_CODE_TOKE_OUT) {
+            LoginedUser *_LoginedUser = [RealmManager queryLoginedUser];
+            [UserService loginWithOpenPlatform:_LoginedUser.openType openId:_LoginedUser.openId nickName:_LoginedUser.nickname headimgUrl:_LoginedUser.headimgUrl gender:_LoginedUser.gender province:_LoginedUser.province city:_LoginedUser.city country:_LoginedUser.country block:^(GetAuthTokenResp *_getAuthTokenResp, NSError *error) {
+                if (_getAuthTokenResp && _getAuthTokenResp.token) {
+                    [weakClient GET:URLString parameters:parameters completionHandler:completionHandler];
+                } else {
+                    completionHandler(response, responseObject, error);
+                }
+            }];
+        }else{
+            completionHandler(response, responseObject, error);
+        }
+    }];
+    [dataTask resume];
+    return dataTask;
+}
+
+- (NSURLSessionDataTask*)POSTJSON_NOTRETRY:(NSString *)URLString
+                       parameters:(id)parameters
+                completionHandler:(void (^)(NSURLResponse *response, id responseObject, NSError *error))completionHandler{
+    __weak AFAppDotNetAPIClient *weakClient = self;
+    
+    NSString* URL = [AFAppDotNetAPIBaseURLString stringByAppendingString:URLString];
+    
+    NSMutableDictionary *paramsDic = [NSMutableDictionary dictionaryWithDictionary:parameters];
+    if (![[[ApiNotNeedSessionIdDic getApiDic] allKeys] containsObject:URL]) {
+        if ([[Validator getToken] isKindOfClass:[NSError class]]) {
+            completionHandler(nil, nil, [Validator getToken]);
+            return nil;
+        }else{
+            //            [paramsDic setObject:[Validator getValidSessionId] forKey:@"sessionId"];
+        }
+    }
+    
+    NSMutableURLRequest *request = [[AFJSONRequestSerializer serializer] requestWithMethod:@"POST" URLString:URL parameters:paramsDic error:nil];
+    CocoaSecurityEncoder *encoder = [CocoaSecurityEncoder new];
+    NSString *baseString = [encoder base64:[self.firmValue dataUsingEncoding:NSUTF8StringEncoding]];
+    [request addValue:baseString forHTTPHeaderField:FIRM_FIELD];
+    if ([[Validator getToken] isKindOfClass:[NSString class]]) {
+        NSString *token = [Validator getToken];
+        [request addValue:token forHTTPHeaderField:@"Authorization"];
+    }
+    NSURLSessionDataTask* dataTask =  [[AFAppDotNetAPIClient sharedClient] dataTaskWithRequest:request completionHandler:^(NSURLResponse *response, id responseObject, NSError *error) {
+        completionHandler(response, responseObject, error);
+    }];
+    [dataTask resume];
+    return dataTask;
+}
+
 - (NSURLSessionDataTask*)UPLOAD:(NSString *)URLString
                      parameters:(id)parameters
                           image:(UIImage*)image

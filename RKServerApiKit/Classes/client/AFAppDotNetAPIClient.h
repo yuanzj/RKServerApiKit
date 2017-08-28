@@ -22,10 +22,16 @@
 #import "User.h"
 #import <CocoaSecurity/CocoaSecurity.h>
 
+//#ifdef DEV_SERVER_MODEL
+//static NSString * const AFAppDotNetAPIBaseURLString = @"http://cjl3.rokyinfo.net:7190/";
+//#else
+//static NSString * const AFAppDotNetAPIBaseURLString = @"http://cjl3.rokyinfo.net:7190/";
+//#endif
+
 #ifdef DEV_SERVER_MODEL
-static NSString * const AFAppDotNetAPIBaseURLString = @"http://cjl3.rokyinfo.net:7190/";
+static NSString * const AFAppDotNetAPIBaseURLString = @"http://cjl3.rokyinfo.net:8010/";
 #else
-static NSString * const AFAppDotNetAPIBaseURLString = @"http://cjl3.rokyinfo.net:7190/";
+static NSString * const AFAppDotNetAPIBaseURLString = @"http://cjl3.rokyinfo.net:8010/";
 #endif
 
 #define FIRM_FIELD @"firm"
@@ -43,6 +49,18 @@ static NSString * const AFAppDotNetAPIBaseURLString = @"http://cjl3.rokyinfo.net
 - (NSURLSessionDataTask*)POST:(NSString *)URLString
                   parameters:(id)parameters
            completionHandler:(void (^)(NSURLResponse *response, id responseObject, NSError *error))completionHandler;
+
+- (NSURLSessionDataTask*)PUT:(NSString *)URLString
+                  parameters:(id)parameters
+           completionHandler:(void (^)(NSURLResponse *response, id responseObject, NSError *error))completionHandler;
+
+- (NSURLSessionDataTask*)POST_JSON:(NSString *)URLString
+                        parameters:(id)parameters
+                 completionHandler:(void (^)(NSURLResponse *response, id responseObject, NSError *error))completionHandler;
+
+- (NSURLSessionDataTask*)POSTJSON_NOTRETRY:(NSString *)URLString
+                   parameters:(id)parameters
+            completionHandler:(void (^)(NSURLResponse *response, id responseObject, NSError *error))completionHandler;
 
 - (NSURLSessionDataTask*)UPLOAD:(NSString *)URLString
                    parameters:(id)parameters

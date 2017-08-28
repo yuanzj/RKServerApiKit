@@ -117,4 +117,8 @@
 
 + (void)clearLoginedUser;
 
++ (void)clearPaygoodList;
+
++ (void)savePaygoodList:(NSArray *)_PayGoodList;
+
 @end

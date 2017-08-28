@@ -11,6 +11,7 @@
 #import "RideDayStatisticDb.h"
 #import "RideSpeedStatisticDb.h"
 #import "RideMilesStatisticDb.h"
+#import "PayGood.h"
 
 @implementation RealmManager
 
@@ -411,6 +412,28 @@
         [realm commitWriteTransaction];
     }
     
+}
+
++ (void)clearPaygoodList{
+//    // Delete all objects from the realm
+    RLMResults<PayGood *> *mPayGoodList = [PayGood allObjects];
+    
+    if (mPayGoodList) {
+        
+        RLMRealm *realm = [RLMRealm defaultRealm];
+        [realm beginWriteTransaction];
+        [realm deleteObjects:mPayGoodList];
+        [realm commitWriteTransaction];
+    }
+}
+
++ (void)savePaygoodList:(NSArray *)_PayGoodList{
+//    // Get the default Realm
+    RLMRealm *realm = [RLMRealm defaultRealm];
+    
+    [realm beginWriteTransaction];
+    [realm addObjects:_PayGoodList];
+    [realm commitWriteTransaction];
 }
 
 @end

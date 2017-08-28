@@ -14,6 +14,7 @@
 #import "FailServerResponse.h"
 #import "GetAuthTokenResp.h"
 #import "ErrorResp.h"
+#import "EbikeStoreResp.h"
 
 @interface UserService : NSObject
 extern NSString * const USER;
@@ -116,6 +117,11 @@ extern NSString * const USER;
  */
 +(NSURLSessionDataTask *)deleteBatchMessagesWithMsgIds:(NSArray*)msgIds block:(void (^)(BaseResponse *_baseResp, NSError *error)) block;
 
+/**
+ * 用户实名
+ */
++(NSURLSessionDataTask *)modifyUserInfo:(NSString*)phoneNumber realName:(NSString*)realName idCard:(NSString*)idCard  block:(void (^)(NSURLResponse *response, ErrorResp *errorResp, NSError *error)) block;
+
 #pragma mark -
 #pragma mark 以下接口废弃
 
@@ -177,4 +183,8 @@ extern NSString * const USER;
 +(NSURLSessionDataTask *)loginWithOpenPlatform:(NSString*)openType openId:(NSString*)openId nickName:(NSString*)nickname headimgUrl:(NSString*)headimgUrl gender:(NSString*)gender province:(NSString*)province city:(NSString*)city country:(NSString*)country block:(void (^)(GetAuthTokenResp *_getAuthTokenResp, NSError *error)) block;
 
 +(NSURLSessionDataTask *)bindPhoneNum:(NSString*)phoneNumber password:(NSString*)password block:(void (^)(NSURLResponse *response, ErrorResp *errorResp, NSError *error)) block;
+
++(NSURLSessionDataTask *)getEbikeStores:(NSString*)leftBottomLat leftBottomLng:(NSString*)leftBottomLng rightTopLat:(NSString*)rightTopLat rightTopLng:(NSString*)rightTopLng type:(NSString*)type page:(NSString*)page limit:(NSString*)limit block:(void (^)(EbikeStoreResp *_EbikeStoreResp, NSError *error)) block;
+
++(NSURLSessionDataTask *)loginGetToken:(NSString*)account password:(NSString*)password block:(void (^)(GetAuthTokenResp *_getAuthTokenResp, NSError *error)) block;
 @end
