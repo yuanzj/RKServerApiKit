@@ -108,6 +108,11 @@
  */
 +(NSURLSessionDataTask *)changeBindedMobileWithVeriCode:(NSString*)veriCode newMobile:(NSString*) newMobile block:(void (^)(BaseResponse *_baseResp, NSError *error)) block;
 
+/**
+ * 用户实名
+ */
++(NSURLSessionDataTask *)modifyUserInfo:(NSString*)phoneNumber realName:(NSString*)realName idCard:(NSString*)idCard  block:(void (^)(NSURLResponse *response, ErrorResp *errorResp, NSError *error)) block;
+
 #pragma mark -
 #pragma mark 更新用户性别
 /**
@@ -235,4 +240,9 @@
  * 获取网点接口
  */
 +(NSURLSessionDataTask *)getEbikeStores:(NSString*)leftBottomLat leftBottomLng:(NSString*)leftBottomLng rightTopLat:(NSString*)rightTopLat rightTopLng:(NSString*)rightTopLng type:(NSString*)type page:(NSString*)page limit:(NSString*)limit block:(void (^)(EbikeStoreResp *_EbikeStoreResp, NSError *error)) block;
+
+/**
+ * 登陆获取token
+ */
++(NSURLSessionDataTask *)loginGetToken:(NSString*)account password:(NSString*)password block:(void (^)(GetAuthTokenResp *_getAuthTokenResp, NSError *error)) block;
 @end

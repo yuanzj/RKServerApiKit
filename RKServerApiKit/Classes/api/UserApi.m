@@ -430,6 +430,31 @@
     }];
 }
 
++(NSURLSessionDataTask *)modifyUserInfo:(NSString*)phoneNumber realName:(NSString*)realName idCard:(NSString*)idCard  block:(void (^)(NSURLResponse *response, ErrorResp *errorResp, NSError *error)) block{
+    
+    NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
+    
+    if (phoneNumber) {
+        [params setObject:phoneNumber forKey:@"phoneNumber"];
+    }
+    if (realName) {
+        [params setObject:realName forKey:@"realname"];
+    }
+    if (idCard) {
+        [params setObject:idCard forKey:@"identityNumber"];
+    }
+    return [[AFAppDotNetAPIClient sharedClient] PUT:@"api-user/v3.1/users/update" parameters:params completionHandler:^(NSURLResponse *response, id JSON, NSError *error) {
+        if(block){
+            if (JSON) {
+                ErrorResp *mErrorResp = [ErrorResp mj_objectWithKeyValues:JSON];
+                block(response, mErrorResp, error);
+            } else {
+                block(response, nil, error);
+            }
+        }
+    }];
+}
+
 +(NSURLSessionDataTask *)getEbikeStores:(NSString*)leftBottomLat leftBottomLng:(NSString*)leftBottomLng rightTopLat:(NSString*)rightTopLat rightTopLng:(NSString*)rightTopLng type:(NSString*)type page:(NSString*)page limit:(NSString*)limit block:(void (^)(EbikeStoreResp *_EbikeStoreResp, NSError *error)) block {
     NSString* bounds = [[[[[[leftBottomLat stringByAppendingString:@","] stringByAppendingString:leftBottomLng] stringByAppendingString:@";"] stringByAppendingString:rightTopLat] stringByAppendingString:@","] stringByAppendingString:rightTopLng];
     return [[AFAppDotNetAPIClient sharedClient] GET:@"api-user/v3.1/ebikestores" parameters:@{@"bounds":bounds, @"type":type, @"page":page, @"limit":limit} completionHandler:^(NSURLResponse *response, id JSON, NSError *error) {
@@ -443,6 +468,19 @@
                 EbikeStoreResp *mEbikeStoreResp = [EbikeStoreResp mj_objectWithKeyValues:JSON];
                 block(mEbikeStoreResp, error);
             } else {
+                block(nil, error);
+            }
+        }
+    }];
+}
+
++(NSURLSessionDataTask *)loginGetToken:(NSString*)account password:(NSString*)password block:(void (^)(GetAuthTokenResp *_getAuthTokenResp, NSError *error)) block{
+    return [[AFAppDotNetAPIClient sharedClient] POSTJSON_NOTRETRY:@"auth/token" parameters:@{@"phoneNumber":account, @"password":password}  completionHandler:^(NSURLResponse *response, id JSON, NSError *error) {
+        if(block){
+            if(JSON){
+                GetAuthTokenResp *mGetAuthTokenResp = [GetAuthTokenResp mj_objectWithKeyValues:JSON];
+                block(mGetAuthTokenResp, error);
+            }else{
                 block(nil, error);
             }
         }

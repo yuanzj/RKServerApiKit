@@ -166,6 +166,10 @@ NSString * const USER = @"USER";
     return [UserApi unBindDeviceWithDeviceId:deviceId block:block];
 }
 
++(NSURLSessionDataTask *)modifyUserInfo:(NSString*)phoneNumber realName:(NSString*)realName idCard:(NSString*)idCard  block:(void (^)(NSURLResponse *response, ErrorResp *errorResp, NSError *error)) block{
+    return [UserApi modifyUserInfo:phoneNumber realName:realName idCard:idCard block:block];
+}
+
 +(NSURLSessionDataTask *)getTokenWithBlock:(void (^)(TokenResponse *_tokenResponse, NSError *error)) block{
     return [UserApi getTokenWithBlock:^(TokenResponse *_tokenResponse, NSError *error) {
         if (_tokenResponse) {
@@ -213,6 +217,25 @@ NSString * const USER = @"USER";
 
 +(NSURLSessionDataTask *)getEbikeStores:(NSString*)leftBottomLat leftBottomLng:(NSString*)leftBottomLng rightTopLat:(NSString*)rightTopLat rightTopLng:(NSString*)rightTopLng type:(NSString*)type page:(NSString*)page limit:(NSString*)limit block:(void (^)(EbikeStoreResp *_EbikeStoreResp, NSError *error)) block {
     return [UserApi getEbikeStores:leftBottomLat leftBottomLng:leftBottomLng rightTopLat:rightTopLat rightTopLng:rightTopLng type:type page:page limit:limit block:block];
+}
+
++(NSURLSessionDataTask *)loginGetToken:(NSString*)account password:(NSString*)password block:(void (^)(GetAuthTokenResp *_getAuthTokenResp, NSError *error)) block{
+    return [UserApi loginGetToken:account password:password block:^(GetAuthTokenResp *_getAuthTokenResp, NSError *error) {
+        if (_getAuthTokenResp && _getAuthTokenResp.token) {
+            LoginedUser *loginedUser = [[LoginedUser alloc] init];
+            loginedUser.token = _getAuthTokenResp.token;
+            NSArray *authTokenArray = [_getAuthTokenResp.token componentsSeparatedByString:@"."];
+            if (authTokenArray && authTokenArray.count >= 2) {
+                NSString *base64Str = [authTokenArray objectAtIndex:1];
+                CocoaSecurityDecoder *decoder = [CocoaSecurityDecoder new];
+                NSString *json = [[NSString alloc] initWithData:[[NSData alloc] initWithBase64EncodedString:base64Str options:0] encoding:NSUTF8StringEncoding];
+            }
+            [RealmManager saveLoginedUser:loginedUser];
+            block(_getAuthTokenResp, error);
+        } else {
+            block(_getAuthTokenResp, error);
+        }
+    }];
 }
 
 @end
