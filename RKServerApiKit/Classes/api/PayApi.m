@@ -56,10 +56,10 @@
         if(block){
             if(JSON){
                 ErrorResp *mErrorResp = [ErrorResp mj_objectWithKeyValues:JSON];
-                if (mErrorResp) {
-                    block(nil, mErrorResp, nil);
+                if (mErrorResp && mErrorResp.error) {
+                    block(nil, mErrorResp, error);
                 } else {
-                    block(JSON, nil, nil);
+                    block(JSON, nil, error);
                 }
             }else{
                 block(nil, nil, error);

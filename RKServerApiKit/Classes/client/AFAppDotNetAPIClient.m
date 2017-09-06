@@ -188,7 +188,6 @@
         [request addValue:token forHTTPHeaderField:@"Authorization"];
     }
     NSURLSessionDataTask* dataTask =  [[AFAppDotNetAPIClient sharedClient] dataTaskWithRequest:request completionHandler:^(NSURLResponse *response, id responseObject, NSError *error) {
-        NSLog(@"cyytest statusCode:%ld",(long)((NSHTTPURLResponse*)response).statusCode);
         if (((NSHTTPURLResponse*)response).statusCode == HTTP_CODE_TOKE_OUT) {
             LoginedUser *_LoginedUser = [RealmManager queryLoginedUser];
             [UserService loginWithOpenPlatform:_LoginedUser.openType openId:_LoginedUser.openId nickName:_LoginedUser.nickname headimgUrl:_LoginedUser.headimgUrl gender:_LoginedUser.gender province:_LoginedUser.province city:_LoginedUser.city country:_LoginedUser.country block:^(GetAuthTokenResp *_getAuthTokenResp, NSError *error) {

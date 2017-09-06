@@ -161,4 +161,24 @@
  */
 +(NSURLSessionDataTask *)getOrder:(NSString*)orderId block:(void (^)(Order *mOrder, NSError *error)) block;
 
+/**
+ * 上电
+ */
++(NSURLSessionDataTask *)poweron:(NSString*)ueSn  block:(void (^)(NSURLResponse *response, ErrorResp *errorResp, NSError *error)) block;
+
+/**
+ * 断电
+ */
++(NSURLSessionDataTask *)poweroff:(NSString*)ueSn  block:(void (^)(NSURLResponse *response, ErrorResp *errorResp, NSError *error)) block;
+
+/**
+ * 寻车
+ */
++(NSURLSessionDataTask *)search:(NSString*)ueSn  block:(void (^)(NSURLResponse *response, ErrorResp *errorResp, NSError *error)) block;
+
+/**
+ * 开启坐桶
+ */
++(NSURLSessionDataTask *)openbox:(NSString*)ueSn  block:(void (^)(NSURLResponse *response, ErrorResp *errorResp, NSError *error)) block;
+
 @end

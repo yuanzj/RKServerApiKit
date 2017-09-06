@@ -471,4 +471,72 @@
     }];
 }
 
+/**
+ * 上电
+ */
++(NSURLSessionDataTask *)poweron:(NSString*)ueSn  block:(void (^)(NSURLResponse *response, ErrorResp *errorResp, NSError *error)) block{
+    NSString* url = [NSString stringWithFormat:@"/api-ebike/v3.1/ebikes/%@/power-on", ueSn];
+    return [[AFAppDotNetAPIClient sharedClient] GET:url parameters:nil completionHandler:^(NSURLResponse *response, id JSON, NSError *error) {
+        if(block){
+            if (JSON) {
+                ErrorResp *mErrorResp = [ErrorResp mj_objectWithKeyValues:JSON];
+                block(response, mErrorResp, error);
+            } else {
+                block(response, nil, error);
+            }
+        }
+    }];
+}
+
+/**
+ * 断电
+ */
++(NSURLSessionDataTask *)poweroff:(NSString*)ueSn  block:(void (^)(NSURLResponse *response, ErrorResp *errorResp, NSError *error)) block{
+    NSString* url = [NSString stringWithFormat:@"/api-ebike/v3.1/ebikes/%@/power-off", ueSn];
+    return [[AFAppDotNetAPIClient sharedClient] GET:url parameters:nil completionHandler:^(NSURLResponse *response, id JSON, NSError *error) {
+        if(block){
+            if (JSON) {
+                ErrorResp *mErrorResp = [ErrorResp mj_objectWithKeyValues:JSON];
+                block(response, mErrorResp, error);
+            } else {
+                block(response, nil, error);
+            }
+        }
+    }];
+}
+
+/**
+ * 寻车
+ */
++(NSURLSessionDataTask *)search:(NSString*)ueSn  block:(void (^)(NSURLResponse *response, ErrorResp *errorResp, NSError *error)) block{
+    NSString* url = [NSString stringWithFormat:@"/api-ebike/v3.1/ebikes/%@/search", ueSn];
+    return [[AFAppDotNetAPIClient sharedClient] GET:url parameters:nil completionHandler:^(NSURLResponse *response, id JSON, NSError *error) {
+        if(block){
+            if (JSON) {
+                ErrorResp *mErrorResp = [ErrorResp mj_objectWithKeyValues:JSON];
+                block(response, mErrorResp, error);
+            } else {
+                block(response, nil, error);
+            }
+        }
+    }];
+}
+
+/**
+ * 开启坐桶
+ */
++(NSURLSessionDataTask *)openbox:(NSString*)ueSn  block:(void (^)(NSURLResponse *response, ErrorResp *errorResp, NSError *error)) block{
+    NSString* url = [NSString stringWithFormat:@"/api-ebike/v3.1/ebikes/%@/open-box", ueSn];
+    return [[AFAppDotNetAPIClient sharedClient] GET:url parameters:nil completionHandler:^(NSURLResponse *response, id JSON, NSError *error) {
+        if(block){
+            if (JSON) {
+                ErrorResp *mErrorResp = [ErrorResp mj_objectWithKeyValues:JSON];
+                block(response, mErrorResp, error);
+            } else {
+                block(response, nil, error);
+            }
+        }
+    }];
+}
+
 @end

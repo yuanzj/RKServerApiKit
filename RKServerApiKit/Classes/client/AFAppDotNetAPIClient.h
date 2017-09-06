@@ -34,6 +34,12 @@ static NSString * const AFAppDotNetAPIBaseURLString = @"http://cjl3.rokyinfo.net
 static NSString * const AFAppDotNetAPIBaseURLString = @"http://cjl3.rokyinfo.net:8010/";
 #endif
 
+//#ifdef DEV_SERVER_MODEL
+//static NSString * const AFAppDotNetAPIBaseURLString = @"http://cjl3.rokyinfo.net:8010/";
+//#else
+//static NSString * const AFAppDotNetAPIBaseURLString = @"http://cjl3.rokyinfo.net:8010/";
+//#endif
+
 #define FIRM_FIELD @"firm"
 
 @interface AFAppDotNetAPIClient : AFURLSessionManager
