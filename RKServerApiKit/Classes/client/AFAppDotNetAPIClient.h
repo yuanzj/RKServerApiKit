@@ -22,10 +22,16 @@
 #import "User.h"
 #import <CocoaSecurity/CocoaSecurity.h>
 
+//#ifdef DEV_SERVER_MODEL
+//static NSString * const AFAppDotNetAPIBaseURLString = @"http://cjl3.rokyinfo.net:7190/";
+//#else
+//static NSString * const AFAppDotNetAPIBaseURLString = @"http://cjl3.rokyinfo.net:7190/";
+//#endif
+
 #ifdef DEV_SERVER_MODEL
-static NSString * const AFAppDotNetAPIBaseURLString = @"http://cjl3.rokyinfo.net:7190/";
+static NSString * const AFAppDotNetAPIBaseURLString = @"http://cjl3.rokyinfo.net:8010/";
 #else
-static NSString * const AFAppDotNetAPIBaseURLString = @"http://cjl3.rokyinfo.net:7190/";
+static NSString * const AFAppDotNetAPIBaseURLString = @"http://cjl3.rokyinfo.net:8010/";
 #endif
 
 //#ifdef DEV_SERVER_MODEL
