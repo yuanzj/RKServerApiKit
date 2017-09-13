@@ -27,6 +27,7 @@
 @property (copy, nonatomic) NSString* locationTime;
 @property (copy, nonatomic) NSString* modifyTime;
 @property (copy, nonatomic) NSString* roles;
+@property (copy, nonatomic) NSString* storeId;
 
 + (void)setUserInfo:(UserInfo *)_UserInfo;
 

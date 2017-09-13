@@ -21,6 +21,7 @@
 #import "GetAuthTokenResp.h"
 #import "ErrorResp.h"
 #import "EbikeStoreResp.h"
+#import "EbikeStore.h"
 
 @interface UserApi : NSObject
 
@@ -111,7 +112,7 @@
 /**
  * 用户实名
  */
-+(NSURLSessionDataTask *)modifyUserInfo:(NSString*)phoneNumber realName:(NSString*)realName idCard:(NSString*)idCard  block:(void (^)(NSURLResponse *response, ErrorResp *errorResp, NSError *error)) block;
++(NSURLSessionDataTask *)modifyUserInfo:(NSString*)phoneNumber realName:(NSString*)realName idCard:(NSString*)idCard storeId:(NSString*) storeId block:(void (^)(NSURLResponse *response, ErrorResp *errorResp, NSError *error)) block;
 
 #pragma mark -
 #pragma mark 更新用户性别
@@ -241,6 +242,15 @@
  */
 +(NSURLSessionDataTask *)getEbikeStores:(NSString*)leftBottomLat leftBottomLng:(NSString*)leftBottomLng rightTopLat:(NSString*)rightTopLat rightTopLng:(NSString*)rightTopLng type:(NSString*)type page:(NSString*)page limit:(NSString*)limit block:(void (^)(EbikeStoreResp *_EbikeStoreResp, NSError *error)) block;
 
+/**
+ * 通过城市获取网点接口
+ */
++(NSURLSessionDataTask *)getEbikeStoresByProvice:(NSString*)provice city:(NSString*)city page:(NSString*)page limit:(NSString*)limit block:(void (^)(EbikeStoreResp *_EbikeStoreResp, NSError *error)) block;
+
+/**
+ * 通过storeId获取网点接口
+ */
++(NSURLSessionDataTask *)getEbikeStoresByStoreId:(NSString*)storeId block:(void (^)(EbikeStore *_EbikeStore, NSError *error)) block;
 /**
  * 登陆获取token
  */

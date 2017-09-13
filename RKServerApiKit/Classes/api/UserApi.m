@@ -430,7 +430,7 @@
     }];
 }
 
-+(NSURLSessionDataTask *)modifyUserInfo:(NSString*)phoneNumber realName:(NSString*)realName idCard:(NSString*)idCard  block:(void (^)(NSURLResponse *response, ErrorResp *errorResp, NSError *error)) block{
++(NSURLSessionDataTask *)modifyUserInfo:(NSString*)phoneNumber realName:(NSString*)realName idCard:(NSString*)idCard  storeId:(NSString*) storeId block:(void (^)(NSURLResponse *response, ErrorResp *errorResp, NSError *error)) block{
     
     NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
     
@@ -442,6 +442,9 @@
     }
     if (idCard) {
         [params setObject:idCard forKey:@"identityNumber"];
+    }
+    if (storeId) {
+        [params setObject:storeId forKey:@"storeId"];
     }
     return [[AFAppDotNetAPIClient sharedClient] PUT:@"api-user/v3.1/users/update" parameters:params completionHandler:^(NSURLResponse *response, id JSON, NSError *error) {
         if(block){
@@ -467,6 +470,37 @@
                 }];
                 EbikeStoreResp *mEbikeStoreResp = [EbikeStoreResp mj_objectWithKeyValues:JSON];
                 block(mEbikeStoreResp, error);
+            } else {
+                block(nil, error);
+            }
+        }
+    }];
+}
+
++(NSURLSessionDataTask *)getEbikeStoresByProvice:(NSString*)provice city:(NSString*)city page:(NSString*)page limit:(NSString*)limit block:(void (^)(EbikeStoreResp *_EbikeStoreResp, NSError *error)) block {
+    return [[AFAppDotNetAPIClient sharedClient] GET:@"api-user/v3.1/ebikestores" parameters:@{@"province":provice, @"city":city, @"page":page, @"limit":limit} completionHandler:^(NSURLResponse *response, id JSON, NSError *error) {
+        if(block){
+            if (JSON) {
+                [EbikeStoreResp mj_setupObjectClassInArray:^NSDictionary *{
+                    return @{
+                             @"list" : [EbikeStore class]
+                             };
+                }];
+                EbikeStoreResp *mEbikeStoreResp = [EbikeStoreResp mj_objectWithKeyValues:JSON];
+                block(mEbikeStoreResp, error);
+            } else {
+                block(nil, error);
+            }
+        }
+    }];
+}
+
++(NSURLSessionDataTask *)getEbikeStoresByStoreId:(NSString*)storeId block:(void (^)(EbikeStore *mEbikeStore, NSError *error)) block {
+    return [[AFAppDotNetAPIClient sharedClient] GET:[NSString stringWithFormat:@"%@/%@", @"api-user/v3.1/ebikestores", storeId] parameters:nil completionHandler:^(NSURLResponse *response, id JSON, NSError *error) {
+        if(block){
+            if (JSON) {
+                EbikeStore *mEbikeStore = [EbikeStore mj_objectWithKeyValues:JSON];
+                block(mEbikeStore, error);
             } else {
                 block(nil, error);
             }
