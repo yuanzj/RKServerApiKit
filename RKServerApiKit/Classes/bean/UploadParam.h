@@ -27,5 +27,9 @@
 @property (copy, nonatomic) NSString* uploadTime;
 @property (copy, nonatomic) NSString* uploadReason;
 @property (copy, nonatomic) NSString* horizontalAccuracy;
+@property (copy, nonatomic) NSString* ccuSoftwareVersion;
+@property (copy, nonatomic) NSString* ccuHardwareVersion;
+@property (copy, nonatomic) NSString* pcuSoftwareVersion;
+@property (copy, nonatomic) NSString* pcuHardwareVersion;
 
 @end

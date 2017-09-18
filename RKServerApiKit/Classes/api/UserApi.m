@@ -394,7 +394,42 @@
 }
 
 +(NSURLSessionDataTask *)loginWithOpenPlatform:(NSString*)openType openId:(NSString*)openId nickName:(NSString*)nickname headimgUrl:(NSString*)headimgUrl gender:(NSString*)gender province:(NSString*)province city:(NSString*)city country:(NSString*)country block:(void (^)(GetAuthTokenResp *_getAuthTokenResp, NSError *error)) block {
-    return [[AFAppDotNetAPIClient sharedClient] POST:@"auth/open_platform" parameters:@{@"openType":openType, @"openId":openId, @"nickname":nickname, @"headimgUrl":headimgUrl, @"gender":gender, @"province":province, @"city":city, @"country":country}  completionHandler:^(NSURLResponse *response, id JSON, NSError *error) {
+    
+    NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
+    
+    if (openType) {
+        [params setObject:openType forKey:@"openType"];
+    }
+    
+    if (openId) {
+        [params setObject:openId forKey:@"openId"];
+    }
+    
+    if (nickname) {
+        [params setObject:nickname forKey:@"nickname"];
+    }
+    
+    if (headimgUrl) {
+        [params setObject:headimgUrl forKey:@"headimgUrl"];
+    }
+    
+    if (gender) {
+        [params setObject:gender forKey:@"gender"];
+    }
+    
+    if (province) {
+        [params setObject:province forKey:@"province"];
+    }
+    
+    if (city) {
+        [params setObject:city forKey:@"city"];
+    }
+    
+    if (country) {
+        [params setObject:country forKey:@"country"];
+    }
+    
+    return [[AFAppDotNetAPIClient sharedClient] POST:@"auth/open_platform" parameters:params completionHandler:^(NSURLResponse *response, id JSON, NSError *error) {
         if(block){
             if(JSON){
                 GetAuthTokenResp *mGetAuthTokenResp = [GetAuthTokenResp mj_objectWithKeyValues:JSON];
@@ -477,8 +512,27 @@
     }];
 }
 
-+(NSURLSessionDataTask *)getEbikeStoresByProvice:(NSString*)provice city:(NSString*)city page:(NSString*)page limit:(NSString*)limit block:(void (^)(EbikeStoreResp *_EbikeStoreResp, NSError *error)) block {
-    return [[AFAppDotNetAPIClient sharedClient] GET:@"api-user/v3.1/ebikestores" parameters:@{@"province":provice, @"city":city, @"page":page, @"limit":limit} completionHandler:^(NSURLResponse *response, id JSON, NSError *error) {
++(NSURLSessionDataTask *)getEbikeStoresByProvice:(NSString*)province city:(NSString*)city page:(NSString*)page limit:(NSString*)limit block:(void (^)(EbikeStoreResp *_EbikeStoreResp, NSError *error)) block {
+    
+    NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
+    
+    if (province) {
+        [params setObject:province forKey:@"province"];
+    }
+    
+    if (city) {
+        [params setObject:city forKey:@"city"];
+    }
+    
+    if (page) {
+        [params setObject:page forKey:@"page"];
+    }
+    
+    if (limit) {
+        [params setObject:limit forKey:@"limit"];
+    }
+    
+    return [[AFAppDotNetAPIClient sharedClient] GET:@"api-user/v3.1/ebikestores" parameters:params completionHandler:^(NSURLResponse *response, id JSON, NSError *error) {
         if(block){
             if (JSON) {
                 [EbikeStoreResp mj_setupObjectClassInArray:^NSDictionary *{
