@@ -539,4 +539,38 @@
     }];
 }
 
+/**
+ * 换车
+ */
++(NSURLSessionDataTask *)replaceEbike:(NSString*)ueSn orderId:(NSString*)orderId safeCode:(NSString*)safeCode block:(void (^)(NSURLResponse *response, ErrorResp *errorResp, NSError *error)) block {
+    NSString* url = [NSString stringWithFormat:@"api-order/v3.1/orders/%@/replace/%@", orderId, ueSn];
+    return [[AFAppDotNetAPIClient sharedClient] PUT:url parameters:@{@"safeCode":(safeCode ? safeCode : @"")} completionHandler:^(NSURLResponse *response, id JSON, NSError *error) {
+        if(block){
+            if (JSON) {
+                ErrorResp *mErrorResp = [ErrorResp mj_objectWithKeyValues:JSON];
+                block(response, mErrorResp, error);
+            } else {
+                block(response, nil, error);
+            }
+        }
+    }];
+}
+
+/**
+ * 还车
+ */
++(NSURLSessionDataTask *)endEbike:(NSString*)orderId safeCode:(NSString*)safeCode block:(void (^)(NSURLResponse *response, ErrorResp *errorResp, NSError *error)) block {
+    NSString* url = [NSString stringWithFormat:@"api-order/v3.1/orders/%@/end", orderId];
+    return [[AFAppDotNetAPIClient sharedClient] PUT:url parameters:@{@"safeCode":(safeCode ? safeCode : @"")} completionHandler:^(NSURLResponse *response, id JSON, NSError *error) {
+        if(block){
+            if (JSON) {
+                ErrorResp *mErrorResp = [ErrorResp mj_objectWithKeyValues:JSON];
+                block(response, mErrorResp, error);
+            } else {
+                block(response, nil, error);
+            }
+        }
+    }];
+}
+
 @end

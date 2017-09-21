@@ -268,4 +268,18 @@
     return [UeApi openbox:ueSn block:block];
 }
 
+/**
+ * 换车
+ */
++(NSURLSessionDataTask *)replaceEbike:(NSString*)ueSn orderId:(NSString*)orderId safeCode:(NSString*)safeCode block:(void (^)(NSURLResponse *response, ErrorResp *errorResp, NSError *error)) block {
+    return [UeApi replaceEbike:ueSn orderId:orderId safeCode:safeCode block:block];
+}
+
+/**
+ * 还车
+ */
++(NSURLSessionDataTask *)endEbike:(NSString*)orderId safeCode:(NSString*)safeCode block:(void (^)(NSURLResponse *response, ErrorResp *errorResp, NSError *error)) block {
+    return [UeApi endEbike:orderId safeCode:safeCode block:block];
+}
+
 @end

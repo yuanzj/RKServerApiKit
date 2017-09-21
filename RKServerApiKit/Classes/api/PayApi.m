@@ -29,7 +29,29 @@
 }
 
 +(NSURLSessionDataTask *)getPayGoods:(NSString*)sort block:(void (^)(PayGoodResp *_PayGoodResp, NSError *error)) block {
-    return [[AFAppDotNetAPIClient sharedClient] GET:@"api-pay/v3.1/pay-goods" parameters:@{@"sort":(sort ? sort : @"")} completionHandler:^(NSURLResponse *response, id JSON, NSError *error) {
+    return [[AFAppDotNetAPIClient sharedClient] GET:@"api-order/v3.1/paymoneys" parameters:@{@"sort":(sort ? sort : @"")} completionHandler:^(NSURLResponse *response, id JSON, NSError *error) {
+        if(block){
+            if(JSON){
+                [PayGoodResp mj_setupObjectClassInArray:^NSDictionary *{
+                    return @{
+                             @"list" : [PayGood class]
+                             };
+                }];
+                PayGoodResp *mPayGoodResp = [PayGoodResp mj_objectWithKeyValues:JSON];
+                if(mPayGoodResp){
+                    block(mPayGoodResp, nil);
+                } else {
+                    block(nil, error);
+                }
+            } else {
+                block(nil, error);
+            }
+        }
+    }];
+}
+
++(NSURLSessionDataTask *)getDeposit:(NSString*)sort block:(void (^)(PayGoodResp *_PayGoodResp, NSError *error)) block {
+    return [[AFAppDotNetAPIClient sharedClient] GET:@"/api-pay/v3.1/pay-goods" parameters:@{@"sort":(sort ? sort : @"")} completionHandler:^(NSURLResponse *response, id JSON, NSError *error) {
         if(block){
             if(JSON){
                 [PayGoodResp mj_setupObjectClassInArray:^NSDictionary *{

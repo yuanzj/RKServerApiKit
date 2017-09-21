@@ -24,5 +24,7 @@
 @property (assign, nonatomic) int rentCount;
 @property (assign, nonatomic) int totalRentCount;
 @property (strong, nonatomic) NSString* linkman;
+@property (strong, nonatomic) NSString* province;
+@property (strong, nonatomic) NSString* city;
 
 @end
