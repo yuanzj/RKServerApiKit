@@ -166,8 +166,12 @@ NSString * const USER = @"USER";
     return [UserApi unBindDeviceWithDeviceId:deviceId block:block];
 }
 
-+(NSURLSessionDataTask *)modifyUserInfo:(NSString*)phoneNumber realName:(NSString*)realName idCard:(NSString*)idCard storeId:(NSString*) storeId block:(void (^)(NSURLResponse *response, ErrorResp *errorResp, NSError *error)) block{
-    return [UserApi modifyUserInfo:phoneNumber realName:realName idCard:idCard storeId:storeId block:block];
++(NSURLSessionDataTask *)modifyUserInfo:(NSString*)phoneNumber smsVerifyCode:(NSString*)smsVerifyCode realName:(NSString*)realName idCard:(NSString*)idCard storeId:(NSString*) storeId block:(void (^)(NSURLResponse *response, ErrorResp *errorResp, NSError *error)) block{
+    return [UserApi modifyUserInfo:phoneNumber smsVerifyCode:smsVerifyCode realName:realName idCard:idCard storeId:storeId block:block];
+}
+
++(NSURLSessionDataTask *)modifyUserInfoByToken:(NSString*)phoneNumber smsVerifyCode:(NSString*)smsVerifyCode realName:(NSString*)realName idCard:(NSString*)idCard storeId:(NSString*) storeId token:(NSString*)tokenString block:(void (^)(NSURLResponse *response, ErrorResp *errorResp, NSError *error)) block {
+    return [UserApi modifyUserInfoByToken:phoneNumber smsVerifyCode:smsVerifyCode realName:realName idCard:idCard storeId:storeId token:(NSString*)tokenString block:block];
 }
 
 +(NSURLSessionDataTask *)getTokenWithBlock:(void (^)(TokenResponse *_tokenResponse, NSError *error)) block{
@@ -186,7 +190,13 @@ NSString * const USER = @"USER";
 
 +(NSURLSessionDataTask *)loginWithOpenPlatform:(NSString*)openType openId:(NSString*)openId nickName:(NSString*)nickname headimgUrl:(NSString*)headimgUrl gender:(NSString*)gender province:(NSString*)province city:(NSString*)city country:(NSString*)country block:(void (^)(GetAuthTokenResp *_getAuthTokenResp, NSError *error)) block {
     return [UserApi loginWithOpenPlatform:openType openId:openId nickName:nickname headimgUrl:headimgUrl gender:gender province:province city:city country:country block:^(GetAuthTokenResp *_getAuthTokenResp, NSError *error) {
-        if (_getAuthTokenResp && _getAuthTokenResp.token) {
+        
+        if (_getAuthTokenResp && _getAuthTokenResp.status && [@"INACTIVE" isEqualToString:_getAuthTokenResp.status]) {
+            NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
+            [params setObject:@"INACTIVE" forKey:@"status"];
+            [params setObject:_getAuthTokenResp.token forKey:@"tokenString"];
+            block(nil, [NSError errorWithDomain:@"submitCommand:Failure" code:0 userInfo:params]);
+        } else if (_getAuthTokenResp && _getAuthTokenResp.token) {
             LoginedUser *loginedUser = [[LoginedUser alloc] init];
             loginedUser.nickname = nickname;
             loginedUser.openType = openType;
@@ -244,6 +254,14 @@ NSString * const USER = @"USER";
             block(_getAuthTokenResp, error);
         }
     }];
+}
+
++(NSURLSessionDataTask *)verifyCode:(NSString*)mobile block:(void (^)(NSURLResponse *response, ErrorResp *errorResp, NSError *error)) block {
+    return [UserApi verifyCode:mobile block:block];
+}
+
++(NSURLSessionDataTask *)verifyCodeByToken:(NSString*)tokenString mobile:(NSString*)mobile block:(void (^)(NSURLResponse *response, ErrorResp *errorResp, NSError *error)) block {
+    return [UserApi verifyCodeByToken:tokenString mobile:mobile block:block];
 }
 
 @end

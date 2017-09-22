@@ -18,6 +18,7 @@
 
 @interface GetAuthTokenResp : NSObject
 
+@property (copy, nonatomic) NSString* status;
 @property (copy, nonatomic) NSString* token;
 @property(strong, nonatomic) GetAuthTokenError* error;
 

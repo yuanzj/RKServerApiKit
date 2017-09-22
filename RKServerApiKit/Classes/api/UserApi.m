@@ -465,12 +465,15 @@
     }];
 }
 
-+(NSURLSessionDataTask *)modifyUserInfo:(NSString*)phoneNumber realName:(NSString*)realName idCard:(NSString*)idCard  storeId:(NSString*) storeId block:(void (^)(NSURLResponse *response, ErrorResp *errorResp, NSError *error)) block{
++(NSURLSessionDataTask *)modifyUserInfo:(NSString*)phoneNumber smsVerifyCode:(NSString*)smsVerifyCode realName:(NSString*)realName idCard:(NSString*)idCard storeId:(NSString*) storeId block:(void (^)(NSURLResponse *response, ErrorResp *errorResp, NSError *error)) block {
     
     NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
     
     if (phoneNumber) {
         [params setObject:phoneNumber forKey:@"phoneNumber"];
+    }
+    if (smsVerifyCode) {
+        [params setObject:smsVerifyCode forKey:@"smsVerifyCode"];
     }
     if (realName) {
         [params setObject:realName forKey:@"realname"];
@@ -482,6 +485,37 @@
         [params setObject:storeId forKey:@"storeId"];
     }
     return [[AFAppDotNetAPIClient sharedClient] PUT:@"api-user/v3.1/users/update" parameters:params completionHandler:^(NSURLResponse *response, id JSON, NSError *error) {
+        if(block){
+            if (JSON) {
+                ErrorResp *mErrorResp = [ErrorResp mj_objectWithKeyValues:JSON];
+                block(response, mErrorResp, error);
+            } else {
+                block(response, nil, error);
+            }
+        }
+    }];
+}
+
++(NSURLSessionDataTask *)modifyUserInfoByToken:(NSString*)phoneNumber smsVerifyCode:(NSString*)smsVerifyCode realName:(NSString*)realName idCard:(NSString*)idCard storeId:(NSString*) storeId token:(NSString*)tokenString block:(void (^)(NSURLResponse *response, ErrorResp *errorResp, NSError *error)) block {
+    
+    NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
+    
+    if (phoneNumber) {
+        [params setObject:phoneNumber forKey:@"phoneNumber"];
+    }
+    if (smsVerifyCode) {
+        [params setObject:smsVerifyCode forKey:@"smsVerifyCode"];
+    }
+    if (realName) {
+        [params setObject:realName forKey:@"realname"];
+    }
+    if (idCard) {
+        [params setObject:idCard forKey:@"identityNumber"];
+    }
+    if (storeId) {
+        [params setObject:storeId forKey:@"storeId"];
+    }
+    return [[AFAppDotNetAPIClient sharedClient] PUT_BY_TOKEN:@"api-user/v3.1/users/update" token:(NSString *)tokenString parameters:params completionHandler:^(NSURLResponse *response, id JSON, NSError *error) {
         if(block){
             if (JSON) {
                 ErrorResp *mErrorResp = [ErrorResp mj_objectWithKeyValues:JSON];
@@ -573,6 +607,44 @@
             }
         }
     }];
+}
+
++(NSURLSessionDataTask *)verifyCode:(NSString*)mobile block:(void (^)(NSURLResponse *response, ErrorResp *errorResp, NSError *error)) block {
+    
+    NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
+    if (mobile) {
+        [params setObject:mobile forKey:@"mobile"];
+    }
+    return [[AFAppDotNetAPIClient sharedClient] GET:@"api-user/v3.1/codes/sms/verify-code" parameters:params completionHandler:^(NSURLResponse *response, id JSON, NSError *error) {
+        if(block){
+            if (JSON) {
+                ErrorResp *mErrorResp = [ErrorResp mj_objectWithKeyValues:JSON];
+                block(response, mErrorResp, error);
+            } else {
+                block(response, nil, error);
+            }
+        }
+    }];
+    
+}
+
++(NSURLSessionDataTask *)verifyCodeByToken:(NSString*)tokenString mobile:(NSString*)mobile block:(void (^)(NSURLResponse *response, ErrorResp *errorResp, NSError *error)) block {
+    
+    NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
+    if (mobile) {
+        [params setObject:mobile forKey:@"mobile"];
+    }
+    return [[AFAppDotNetAPIClient sharedClient] GET_BY_TOKEN:@"api-user/v3.1/codes/sms/verify-code" token:tokenString parameters:params completionHandler:^(NSURLResponse *response, id JSON, NSError *error) {
+        if(block){
+            if (JSON) {
+                ErrorResp *mErrorResp = [ErrorResp mj_objectWithKeyValues:JSON];
+                block(response, mErrorResp, error);
+            } else {
+                block(response, nil, error);
+            }
+        }
+    }];
+    
 }
 
 @end
