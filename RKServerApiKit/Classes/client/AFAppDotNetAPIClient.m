@@ -104,7 +104,7 @@
             LoginedUser *_LoginedUser = [RealmManager queryLoginedUser];
             [UserService loginWithOpenPlatform:_LoginedUser.openType openId:_LoginedUser.openId nickName:_LoginedUser.nickname headimgUrl:_LoginedUser.headimgUrl gender:_LoginedUser.gender province:_LoginedUser.province city:_LoginedUser.city country:_LoginedUser.country block:^(GetAuthTokenResp *_getAuthTokenResp, NSError *error) {
                 if (_getAuthTokenResp && _getAuthTokenResp.token) {
-                    [weakClient GET:URLString parameters:parameters completionHandler:completionHandler];
+                    [weakClient POST:URLString parameters:parameters completionHandler:completionHandler];
                 } else {
                     completionHandler(response, responseObject, error);
                 }
@@ -148,7 +148,7 @@
             LoginedUser *_LoginedUser = [RealmManager queryLoginedUser];
             [UserService loginWithOpenPlatform:_LoginedUser.openType openId:_LoginedUser.openId nickName:_LoginedUser.nickname headimgUrl:_LoginedUser.headimgUrl gender:_LoginedUser.gender province:_LoginedUser.province city:_LoginedUser.city country:_LoginedUser.country block:^(GetAuthTokenResp *_getAuthTokenResp, NSError *error) {
                 if (_getAuthTokenResp && _getAuthTokenResp.token) {
-                    [weakClient GET:URLString parameters:parameters completionHandler:completionHandler];
+                    [weakClient PUT:URLString parameters:parameters completionHandler:completionHandler];
                 } else {
                     completionHandler(response, responseObject, error);
                 }
@@ -156,6 +156,53 @@
         }else{
             completionHandler(response, responseObject, error);
         }
+    }];
+    [dataTask resume];
+    return dataTask;
+}
+
+- (NSURLSessionDataTask*)GET_BY_TOKEN:(NSString *)URLString
+                       token:(NSString *)tokenString
+                  parameters:(id)parameters
+           completionHandler:(void (^)(NSURLResponse *response, id responseObject, NSError *error))completionHandler{
+    
+    //完整URL
+    NSString* URL = [AFAppDotNetAPIBaseURLString stringByAppendingString:URLString];
+    
+    //parameters转换成NSMutableDictionary
+    NSMutableDictionary *paramsDic = [NSMutableDictionary dictionaryWithDictionary:parameters];
+    
+    NSMutableURLRequest *request = [[AFHTTPRequestSerializer serializer] requestWithMethod:@"GET" URLString:URL parameters:paramsDic error:nil];
+    CocoaSecurityEncoder *encoder = [CocoaSecurityEncoder new];
+    NSString *baseString = [encoder base64:[self.firmValue dataUsingEncoding:NSUTF8StringEncoding]];
+    //    NSString *hexBaseString = [encoder hex:[baseString dataUsingEncoding:NSUTF8StringEncoding] useLower:NO];
+    [request addValue:baseString forHTTPHeaderField:FIRM_FIELD];
+    [request addValue:tokenString forHTTPHeaderField:@"Authorization"];
+    
+    NSURLSessionDataTask* dataTask =  [[AFAppDotNetAPIClient sharedClient] dataTaskWithRequest:request completionHandler:^(NSURLResponse *response, id responseObject, NSError *error) {
+        completionHandler(response, responseObject, error);
+    }];
+    [dataTask resume];
+    return dataTask;
+}
+
+- (NSURLSessionDataTask*)PUT_BY_TOKEN:(NSString *)URLString
+                       token:(NSString *)tokenString
+                  parameters:(id)parameters
+           completionHandler:(void (^)(NSURLResponse *response, id responseObject, NSError *error))completionHandler{
+    
+    NSString* URL = [AFAppDotNetAPIBaseURLString stringByAppendingString:URLString];
+    
+    NSMutableDictionary *paramsDic = [NSMutableDictionary dictionaryWithDictionary:parameters];
+    
+    NSMutableURLRequest *request = [[AFHTTPRequestSerializer serializer] requestWithMethod:@"PUT" URLString:URL parameters:paramsDic error:nil];
+    CocoaSecurityEncoder *encoder = [CocoaSecurityEncoder new];
+    NSString *baseString = [encoder base64:[self.firmValue dataUsingEncoding:NSUTF8StringEncoding]];
+    [request addValue:baseString forHTTPHeaderField:FIRM_FIELD];
+    [request addValue:tokenString forHTTPHeaderField:@"Authorization"];
+    
+    NSURLSessionDataTask* dataTask =  [[AFAppDotNetAPIClient sharedClient] dataTaskWithRequest:request completionHandler:^(NSURLResponse *response, id responseObject, NSError *error) {
+        completionHandler(response, responseObject, error);
     }];
     [dataTask resume];
     return dataTask;
@@ -192,7 +239,7 @@
             LoginedUser *_LoginedUser = [RealmManager queryLoginedUser];
             [UserService loginWithOpenPlatform:_LoginedUser.openType openId:_LoginedUser.openId nickName:_LoginedUser.nickname headimgUrl:_LoginedUser.headimgUrl gender:_LoginedUser.gender province:_LoginedUser.province city:_LoginedUser.city country:_LoginedUser.country block:^(GetAuthTokenResp *_getAuthTokenResp, NSError *error) {
                 if (_getAuthTokenResp && _getAuthTokenResp.token) {
-                    [weakClient GET:URLString parameters:parameters completionHandler:completionHandler];
+                    [weakClient POST_JSON:URLString parameters:parameters completionHandler:completionHandler];
                 } else {
                     completionHandler(response, responseObject, error);
                 }

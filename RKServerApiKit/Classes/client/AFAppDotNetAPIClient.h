@@ -54,6 +54,16 @@ static NSString * const AFAppDotNetAPIBaseURLString = @"http://cjl3.rokyinfo.net
                   parameters:(id)parameters
            completionHandler:(void (^)(NSURLResponse *response, id responseObject, NSError *error))completionHandler;
 
+- (NSURLSessionDataTask*)GET_BY_TOKEN:(NSString *)URLString
+                                token:(NSString *)tokenString
+                           parameters:(id)parameters
+                    completionHandler:(void (^)(NSURLResponse *response, id responseObject, NSError *error))completionHandler;
+
+- (NSURLSessionDataTask*)PUT_BY_TOKEN:(NSString *)URLString
+                                token:(NSString *)tokenString
+                           parameters:(id)parameters
+                    completionHandler:(void (^)(NSURLResponse *response, id responseObject, NSError *error))completionHandler;
+
 - (NSURLSessionDataTask*)POST_JSON:(NSString *)URLString
                         parameters:(id)parameters
                  completionHandler:(void (^)(NSURLResponse *response, id responseObject, NSError *error))completionHandler;
