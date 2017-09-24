@@ -451,6 +451,19 @@
     }];
 }
 
++(NSURLSessionDataTask *)addUserEbikeWithUeSn:(NSString*)ueSn addModel:(NSString*)addModel block:(void (^)(NSURLResponse *response, ErrorResp *errorResp, NSError *error)) block{
+    return [[AFAppDotNetAPIClient sharedClient] POST:@"api-ebike/v3.1/relations/add" parameters:@{@"ueSn":(ueSn ? ueSn : @""), @"addModel":(addModel ? addModel : @"")} completionHandler:^(NSURLResponse *response, id JSON, NSError *error) {
+        if(block){
+            if (JSON) {
+                ErrorResp *mErrorResp = [ErrorResp mj_objectWithKeyValues:JSON];
+                block(response, mErrorResp, error);
+            } else {
+                block(response, nil, error);
+            }
+        }
+    }];
+}
+
 /**
  * 获取订单
  */

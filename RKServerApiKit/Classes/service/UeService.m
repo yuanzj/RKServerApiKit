@@ -233,6 +233,10 @@
     return [UeApi addEbikeWithUeSn:ueSn addModel:addModel block:block];
 }
 
++(NSURLSessionDataTask *)addUserEbikeWithUeSn:(NSString*)ueSn addModel:(NSString*)addModel block:(void (^)(NSURLResponse *response, ErrorResp *errorResp, NSError *error)) block{
+    return [UeApi addUserEbikeWithUeSn:ueSn addModel:addModel block:block];
+}
+
 /**
  * 获取订单
  */

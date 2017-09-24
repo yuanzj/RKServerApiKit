@@ -129,9 +129,14 @@
 //新增重构接口
 
 /**
- * 添加车辆
+ * 添加租用车辆
  */
 +(NSURLSessionDataTask *)addEbikeWithUeSn:(NSString*)ueSn addModel:(NSString*)addModel block:(void (^)(NSURLResponse *response, ErrorResp *errorResp, NSError *error)) block;
+
+/**
+ * 添加购买车辆
+ */
++(NSURLSessionDataTask *)addUserEbikeWithUeSn:(NSString*)ueSn addModel:(NSString*)addModel block:(void (^)(NSURLResponse *response, ErrorResp *errorResp, NSError *error)) block;
 
 /**
  * 获取订单

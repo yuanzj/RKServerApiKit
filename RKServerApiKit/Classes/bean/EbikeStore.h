@@ -17,7 +17,7 @@
 @property (assign, nonatomic) double lat;
 @property (assign, nonatomic) double lon;
 @property (strong, nonatomic) NSString* brands;
-//1:骑士之家 2：美团 3：饿了么
+//1:骑多多 2：美团 3：饿了么
 @property (assign, nonatomic) int type;
 @property (strong, nonatomic) NSString* status;
 @property (strong, nonatomic) NSString* userId;
