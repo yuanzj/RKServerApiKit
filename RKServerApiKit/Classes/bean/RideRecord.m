@@ -26,7 +26,7 @@
     return [@{@"day":_day,
               @"startTime":_startTime,
               @"endTime":_endTime,
-              @"distance":@(_distance),
+              @"mileage":@(_mileage),
               @"totalTime":_totalTime,
               @"startLon":_startLon,
               @"startLat":_startLat,
@@ -41,7 +41,7 @@
 @implementation RideRecordResponse
 
 -(NSString*)description{
-    return [NSString stringWithFormat:@"%@ RideRecordList: %@",[super description], [_data5 description]];
+    return [NSString stringWithFormat:@"%@ RideRecordList: %@",[super description], [_list description]];
 }
 
 @end

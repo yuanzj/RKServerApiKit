@@ -78,7 +78,7 @@
 /**
  * 行车记录概要统计
  */
-+(NSURLSessionDataTask *)getRideRecord:(NSString*)ueSn block:(void (^)(RideRecordResponse *_RideSpeedStatistic, NSError *error)) block;
++(NSURLSessionDataTask *)getRideRecord:(NSString*)startTime page:(NSString*)page limit:(NSString*)limit sort:(NSString*)sort block:(void (^)(RideRecordResponse *_RideSpeedStatistic, NSError *error)) block;
 
 /**
  * 获取单词骑行详细信息
@@ -152,9 +152,14 @@
 //新增重构接口
 
 /**
- * 添加车辆
+ * 添加租用车辆
  */
 +(NSURLSessionDataTask *)addEbikeWithUeSn:(NSString*)ueSn addModel:(NSString*)addModel block:(void (^)(NSURLResponse *response, ErrorResp *errorResp, NSError *error)) block;
+
+/**
+ * 添加购买车辆
+ */
++(NSURLSessionDataTask *)addUserEbikeWithUeSn:(NSString*)ueSn addModel:(NSString*)addModel block:(void (^)(NSURLResponse *response, ErrorResp *errorResp, NSError *error)) block;
 
 /**
  * 获取订单
@@ -175,6 +180,11 @@
  * 寻车
  */
 +(NSURLSessionDataTask *)search:(NSString*)ueSn  block:(void (^)(NSURLResponse *response, ErrorResp *errorResp, NSError *error)) block;
+
+/**
+ * 重启ue
+ */
++(NSURLSessionDataTask *)restartUe:(NSString*)ueSn  block:(void (^)(NSURLResponse *response, ErrorResp *errorResp, NSError *error)) block;
 
 /**
  * 开启坐桶

@@ -130,12 +130,12 @@
 /**
  * 行车记录概要统计
  */
-+(NSURLSessionDataTask *)getRideRecord:(NSString*)ueSn block:(void (^)(RideRecordResponse *_RideRecordResponse, NSError *error)) block{
-    return [UeApi getRideRecord:ueSn block:^(RideRecordResponse *_RideRecordResponse, NSError *error){
++(NSURLSessionDataTask *)getRideRecord:(NSString*)startTime page:(NSString*)page limit:(NSString*)limit sort:(NSString*)sort block:(void (^)(RideRecordResponse *_RideSpeedStatistic, NSError *error)) block{
+    return [UeApi getRideRecord:startTime page:page limit:limit sort:sort block:^(RideRecordResponse *_RideRecordResponse, NSError *error) {
         if (_RideRecordResponse) {
             if(_RideRecordResponse.state == RKSAPIResponseSuccess){
                 
-                NSArray* data = _RideRecordResponse.data5;
+                NSArray* data = _RideRecordResponse.list;
                 if (data && data.count > 0) {
                     [RealmManager clearRideRecordList];
                     [RealmManager saveRideRecordList:data];
@@ -233,6 +233,10 @@
     return [UeApi addEbikeWithUeSn:ueSn addModel:addModel block:block];
 }
 
++(NSURLSessionDataTask *)addUserEbikeWithUeSn:(NSString*)ueSn addModel:(NSString*)addModel block:(void (^)(NSURLResponse *response, ErrorResp *errorResp, NSError *error)) block{
+    return [UeApi addUserEbikeWithUeSn:ueSn addModel:addModel block:block];
+}
+
 /**
  * 获取订单
  */
@@ -266,6 +270,10 @@
  */
 +(NSURLSessionDataTask *)openbox:(NSString*)ueSn  block:(void (^)(NSURLResponse *response, ErrorResp *errorResp, NSError *error)) block {
     return [UeApi openbox:ueSn block:block];
+}
+
++(NSURLSessionDataTask *)restartUe:(NSString*)ueSn block:(void (^)(NSURLResponse *response, ErrorResp *errorResp, NSError *error)) block {
+    return [UeApi restartUe:ueSn block:block];
 }
 
 /**

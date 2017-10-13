@@ -176,15 +176,30 @@
 /**
  * 行车记录概要统计
  */
-+(NSURLSessionDataTask *)getRideRecord:(NSString*)ueSn block:(void (^)(RideRecordResponse *_RideSpeedStatistic, NSError *error)) block{
++(NSURLSessionDataTask *)getRideRecord:(NSString*)startTime page:(NSString*)page limit:(NSString*)limit sort:(NSString*)sort block:(void (^)(RideRecordResponse *_RideSpeedStatistic, NSError *error)) block{
+    
+    NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
+    
+    if (startTime) {
+        [params setObject:startTime forKey:@"startTime"];
+    }
+    if (page) {
+        [params setObject:page forKey:@"page"];
+    }
+    if (limit) {
+        [params setObject:limit forKey:@"limit"];
+    }
+    if (sort) {
+        [params setObject:sort forKey:@"sort"];
+    }
 
-    return [[AFAppDotNetAPIClient sharedClient] GET:@"ue/ride_record_statistic" parameters:@{@"ueSn":(ueSn ? ueSn : @"")} completionHandler:^(NSURLResponse *response, id JSON, NSError *error) {
+    return [[AFAppDotNetAPIClient sharedClient] GET:@"/api-analyze/v3.1/riderecords" parameters:params completionHandler:^(NSURLResponse *response, id JSON, NSError *error) {
         if(block){
             if(JSON){
                 // Tell MJExtension what type model will be contained in data and accessoryUEs.
                 [RideRecordResponse mj_setupObjectClassInArray:^NSDictionary *{
                     return @{
-                             @"data5" : [RideRecord class]
+                             @"list" : [RideRecord class]
                              };
                 }];
                 
@@ -451,6 +466,19 @@
     }];
 }
 
++(NSURLSessionDataTask *)addUserEbikeWithUeSn:(NSString*)ueSn addModel:(NSString*)addModel block:(void (^)(NSURLResponse *response, ErrorResp *errorResp, NSError *error)) block{
+    return [[AFAppDotNetAPIClient sharedClient] POST:@"api-ebike/v3.1/relations/add" parameters:@{@"ueSn":(ueSn ? ueSn : @""), @"addModel":(addModel ? addModel : @"")} completionHandler:^(NSURLResponse *response, id JSON, NSError *error) {
+        if(block){
+            if (JSON) {
+                ErrorResp *mErrorResp = [ErrorResp mj_objectWithKeyValues:JSON];
+                block(response, mErrorResp, error);
+            } else {
+                block(response, nil, error);
+            }
+        }
+    }];
+}
+
 /**
  * 获取订单
  */
@@ -527,6 +555,20 @@
  */
 +(NSURLSessionDataTask *)openbox:(NSString*)ueSn  block:(void (^)(NSURLResponse *response, ErrorResp *errorResp, NSError *error)) block{
     NSString* url = [NSString stringWithFormat:@"/api-ebike/v3.1/ebikes/%@/open-box", ueSn];
+    return [[AFAppDotNetAPIClient sharedClient] GET:url parameters:nil completionHandler:^(NSURLResponse *response, id JSON, NSError *error) {
+        if(block){
+            if (JSON) {
+                ErrorResp *mErrorResp = [ErrorResp mj_objectWithKeyValues:JSON];
+                block(response, mErrorResp, error);
+            } else {
+                block(response, nil, error);
+            }
+        }
+    }];
+}
+
++(NSURLSessionDataTask *)restartUe:(NSString*)ueSn block:(void (^)(NSURLResponse *response, ErrorResp *errorResp, NSError *error)) block {
+    NSString* url = [NSString stringWithFormat:@"/api-ebike/v3.1/ebikes/%@/restart", ueSn];
     return [[AFAppDotNetAPIClient sharedClient] GET:url parameters:nil completionHandler:^(NSURLResponse *response, id JSON, NSError *error) {
         if(block){
             if (JSON) {
