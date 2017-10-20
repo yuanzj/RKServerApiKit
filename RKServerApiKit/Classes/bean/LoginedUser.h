@@ -26,4 +26,7 @@
 @property (copy, nonatomic) NSString* roles;
 @property (copy, nonatomic) NSString* sub;
 
+@property (copy, nonatomic) NSString* phoneNum;
+@property (copy, nonatomic) NSString* password;
+
 @end

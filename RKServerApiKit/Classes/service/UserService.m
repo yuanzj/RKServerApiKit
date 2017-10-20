@@ -174,6 +174,10 @@ NSString * const USER = @"USER";
     return [UserApi modifyUserInfoByToken:phoneNumber smsVerifyCode:smsVerifyCode realName:realName idCard:idCard storeId:storeId token:(NSString*)tokenString block:block];
 }
 
++(NSURLSessionDataTask *)updateUserPsw:(NSString*)password block:(void (^)(NSURLResponse *response, ErrorResp *errorResp, NSError *error)) block {
+    return [UserApi updateUserPsw:password block:block];
+}
+
 +(NSURLSessionDataTask *)getTokenWithBlock:(void (^)(TokenResponse *_tokenResponse, NSError *error)) block{
     return [UserApi getTokenWithBlock:^(TokenResponse *_tokenResponse, NSError *error) {
         if (_tokenResponse) {
@@ -209,9 +213,7 @@ NSString * const USER = @"USER";
             loginedUser.token = _getAuthTokenResp.token;
             NSArray *authTokenArray = [_getAuthTokenResp.token componentsSeparatedByString:@"."];
             if (authTokenArray && authTokenArray.count >= 2) {
-                NSString *base64Str = [authTokenArray objectAtIndex:1];
-                CocoaSecurityDecoder *decoder = [CocoaSecurityDecoder new];
-                NSString *json = [[NSString alloc] initWithData:[[NSData alloc] initWithBase64EncodedString:base64Str options:0] encoding:NSUTF8StringEncoding];
+//                NSString *base64Str = [authTokenArray objectAtIndex:1];
             }
             [RealmManager saveLoginedUser:loginedUser];
             block(_getAuthTokenResp, nil);
@@ -242,6 +244,8 @@ NSString * const USER = @"USER";
         if (_getAuthTokenResp && _getAuthTokenResp.token) {
             LoginedUser *loginedUser = [[LoginedUser alloc] init];
             loginedUser.token = _getAuthTokenResp.token;
+            loginedUser.phoneNum = account;
+            loginedUser.password = password;
             NSArray *authTokenArray = [_getAuthTokenResp.token componentsSeparatedByString:@"."];
             if (authTokenArray && authTokenArray.count >= 2) {
                 NSString *base64Str = [authTokenArray objectAtIndex:1];

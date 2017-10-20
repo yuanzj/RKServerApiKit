@@ -527,6 +527,27 @@
     }];
 }
 
++(NSURLSessionDataTask *)updateUserPsw:(NSString*)password block:(void (^)(NSURLResponse *response, ErrorResp *errorResp, NSError *error)) block {
+    
+    NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
+    
+    if (password) {
+        [params setObject:password forKey:@"password"];
+    }
+
+    return [[AFAppDotNetAPIClient sharedClient] PUT:@"api-user/v3.1/users/update" parameters:params completionHandler:^(NSURLResponse *response, id JSON, NSError *error) {
+        if(block){
+            if (JSON) {
+                ErrorResp *mErrorResp = [ErrorResp mj_objectWithKeyValues:JSON];
+                block(response, mErrorResp, error);
+            } else {
+                block(response, nil, error);
+            }
+        }
+    }];
+    
+}
+
 +(NSURLSessionDataTask *)getEbikeStores:(NSString*)leftBottomLat leftBottomLng:(NSString*)leftBottomLng rightTopLat:(NSString*)rightTopLat rightTopLng:(NSString*)rightTopLng type:(NSString*)type page:(NSString*)page limit:(NSString*)limit block:(void (^)(EbikeStoreResp *_EbikeStoreResp, NSError *error)) block {
     NSString* bounds = [[[[[[leftBottomLat stringByAppendingString:@","] stringByAppendingString:leftBottomLng] stringByAppendingString:@";"] stringByAppendingString:rightTopLat] stringByAppendingString:@","] stringByAppendingString:rightTopLng];
     return [[AFAppDotNetAPIClient sharedClient] GET:@"api-user/v3.1/ebikestores" parameters:@{@"bounds":bounds, @"type":type, @"page":page, @"limit":limit} completionHandler:^(NSURLResponse *response, id JSON, NSError *error) {

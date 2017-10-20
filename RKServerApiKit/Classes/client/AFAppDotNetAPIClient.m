@@ -58,13 +58,23 @@
     NSURLSessionDataTask* dataTask =  [[AFAppDotNetAPIClient sharedClient] dataTaskWithRequest:request completionHandler:^(NSURLResponse *response, id responseObject, NSError *error) {
         if (((NSHTTPURLResponse*)response).statusCode == HTTP_CODE_TOKE_OUT) {
             LoginedUser *_LoginedUser = [RealmManager queryLoginedUser];
-            [UserService loginWithOpenPlatform:_LoginedUser.openType openId:_LoginedUser.openId nickName:_LoginedUser.nickname headimgUrl:_LoginedUser.headimgUrl gender:_LoginedUser.gender province:_LoginedUser.province city:_LoginedUser.city country:_LoginedUser.country block:^(GetAuthTokenResp *_getAuthTokenResp, NSError *error) {
-                if (_getAuthTokenResp && _getAuthTokenResp.token) {
-                    [weakClient GET:URLString parameters:parameters completionHandler:completionHandler];
-                } else {
-                    completionHandler(response, responseObject, error);
-                }
-            }];
+            if (_LoginedUser.phoneNum && _LoginedUser.password) {
+                [UserService loginGetToken:_LoginedUser.phoneNum password:_LoginedUser.password block:^(GetAuthTokenResp *_getAuthTokenResp, NSError *error) {
+                    if (_getAuthTokenResp && _getAuthTokenResp.token) {
+                        [weakClient GET:URLString parameters:parameters completionHandler:completionHandler];
+                    } else {
+                        completionHandler(response, responseObject, error);
+                    }
+                }];
+            } else {
+                [UserService loginWithOpenPlatform:_LoginedUser.openType openId:_LoginedUser.openId nickName:_LoginedUser.nickname headimgUrl:_LoginedUser.headimgUrl gender:_LoginedUser.gender province:_LoginedUser.province city:_LoginedUser.city country:_LoginedUser.country block:^(GetAuthTokenResp *_getAuthTokenResp, NSError *error) {
+                    if (_getAuthTokenResp && _getAuthTokenResp.token) {
+                        [weakClient GET:URLString parameters:parameters completionHandler:completionHandler];
+                    } else {
+                        completionHandler(response, responseObject, error);
+                    }
+                }];
+            }
         }else{
             completionHandler(response, responseObject, error);
         }
@@ -102,13 +112,23 @@
     NSURLSessionDataTask* dataTask =  [[AFAppDotNetAPIClient sharedClient] dataTaskWithRequest:request completionHandler:^(NSURLResponse *response, id responseObject, NSError *error) {
         if (((NSHTTPURLResponse*)response).statusCode == HTTP_CODE_TOKE_OUT) {
             LoginedUser *_LoginedUser = [RealmManager queryLoginedUser];
-            [UserService loginWithOpenPlatform:_LoginedUser.openType openId:_LoginedUser.openId nickName:_LoginedUser.nickname headimgUrl:_LoginedUser.headimgUrl gender:_LoginedUser.gender province:_LoginedUser.province city:_LoginedUser.city country:_LoginedUser.country block:^(GetAuthTokenResp *_getAuthTokenResp, NSError *error) {
-                if (_getAuthTokenResp && _getAuthTokenResp.token) {
-                    [weakClient POST:URLString parameters:parameters completionHandler:completionHandler];
-                } else {
-                    completionHandler(response, responseObject, error);
-                }
-            }];
+            if (_LoginedUser.phoneNum && _LoginedUser.password) {
+                [UserService loginGetToken:_LoginedUser.phoneNum password:_LoginedUser.password block:^(GetAuthTokenResp *_getAuthTokenResp, NSError *error) {
+                    if (_getAuthTokenResp && _getAuthTokenResp.token) {
+                        [weakClient POST:URLString parameters:parameters completionHandler:completionHandler];
+                    } else {
+                        completionHandler(response, responseObject, error);
+                    }
+                }];
+            } else {
+                [UserService loginWithOpenPlatform:_LoginedUser.openType openId:_LoginedUser.openId nickName:_LoginedUser.nickname headimgUrl:_LoginedUser.headimgUrl gender:_LoginedUser.gender province:_LoginedUser.province city:_LoginedUser.city country:_LoginedUser.country block:^(GetAuthTokenResp *_getAuthTokenResp, NSError *error) {
+                    if (_getAuthTokenResp && _getAuthTokenResp.token) {
+                        [weakClient POST:URLString parameters:parameters completionHandler:completionHandler];
+                    } else {
+                        completionHandler(response, responseObject, error);
+                    }
+                }];
+            }
         }else{
             completionHandler(response, responseObject, error);
         }
@@ -146,13 +166,23 @@
     NSURLSessionDataTask* dataTask =  [[AFAppDotNetAPIClient sharedClient] dataTaskWithRequest:request completionHandler:^(NSURLResponse *response, id responseObject, NSError *error) {
         if (((NSHTTPURLResponse*)response).statusCode == HTTP_CODE_TOKE_OUT) {
             LoginedUser *_LoginedUser = [RealmManager queryLoginedUser];
-            [UserService loginWithOpenPlatform:_LoginedUser.openType openId:_LoginedUser.openId nickName:_LoginedUser.nickname headimgUrl:_LoginedUser.headimgUrl gender:_LoginedUser.gender province:_LoginedUser.province city:_LoginedUser.city country:_LoginedUser.country block:^(GetAuthTokenResp *_getAuthTokenResp, NSError *error) {
-                if (_getAuthTokenResp && _getAuthTokenResp.token) {
-                    [weakClient PUT:URLString parameters:parameters completionHandler:completionHandler];
-                } else {
-                    completionHandler(response, responseObject, error);
-                }
-            }];
+            if (_LoginedUser.phoneNum && _LoginedUser.password) {
+                [UserService loginGetToken:_LoginedUser.phoneNum password:_LoginedUser.password block:^(GetAuthTokenResp *_getAuthTokenResp, NSError *error) {
+                    if (_getAuthTokenResp && _getAuthTokenResp.token) {
+                        [weakClient PUT:URLString parameters:parameters completionHandler:completionHandler];
+                    } else {
+                        completionHandler(response, responseObject, error);
+                    }
+                }];
+            } else {
+                [UserService loginWithOpenPlatform:_LoginedUser.openType openId:_LoginedUser.openId nickName:_LoginedUser.nickname headimgUrl:_LoginedUser.headimgUrl gender:_LoginedUser.gender province:_LoginedUser.province city:_LoginedUser.city country:_LoginedUser.country block:^(GetAuthTokenResp *_getAuthTokenResp, NSError *error) {
+                    if (_getAuthTokenResp && _getAuthTokenResp.token) {
+                        [weakClient PUT:URLString parameters:parameters completionHandler:completionHandler];
+                    } else {
+                        completionHandler(response, responseObject, error);
+                    }
+                }];
+            }
         }else{
             completionHandler(response, responseObject, error);
         }
@@ -237,13 +267,23 @@
     NSURLSessionDataTask* dataTask =  [[AFAppDotNetAPIClient sharedClient] dataTaskWithRequest:request completionHandler:^(NSURLResponse *response, id responseObject, NSError *error) {
         if (((NSHTTPURLResponse*)response).statusCode == HTTP_CODE_TOKE_OUT) {
             LoginedUser *_LoginedUser = [RealmManager queryLoginedUser];
-            [UserService loginWithOpenPlatform:_LoginedUser.openType openId:_LoginedUser.openId nickName:_LoginedUser.nickname headimgUrl:_LoginedUser.headimgUrl gender:_LoginedUser.gender province:_LoginedUser.province city:_LoginedUser.city country:_LoginedUser.country block:^(GetAuthTokenResp *_getAuthTokenResp, NSError *error) {
-                if (_getAuthTokenResp && _getAuthTokenResp.token) {
-                    [weakClient POST_JSON:URLString parameters:parameters completionHandler:completionHandler];
-                } else {
-                    completionHandler(response, responseObject, error);
-                }
-            }];
+            if (_LoginedUser.phoneNum && _LoginedUser.password) {
+                [UserService loginGetToken:_LoginedUser.phoneNum password:_LoginedUser.password block:^(GetAuthTokenResp *_getAuthTokenResp, NSError *error) {
+                    if (_getAuthTokenResp && _getAuthTokenResp.token) {
+                        [weakClient POST_JSON:URLString parameters:parameters completionHandler:completionHandler];
+                    } else {
+                        completionHandler(response, responseObject, error);
+                    }
+                }];
+            } else {
+                [UserService loginWithOpenPlatform:_LoginedUser.openType openId:_LoginedUser.openId nickName:_LoginedUser.nickname headimgUrl:_LoginedUser.headimgUrl gender:_LoginedUser.gender province:_LoginedUser.province city:_LoginedUser.city country:_LoginedUser.country block:^(GetAuthTokenResp *_getAuthTokenResp, NSError *error) {
+                    if (_getAuthTokenResp && _getAuthTokenResp.token) {
+                        [weakClient POST_JSON:URLString parameters:parameters completionHandler:completionHandler];
+                    } else {
+                        completionHandler(response, responseObject, error);
+                    }
+                }];
+            }
         }else{
             completionHandler(response, responseObject, error);
         }
@@ -336,13 +376,25 @@
                   completionHandler:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
                       if (((NSHTTPURLResponse*)response).statusCode == HTTP_CODE_TOKE_OUT) {
                           LoginedUser *_LoginedUser = [RealmManager queryLoginedUser];
-                          [UserService loginWithOpenPlatform:_LoginedUser.openType openId:_LoginedUser.openId nickName:_LoginedUser.nickname headimgUrl:_LoginedUser.headimgUrl gender:_LoginedUser.gender province:_LoginedUser.province city:_LoginedUser.city country:_LoginedUser.country block:^(GetAuthTokenResp *_getAuthTokenResp, NSError *error) {
-                              if (_getAuthTokenResp && _getAuthTokenResp.token) {
-                                  [weakClient GET:URLString parameters:parameters completionHandler:completionHandler];
-                              } else {
-                                  completionHandler(response, responseObject, error);
-                              }
-                          }];
+                          
+                          if (_LoginedUser.phoneNum && _LoginedUser.password) {
+                              [UserService loginGetToken:_LoginedUser.phoneNum password:_LoginedUser.password block:^(GetAuthTokenResp *_getAuthTokenResp, NSError *error) {
+                                  if (_getAuthTokenResp && _getAuthTokenResp.token) {
+                                      [weakClient GET:URLString parameters:parameters completionHandler:completionHandler];
+                                  } else {
+                                      completionHandler(response, responseObject, error);
+                                  }
+                              }];
+                          } else {
+                              [UserService loginWithOpenPlatform:_LoginedUser.openType openId:_LoginedUser.openId nickName:_LoginedUser.nickname headimgUrl:_LoginedUser.headimgUrl gender:_LoginedUser.gender province:_LoginedUser.province city:_LoginedUser.city country:_LoginedUser.country block:^(GetAuthTokenResp *_getAuthTokenResp, NSError *error) {
+                                  if (_getAuthTokenResp && _getAuthTokenResp.token) {
+                                      [weakClient GET:URLString parameters:parameters completionHandler:completionHandler];
+                                  } else {
+                                      completionHandler(response, responseObject, error);
+                                  }
+                              }];
+                          }
+                          
                       }else{
                           completionHandler(response, responseObject, error);
                       }
