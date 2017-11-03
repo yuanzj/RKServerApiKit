@@ -346,7 +346,7 @@
     [realm commitWriteTransaction];
     
     //最大缓存上限为 MAX_STORE_LOCATION_INFO 个地理位置
-    RLMResults<GeolocationRepository *> *mGeolocationRepository = [[GeolocationRepository allObjects] sortedResultsUsingProperty:@"insterDate" ascending:YES];
+    RLMResults<GeolocationRepository *> *mGeolocationRepository = [[GeolocationRepository allObjects] sortedResultsUsingKeyPath:@"insterDate" ascending:YES];
     
     if (mGeolocationRepository && mGeolocationRepository.count > MAX_STORE_LOCATION_INFO) {
         

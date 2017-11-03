@@ -77,6 +77,9 @@ typedef NS_ENUM(NSUInteger, CurrentCarStatus) {
 
 @property (copy, nonatomic) NSString * horizontalAccuracy;
 
+//数据来源 0：gps 1：蓝牙
+@property (copy, nonatomic) NSString * source;
+
 
 @end
 

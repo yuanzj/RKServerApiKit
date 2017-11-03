@@ -7,6 +7,8 @@
 //
 
 #import "UeApi.h"
+#import "RidePowerStatistic.h"
+#import "RideUsedTimeStatistic.h"
 
 @implementation UeApi
 
@@ -150,19 +152,61 @@
  * 最近7天里程统计
  */
 +(NSURLSessionDataTask *)rideMilesStatistic:(NSString*)ueSn block:(void (^)(RideMilesStatisticResponse *_RideSpeedStatistic, NSError *error)) block{
-    return [[AFAppDotNetAPIClient sharedClient] GET:@"ue/ride_miles_statistic" parameters:@{@"ueSn":(ueSn ? ueSn : @"")} completionHandler:^(NSURLResponse *response, id JSON, NSError *error) {
+    return [[AFAppDotNetAPIClient sharedClient] GET:@"api-analyze/v3.1/statistics/day/mileage" parameters:nil completionHandler:^(NSURLResponse *response, id JSON, NSError *error) {
         if(block){
             if(JSON){
                 // Tell MJExtension what type model will be contained in data and accessoryUEs.
-                [RideMilesStatisticResponse mj_setupObjectClassInArray:^NSDictionary *{
-                    return @{
-                             @"data4" : [RideMilesStatistic class]
-                             };
-                }];
-                
-                RideMilesStatisticResponse *mUeListResponse = [RideMilesStatisticResponse mj_objectWithKeyValues:JSON];
-                if(mUeListResponse){
-                    block(mUeListResponse, nil);
+//                [RideMilesStatisticResponse mj_setupObjectClassInArray:^NSDictionary *{
+//                    return @{
+//                             @"data4" : [RideMilesStatistic class]
+//                             };
+//                }];
+//                 RideMilesStatisticResponse *mUeListResponse = [RideMilesStatisticResponse mj_objectWithKeyValues:JSON];
+                RideMilesStatisticResponse* mRideMilesStatisticResponse = [[RideMilesStatisticResponse alloc] init];
+                NSArray *rideMilesStatisticArray = [RideMilesStatistic mj_objectArrayWithKeyValuesArray:JSON];
+                mRideMilesStatisticResponse.data4 = rideMilesStatisticArray;
+                if(rideMilesStatisticArray){
+                    block(mRideMilesStatisticResponse, nil);
+                }else{
+                    block(nil, error);
+                }
+            }else{
+                block(nil, error);
+            }
+        }
+    }];
+}
+
+/**
+ * 最近7天耗电量统计
+ */
++(NSURLSessionDataTask *)ridePowerStatistic:(void (^)(NSArray *_RidePowerStatisticArray, NSError *error)) block{
+    return [[AFAppDotNetAPIClient sharedClient] GET:@"api-analyze/v3.1/statistics/day/power" parameters:nil completionHandler:^(NSURLResponse *response, id JSON, NSError *error) {
+        if(block){
+            if(JSON){
+                NSArray *ridePowerStatisticArray = [RidePowerStatistic mj_objectArrayWithKeyValuesArray:JSON];
+                if(ridePowerStatisticArray){
+                    block(ridePowerStatisticArray, nil);
+                }else{
+                    block(nil, error);
+                }
+            }else{
+                block(nil, error);
+            }
+        }
+    }];
+}
+
+/**
+ * 最近7天使用时间统计
+ */
++(NSURLSessionDataTask *)rideUsedTimeStatistic:(void (^)(NSArray *_RideUsedTimeStatisticArray, NSError *error)) block{
+    return [[AFAppDotNetAPIClient sharedClient] GET:@"api-analyze/v3.1/statistics/day/total_time" parameters:nil completionHandler:^(NSURLResponse *response, id JSON, NSError *error) {
+        if(block){
+            if(JSON){
+                NSArray *rideUsedTimeStatisticArray = [RideUsedTimeStatistic mj_objectArrayWithKeyValuesArray:JSON];
+                if(rideUsedTimeStatisticArray){
+                    block(rideUsedTimeStatisticArray, nil);
                 }else{
                     block(nil, error);
                 }
