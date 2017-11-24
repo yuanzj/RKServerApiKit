@@ -351,7 +351,7 @@
         NSString *str = [formatter stringFromDate:[NSDate date]];
         NSString *fileName = [NSString stringWithFormat:@"%@.jpg", str];
         // 上传图片，以文件流的格式
-        [formData appendPartWithFileData:imageData name:@"file" fileName:fileName mimeType:@"image/jpeg"];
+        [formData appendPartWithFileData:imageData name:@"logoFile" fileName:fileName mimeType:@"image/jpeg"];
     } error:nil];
     CocoaSecurityEncoder *encoder = [CocoaSecurityEncoder new];
     NSString *baseString = [encoder base64:[self.firmValue dataUsingEncoding:NSUTF8StringEncoding]];
@@ -380,7 +380,7 @@
                           if (_LoginedUser.phoneNum && _LoginedUser.password) {
                               [UserService loginGetToken:_LoginedUser.phoneNum password:_LoginedUser.password block:^(GetAuthTokenResp *_getAuthTokenResp, NSError *error) {
                                   if (_getAuthTokenResp && _getAuthTokenResp.token) {
-                                      [weakClient GET:URLString parameters:parameters completionHandler:completionHandler];
+                                      [weakClient UPLOAD:URLString parameters:parameters image:image completionHandler:completionHandler];
                                   } else {
                                       completionHandler(response, responseObject, error);
                                   }
@@ -388,7 +388,7 @@
                           } else {
                               [UserService loginWithOpenPlatform:_LoginedUser.openType openId:_LoginedUser.openId nickName:_LoginedUser.nickname headimgUrl:_LoginedUser.headimgUrl gender:_LoginedUser.gender province:_LoginedUser.province city:_LoginedUser.city country:_LoginedUser.country block:^(GetAuthTokenResp *_getAuthTokenResp, NSError *error) {
                                   if (_getAuthTokenResp && _getAuthTokenResp.token) {
-                                      [weakClient GET:URLString parameters:parameters completionHandler:completionHandler];
+                                      [weakClient UPLOAD:URLString parameters:parameters image:image completionHandler:completionHandler];
                                   } else {
                                       completionHandler(response, responseObject, error);
                                   }

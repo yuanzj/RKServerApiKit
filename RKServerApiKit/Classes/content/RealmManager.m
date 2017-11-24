@@ -401,6 +401,13 @@
     return [[LoginedUser allObjects] firstObject];
 }
 
++ (void)updateLoginedUser:(NSString*)roles {
+    RLMResults<LoginedUser *> *mLoginedUser = [LoginedUser allObjects];
+    [[RLMRealm defaultRealm] transactionWithBlock:^{
+        [[mLoginedUser firstObject] setValue:roles forKeyPath:@"roles"];
+    }];
+}
+
 + (void)clearLoginedUser{
     // Delete all objects from the realm
     RLMResults<LoginedUser *> *loginedUsers = [LoginedUser allObjects];

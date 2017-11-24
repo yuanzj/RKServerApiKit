@@ -432,6 +432,11 @@
     return [[AFAppDotNetAPIClient sharedClient] POST:@"auth/open_platform" parameters:params completionHandler:^(NSURLResponse *response, id JSON, NSError *error) {
         if(block){
             if(JSON){
+                [GetAuthTokenResp mj_setupObjectClassInArray:^NSDictionary *{
+                    return @{
+                             @"roles" : [UserRole class]
+                             };
+                }];
                 GetAuthTokenResp *mGetAuthTokenResp = [GetAuthTokenResp mj_objectWithKeyValues:JSON];
                 if(mGetAuthTokenResp){
                     block(mGetAuthTokenResp, nil);
@@ -550,7 +555,7 @@
 
 +(NSURLSessionDataTask *)getEbikeStores:(NSString*)leftBottomLat leftBottomLng:(NSString*)leftBottomLng rightTopLat:(NSString*)rightTopLat rightTopLng:(NSString*)rightTopLng type:(NSString*)type page:(NSString*)page limit:(NSString*)limit block:(void (^)(EbikeStoreResp *_EbikeStoreResp, NSError *error)) block {
     NSString* bounds = [[[[[[leftBottomLat stringByAppendingString:@","] stringByAppendingString:leftBottomLng] stringByAppendingString:@";"] stringByAppendingString:rightTopLat] stringByAppendingString:@","] stringByAppendingString:rightTopLng];
-    return [[AFAppDotNetAPIClient sharedClient] GET:@"api-user/v3.1/ebikestores" parameters:@{@"bounds":bounds, @"type":type, @"page":page, @"limit":limit} completionHandler:^(NSURLResponse *response, id JSON, NSError *error) {
+    return [[AFAppDotNetAPIClient sharedClient] GET:@"api-user/v3.1/ebikestores/list" parameters:@{@"bounds":bounds, @"type":type, @"page":page, @"limit":limit} completionHandler:^(NSURLResponse *response, id JSON, NSError *error) {
         if(block){
             if (JSON) {
                 [EbikeStoreResp mj_setupObjectClassInArray:^NSDictionary *{
@@ -621,6 +626,11 @@
     return [[AFAppDotNetAPIClient sharedClient] POSTJSON_NOTRETRY:@"auth/token" parameters:@{@"phoneNumber":account, @"password":password}  completionHandler:^(NSURLResponse *response, id JSON, NSError *error) {
         if(block){
             if(JSON){
+                [GetAuthTokenResp mj_setupObjectClassInArray:^NSDictionary *{
+                    return @{
+                             @"roles" : [UserRole class]
+                             };
+                }];
                 GetAuthTokenResp *mGetAuthTokenResp = [GetAuthTokenResp mj_objectWithKeyValues:JSON];
                 block(mGetAuthTokenResp, error);
             }else{
@@ -666,6 +676,58 @@
         }
     }];
     
+}
+
++(NSURLSessionDataTask *)upgradeForEnterpriseByName:(NSString*)name type:(NSString*)type brands:(NSString*)brands contact:(NSString*)contact openStartTime:(NSString*)openStartTime openEndTime:(NSString*)openEndTime lat:(NSString*)lat lon:(NSString*)lon province:(NSString*)province city:(NSString*)city county:(NSString*)county address:(NSString*)address logoFile:(UIImage*)logoFile block:(void (^)(NSURLResponse *response, ErrorResp *errorResp, NSError *error)) block{
+    
+    NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
+    if (name) {
+        [params setObject:name forKey:@"name"];
+    }
+    if (type) {
+        [params setObject:type forKey:@"type"];
+    }
+    if (brands) {
+        [params setObject:brands forKey:@"brands"];
+    }
+    if (contact) {
+        [params setObject:contact forKey:@"contact"];
+    }
+    if (openStartTime) {
+        [params setObject:openStartTime forKey:@"openStartTime"];
+    }
+    if (openEndTime) {
+        [params setObject:openEndTime forKey:@"openEndTime"];
+    }
+    if (lat) {
+        [params setObject:lat forKey:@"lat"];
+    }
+    if (lon) {
+        [params setObject:lon forKey:@"lon"];
+    }
+    if (province) {
+        [params setObject:province forKey:@"province"];
+    }
+    if (city) {
+        [params setObject:city forKey:@"city"];
+    }
+    if (county) {
+        [params setObject:county forKey:@"county"];
+    }
+    if (address) {
+        [params setObject:address forKey:@"address"];
+    }
+    
+    return [[AFAppDotNetAPIClient sharedClient] UPLOAD:@"api-user/v3.1/users/upgrade2enterprise" parameters:params image:logoFile completionHandler:^(NSURLResponse *response, id JSON, NSError *error) {
+        if(block){
+            if (JSON) {
+                ErrorResp *mErrorResp = [ErrorResp mj_objectWithKeyValues:JSON];
+                block(response, mErrorResp, error);
+            } else {
+                block(response, nil, error);
+            }
+        }
+    }];
 }
 
 @end
