@@ -57,6 +57,7 @@ typedef NS_ENUM(NSUInteger, CurrentCarStatus) {
 @property (copy, nonatomic) NSString * totalMiles;
 @property (copy, nonatomic) NSString * remainCapacity;
 @property (copy, nonatomic) NSString * soh;
+@property (copy, nonatomic) NSString * voltage;
 @property (copy, nonatomic) NSString * todayMiles;
 @property (copy, nonatomic) NSString * fault;
 @property (copy, nonatomic) NSString * lon;
@@ -75,6 +76,9 @@ typedef NS_ENUM(NSUInteger, CurrentCarStatus) {
 @property (copy, nonatomic) NSString * rs485Status;
 
 @property (copy, nonatomic) NSString * horizontalAccuracy;
+
+//数据来源 0：gps 1：蓝牙
+@property (copy, nonatomic) NSString * source;
 
 
 @end

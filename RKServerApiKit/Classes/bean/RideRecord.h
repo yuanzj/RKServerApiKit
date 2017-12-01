@@ -12,10 +12,11 @@
 
 @interface RideRecord : RLMObject
 
+@property (copy, nonatomic) NSString * ccuSn;
 @property (copy, nonatomic) NSString * day;
 @property (copy, nonatomic) NSString * startTime;
 @property (copy, nonatomic) NSString * endTime;
-@property (assign, nonatomic) float distance;
+@property (assign, nonatomic) float mileage;
 @property (copy, nonatomic) NSString * totalTime;
 @property (copy, nonatomic) NSString * startLon;
 @property (copy, nonatomic) NSString * startLat;
@@ -28,7 +29,7 @@
 
 @interface RideRecordResponse : BaseResponse
 
-@property (strong, nonatomic) NSArray* data5;
+@property (strong, nonatomic) NSArray* list;
 
 @end
 

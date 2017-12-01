@@ -174,6 +174,10 @@ NSString * const USER = @"USER";
     return [UserApi modifyUserInfoByToken:phoneNumber smsVerifyCode:smsVerifyCode realName:realName idCard:idCard storeId:storeId token:(NSString*)tokenString block:block];
 }
 
++(NSURLSessionDataTask *)updateUserPsw:(NSString*)password block:(void (^)(NSURLResponse *response, ErrorResp *errorResp, NSError *error)) block {
+    return [UserApi updateUserPsw:password block:block];
+}
+
 +(NSURLSessionDataTask *)getTokenWithBlock:(void (^)(TokenResponse *_tokenResponse, NSError *error)) block{
     return [UserApi getTokenWithBlock:^(TokenResponse *_tokenResponse, NSError *error) {
         if (_tokenResponse) {
@@ -207,12 +211,17 @@ NSString * const USER = @"USER";
             loginedUser.city = city;
             loginedUser.country = country;
             loginedUser.token = _getAuthTokenResp.token;
-            NSArray *authTokenArray = [_getAuthTokenResp.token componentsSeparatedByString:@"."];
-            if (authTokenArray && authTokenArray.count >= 2) {
-                NSString *base64Str = [authTokenArray objectAtIndex:1];
-                CocoaSecurityDecoder *decoder = [CocoaSecurityDecoder new];
-                NSString *json = [[NSString alloc] initWithData:[[NSData alloc] initWithBase64EncodedString:base64Str options:0] encoding:NSUTF8StringEncoding];
+            loginedUser.sub = _getAuthTokenResp.userId;
+            NSString* role = @"";
+            if(_getAuthTokenResp.roles && _getAuthTokenResp.roles.count > 0) {
+                for(UserRole* userRole in _getAuthTokenResp.roles) {
+                    if (role && role.length > 0) {
+                        role = [role stringByAppendingString:@","];
+                    }
+                    role = [role stringByAppendingString:userRole.name];
+                }
             }
+            loginedUser.roles = role;
             [RealmManager saveLoginedUser:loginedUser];
             block(_getAuthTokenResp, nil);
         } else {
@@ -242,12 +251,19 @@ NSString * const USER = @"USER";
         if (_getAuthTokenResp && _getAuthTokenResp.token) {
             LoginedUser *loginedUser = [[LoginedUser alloc] init];
             loginedUser.token = _getAuthTokenResp.token;
-            NSArray *authTokenArray = [_getAuthTokenResp.token componentsSeparatedByString:@"."];
-            if (authTokenArray && authTokenArray.count >= 2) {
-                NSString *base64Str = [authTokenArray objectAtIndex:1];
-                CocoaSecurityDecoder *decoder = [CocoaSecurityDecoder new];
-                NSString *json = [[NSString alloc] initWithData:[[NSData alloc] initWithBase64EncodedString:base64Str options:0] encoding:NSUTF8StringEncoding];
+            loginedUser.phoneNum = account;
+            loginedUser.password = password;
+            loginedUser.sub = _getAuthTokenResp.userId;
+            NSString* role = @"";
+            if(_getAuthTokenResp.roles && _getAuthTokenResp.roles.count > 0) {
+                for(UserRole* userRole in _getAuthTokenResp.roles) {
+                    if (role && role.length > 0) {
+                        role = [role stringByAppendingString:@","];
+                    }
+                    role = [role stringByAppendingString:userRole.name];
+                }
             }
+            loginedUser.roles = role;
             [RealmManager saveLoginedUser:loginedUser];
             block(_getAuthTokenResp, error);
         } else {
@@ -262,6 +278,10 @@ NSString * const USER = @"USER";
 
 +(NSURLSessionDataTask *)verifyCodeByToken:(NSString*)tokenString mobile:(NSString*)mobile block:(void (^)(NSURLResponse *response, ErrorResp *errorResp, NSError *error)) block {
     return [UserApi verifyCodeByToken:tokenString mobile:mobile block:block];
+}
+
++(NSURLSessionDataTask *)upgradeForEnterpriseByName:(NSString*)name type:(NSString*)type brands:(NSString*)brands contact:(NSString*)contact openStartTime:(NSString*)openStartTime openEndTime:(NSString*)openEndTime lat:(NSString*)lat lon:(NSString*)lon province:(NSString*)province city:(NSString*)city county:(NSString*)county address:(NSString*)address logoFile:(UIImage*)logoFile block:(void (^)(NSURLResponse *response, ErrorResp *errorResp, NSError *error)) block {
+    return [UserApi upgradeForEnterpriseByName:name type:type brands:brands contact:contact openStartTime:openStartTime openEndTime:openEndTime lat:lat lon:lon province:province city:city county:county address:address logoFile:logoFile block:block];
 }
 
 @end

@@ -115,6 +115,8 @@
 
 + (LoginedUser*)queryLoginedUser;
 
++ (void)updateLoginedUser:(NSString*)roles;
+
 + (void)clearLoginedUser;
 
 + (void)clearPaygoodList;

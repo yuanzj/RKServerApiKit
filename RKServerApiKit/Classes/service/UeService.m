@@ -128,14 +128,40 @@
 }
 
 /**
+ * 最近7天耗电量统计
+ */
++(NSURLSessionDataTask *)ridePowerStatistic:(void (^)(NSArray *_RidePowerStatisticArray, NSError *error)) block {
+    return [UeApi ridePowerStatistic:^(NSArray *_RidePowerStatisticArray, NSError *error) {
+        if (_RidePowerStatisticArray) {
+             block(_RidePowerStatisticArray, nil);
+        } else {
+             block(nil, error);
+        }
+    }];
+}
+
+/**
+ * 最近7天使用时间统计
+ */
++(NSURLSessionDataTask *)rideUsedTimeStatistic:(void (^)(NSArray *_RideUsedTimeStatisticArray, NSError *error)) block {
+    return [UeApi rideUsedTimeStatistic:^(NSArray *_RideUsedTimeStatisticArray, NSError *error) {
+        if (_RideUsedTimeStatisticArray) {
+            block(_RideUsedTimeStatisticArray, nil);
+        } else {
+            block(nil, error);
+        }
+    }];
+}
+
+/**
  * 行车记录概要统计
  */
-+(NSURLSessionDataTask *)getRideRecord:(NSString*)ueSn block:(void (^)(RideRecordResponse *_RideRecordResponse, NSError *error)) block{
-    return [UeApi getRideRecord:ueSn block:^(RideRecordResponse *_RideRecordResponse, NSError *error){
++(NSURLSessionDataTask *)getRideRecord:(NSString*)startTime page:(NSString*)page limit:(NSString*)limit sort:(NSString*)sort block:(void (^)(RideRecordResponse *_RideSpeedStatistic, NSError *error)) block{
+    return [UeApi getRideRecord:startTime page:page limit:limit sort:sort block:^(RideRecordResponse *_RideRecordResponse, NSError *error) {
         if (_RideRecordResponse) {
             if(_RideRecordResponse.state == RKSAPIResponseSuccess){
                 
-                NSArray* data = _RideRecordResponse.data5;
+                NSArray* data = _RideRecordResponse.list;
                 if (data && data.count > 0) {
                     [RealmManager clearRideRecordList];
                     [RealmManager saveRideRecordList:data];
@@ -270,6 +296,10 @@
  */
 +(NSURLSessionDataTask *)openbox:(NSString*)ueSn  block:(void (^)(NSURLResponse *response, ErrorResp *errorResp, NSError *error)) block {
     return [UeApi openbox:ueSn block:block];
+}
+
++(NSURLSessionDataTask *)restartUe:(NSString*)ueSn block:(void (^)(NSURLResponse *response, ErrorResp *errorResp, NSError *error)) block {
+    return [UeApi restartUe:ueSn block:block];
 }
 
 /**

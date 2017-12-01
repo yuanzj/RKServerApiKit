@@ -8,6 +8,10 @@
 
 #import "GetAuthTokenResp.h"
 
+@implementation UserRole
+
+@end
+
 @implementation GetAuthTokenError
 
 @end
