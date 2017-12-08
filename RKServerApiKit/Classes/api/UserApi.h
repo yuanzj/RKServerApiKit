@@ -255,7 +255,7 @@
 /**
  * 通过城市获取网点接口
  */
-+(NSURLSessionDataTask *)getEbikeStoresByProvice:(NSString*)provice city:(NSString*)city page:(NSString*)page limit:(NSString*)limit block:(void (^)(EbikeStoreResp *_EbikeStoreResp, NSError *error)) block;
++(NSURLSessionDataTask *)getEbikeStoresByProvice:(NSString*)provice city:(NSString*)city type:(NSString*)type page:(NSString*)page limit:(NSString*)limit block:(void (^)(EbikeStoreResp *_EbikeStoreResp, NSError *error)) block;
 
 /**
  * 通过storeId获取网点接口
