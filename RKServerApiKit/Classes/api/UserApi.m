@@ -572,7 +572,7 @@
     }];
 }
 
-+(NSURLSessionDataTask *)getEbikeStoresByProvice:(NSString*)province city:(NSString*)city page:(NSString*)page limit:(NSString*)limit block:(void (^)(EbikeStoreResp *_EbikeStoreResp, NSError *error)) block {
++(NSURLSessionDataTask *)getEbikeStoresByProvice:(NSString*)province city:(NSString*)city type:(NSString*)type page:(NSString*)page limit:(NSString*)limit block:(void (^)(EbikeStoreResp *_EbikeStoreResp, NSError *error)) block {
     
     NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
     
@@ -584,6 +584,10 @@
         [params setObject:city forKey:@"city"];
     }
     
+    if (type) {
+        [params setObject:type forKey:@"types"];
+    }
+    
     if (page) {
         [params setObject:page forKey:@"page"];
     }
@@ -592,7 +596,7 @@
         [params setObject:limit forKey:@"limit"];
     }
     
-    return [[AFAppDotNetAPIClient sharedClient] GET:@"api-user/v3.1/ebikestores" parameters:params completionHandler:^(NSURLResponse *response, id JSON, NSError *error) {
+    return [[AFAppDotNetAPIClient sharedClient] GET:@"api-user/v3.1/ebikestores/list" parameters:params completionHandler:^(NSURLResponse *response, id JSON, NSError *error) {
         if(block){
             if (JSON) {
                 [EbikeStoreResp mj_setupObjectClassInArray:^NSDictionary *{

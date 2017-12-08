@@ -12,6 +12,7 @@
 
 @property (assign, nonatomic) int id;
 @property (strong, nonatomic) NSString* name;
+@property (strong, nonatomic) NSString* logo;
 @property (strong, nonatomic) NSString* openStartTime;
 @property (strong, nonatomic) NSString* openEndTime;
 @property (strong, nonatomic) NSString* contact;

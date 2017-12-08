@@ -238,8 +238,8 @@ NSString * const USER = @"USER";
     return [UserApi getEbikeStores:leftBottomLat leftBottomLng:leftBottomLng rightTopLat:rightTopLat rightTopLng:rightTopLng type:type page:page limit:limit block:block];
 }
 
-+(NSURLSessionDataTask *)getEbikeStoresByProvice:(NSString*)provice city:(NSString*)city page:(NSString*)page limit:(NSString*)limit block:(void (^)(EbikeStoreResp *_EbikeStoreResp, NSError *error)) block {
-    return [UserApi getEbikeStoresByProvice:provice city:city page:page limit:limit block:block];
++(NSURLSessionDataTask *)getEbikeStoresByProvice:(NSString*)provice city:(NSString*)city type:(NSString*)type page:(NSString*)page limit:(NSString*)limit block:(void (^)(EbikeStoreResp *_EbikeStoreResp, NSError *error)) block {
+    return [UserApi getEbikeStoresByProvice:provice city:city type:type page:page limit:limit block:block];
 }
 
 +(NSURLSessionDataTask *)getEbikeStoresByStoreId:(NSString*)storeId block:(void (^)(EbikeStore *_EbikeStore, NSError *error)) block {
