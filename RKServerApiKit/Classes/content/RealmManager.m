@@ -12,6 +12,7 @@
 #import "RideSpeedStatisticDb.h"
 #import "RideMilesStatisticDb.h"
 #import "PayGood.h"
+#import "SimChargeOrder.h"
 
 @implementation RealmManager
 
@@ -174,6 +175,25 @@
         RLMRealm *realm = [RLMRealm defaultRealm];
         [realm beginWriteTransaction];
         [realm deleteObjects:mMsgBean];
+        [realm commitWriteTransaction];
+    }
+}
+
++ (void)saveSimOrderList:(NSArray *)_SimOrder{
+    RLMRealm *realm = [RLMRealm defaultRealm];
+    
+    [realm beginWriteTransaction];
+    [realm addObjects:_SimOrder];
+    [realm commitWriteTransaction];
+}
+
++ (void)clearSimOrderList{
+    RLMResults<SimChargeOrder *> *mSimChargeOrder = [SimChargeOrder allObjects];
+    
+    if (mSimChargeOrder) {
+        RLMRealm *realm = [RLMRealm defaultRealm];
+        [realm beginWriteTransaction];
+        [realm deleteObjects:mSimChargeOrder];
         [realm commitWriteTransaction];
     }
 }

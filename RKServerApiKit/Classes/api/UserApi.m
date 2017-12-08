@@ -10,6 +10,7 @@
 #import "AFAppUploadAPIClient.h"
 #import "EbikeStoreResp.h"
 #import "EbikeStore.h"
+#import "SimChargeOrder.h"
 
 @implementation UserApi
 
@@ -729,6 +730,35 @@
                 block(response, mErrorResp, error);
             } else {
                 block(response, nil, error);
+            }
+        }
+    }];
+}
+
++(NSURLSessionDataTask *)getSimChargeOrders:(NSString*)page limit:(NSString*)limit block:(void (^)(SimChargeOrderResp *_SimChargeOrderResp, NSError *error)) block {
+    
+    NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
+    
+    if (page) {
+        [params setObject:page forKey:@"page"];
+    }
+    
+    if (limit) {
+        [params setObject:limit forKey:@"limit"];
+    }
+    
+    return [[AFAppDotNetAPIClient sharedClient] GET:@"api-order/v3.1/simchargeorders" parameters:params completionHandler:^(NSURLResponse *response, id JSON, NSError *error) {
+        if(block){
+            if (JSON) {
+                [SimChargeOrderResp mj_setupObjectClassInArray:^NSDictionary *{
+                    return @{
+                             @"list" : [SimChargeOrder class]
+                             };
+                }];
+                SimChargeOrderResp *mSimChargeOrderResp = [SimChargeOrderResp mj_objectWithKeyValues:JSON];
+                block(mSimChargeOrderResp, error);
+            } else {
+                block(nil, error);
             }
         }
     }];
