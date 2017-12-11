@@ -50,6 +50,44 @@
     }];
 }
 
++(NSURLSessionDataTask *)getPayGoodsWithBlock:(void (^)(SimChargeGoodResp *_PayGoodResp, NSError *error)) block{
+    
+    return [[AFAppDotNetAPIClient sharedClient] GET:@"api-order/v3.1/simchargeproducts" parameters:nil completionHandler:^(NSURLResponse *response, id JSON, NSError *error) {
+        if(block){
+            if(JSON){
+                [SimChargeGoodResp mj_setupObjectClassInArray:^NSDictionary *{
+                    return @{
+                             @"list" : [SimChargeGood class]
+                             };
+                }];
+                SimChargeGoodResp *mPayGoodResp = [SimChargeGoodResp mj_objectWithKeyValues:JSON];
+                if(mPayGoodResp){
+                    block(mPayGoodResp, nil);
+                } else {
+                    block(nil, error);
+                }
+            } else {
+                block(nil, error);
+            }
+        }
+    }];
+    
+}
+
++(NSURLSessionDataTask *)createSimChargeOrder:(NSString*)imsi simChargeGoodId:(int)goodId price:(double)price block:(void (^)(NSString *orderId, NSError *error)) block{
+    
+    return [[AFAppDotNetAPIClient sharedClient] POST_JSON_text:@"api-order/v3.1/simchargeorders/" parameters:@{@"imsi":imsi,@"productId":@(goodId),@"price":@(price)} completionHandler:^(NSURLResponse *response, id JSON, NSError *error) {
+        if(block){
+            if(JSON){
+                block( [[NSString alloc] initWithData:JSON encoding:NSUTF8StringEncoding] , nil);
+            } else {
+                block(nil, error);
+            }
+        }
+    }];
+    
+}
+
 +(NSURLSessionDataTask *)getDeposit:(NSString*)sort block:(void (^)(PayGoodResp *_PayGoodResp, NSError *error)) block {
     return [[AFAppDotNetAPIClient sharedClient] GET:@"/api-pay/v3.1/pay-goods" parameters:@{@"sort":(sort ? sort : @"")} completionHandler:^(NSURLResponse *response, id JSON, NSError *error) {
         if(block){
@@ -89,6 +127,30 @@
         }
     }];
 
+}
+
++(NSURLSessionDataTask *)payOrder:(NSString*)payChannelId payType:(NSString*)payType orderId:(NSString*)orderId amount:(NSString*)amount good:(NSDictionary*)good block:(void (^)(NSDictionary *_orderInfo, ErrorResp *errorResp, NSError *error)) block{
+    
+    
+//    @Query("payChannelId") Long payChannelId, @Query("payType") String payType, @Query("amount") double amount, @Query("orderId") String orderId, @Body SimChargeProduct productEntity
+    
+    ;
+    
+    return [[AFAppDotNetAPIClient sharedClient] POST_JSON:[NSString stringWithFormat:@"api-pay/v3.1/gateway/create-pay-order?payChannelId=%@&payType=%@&amount=%@&orderId=%@",payChannelId,payType,amount,orderId] parameters:good completionHandler:^(NSURLResponse *response, id JSON, NSError *error) {
+        if(block){
+            if(JSON){
+                ErrorResp *mErrorResp = [ErrorResp mj_objectWithKeyValues:JSON];
+                if (mErrorResp && mErrorResp.error) {
+                    block(nil, mErrorResp, error);
+                } else {
+                    block(JSON, nil, error);
+                }
+            }else{
+                block(nil, nil, error);
+            }
+        }
+    }];
+    
 }
 
 +(NSURLSessionDataTask *)verifyOrder:(NSString*)payChannelId ordeResult:(NSDictionary*)ordeResult block:(void (^)(NSURLResponse *response, ErrorResp *errorResp, NSError *error)) block {

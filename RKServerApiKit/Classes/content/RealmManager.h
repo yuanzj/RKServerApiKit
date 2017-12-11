@@ -22,6 +22,7 @@
 #import "RideMilesStatisticDb.h"
 #import "TokenResponse.h"
 #import "LoginedUser.h"
+#import "SimChargeGood.h"
 
 #define MAX_STORE_LOCATION_INFO 1000
 
@@ -122,5 +123,9 @@
 + (void)clearPaygoodList;
 
 + (void)savePaygoodList:(NSArray *)_PayGoodList;
+
++ (void)clearSimChargeGoodList;
+
++ (void)saveSimChargeGoodList:(NSArray *)_PayGoodList;
 
 @end

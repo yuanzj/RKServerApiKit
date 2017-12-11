@@ -31,6 +31,34 @@
         }
     }];
 }
++(NSURLSessionDataTask *)getSimChargeGoodsWithBlock:(void (^)(SimChargeGoodResp *_PayGoodResp, NSError *error)) block{
+    
+    return [PayApi getPayGoodsWithBlock:^(SimChargeGoodResp *_PayGoodResp, NSError *error) {
+        if (_PayGoodResp) {
+            
+            NSArray* data = _PayGoodResp.list;
+            [RealmManager clearSimChargeGoodList];
+            if (data && data.count > 0) {
+                [RealmManager saveSimChargeGoodList:data];
+            }
+            
+            block(_PayGoodResp, nil);
+        } else {
+            block(nil, error);
+        }
+    }];
+    
+}
++(NSURLSessionDataTask *)createSimChargeOrder:(NSString*)imsi simChargeGoodId:(int)goodId price:(double)price block:(void (^)(NSString *orderId, NSError *error)) block{
+    
+    return [PayApi createSimChargeOrder:imsi simChargeGoodId:goodId price:price block:^(NSString *orderId, NSError *error) {
+        if (orderId) {
+            block(orderId, nil);
+        } else {
+            block(nil, error);
+        }
+    }];
+}
 
 +(NSURLSessionDataTask *)getDeposit:(NSString*)sort block:(void (^)(PayGoodResp *_PayGoodResp, NSError *error)) block {
     return [PayApi getDeposit:sort block:^(PayGoodResp *_PayGoodResp, NSError *error) {
@@ -51,6 +79,13 @@
 
 +(NSURLSessionDataTask *)topUpBalance:(NSString*)payChannelId payType:(NSString*)payType payGoodsId:(NSString*)payGoodsId amount:(NSString*)amount salesPromotionId:(NSString*)salesPromotionId block:(void (^)(NSDictionary *_orderInfo, ErrorResp *errorResp, NSError *error)) block {
     return [PayApi topUpBalance:payChannelId payType:payType payGoodsId:payGoodsId amount:amount salesPromotionId:salesPromotionId block:^(NSDictionary *_orderInfo, ErrorResp *errorResp, NSError *error) {
+        block(_orderInfo, errorResp, nil);
+    }];
+}
+
++(NSURLSessionDataTask *)payOrder:(NSString*)payChannelId payType:(NSString*)payType orderId:(NSString*)orderId amount:(NSString*)amount good:(NSDictionary*)good block:(void (^)(NSDictionary *_orderInfo, ErrorResp *errorResp, NSError *error)) block{
+    
+    return [PayApi payOrder:payChannelId payType:payType orderId:orderId amount:amount good:good block:^(NSDictionary *_orderInfo, ErrorResp *errorResp, NSError *error) {
         block(_orderInfo, errorResp, nil);
     }];
 }

@@ -198,6 +198,8 @@
     }
 }
 
+
+
 + (void)saveRideDayStatistic:(RideDayStatistic*)rideDayStatistic{
     RLMRealm *realm = [RLMRealm defaultRealm];
     
@@ -456,6 +458,28 @@
 
 + (void)savePaygoodList:(NSArray *)_PayGoodList{
 //    // Get the default Realm
+    RLMRealm *realm = [RLMRealm defaultRealm];
+    
+    [realm beginWriteTransaction];
+    [realm addObjects:_PayGoodList];
+    [realm commitWriteTransaction];
+}
+
++ (void)clearSimChargeGoodList{
+    //    // Delete all objects from the realm
+    RLMResults<SimChargeGood *> *mPayGoodList = [SimChargeGood allObjects];
+    
+    if (mPayGoodList) {
+        
+        RLMRealm *realm = [RLMRealm defaultRealm];
+        [realm beginWriteTransaction];
+        [realm deleteObjects:mPayGoodList];
+        [realm commitWriteTransaction];
+    }
+}
+
++ (void)saveSimChargeGoodList:(NSArray *)_PayGoodList{
+    //    // Get the default Realm
     RLMRealm *realm = [RLMRealm defaultRealm];
     
     [realm beginWriteTransaction];
