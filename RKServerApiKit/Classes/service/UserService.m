@@ -284,4 +284,19 @@ NSString * const USER = @"USER";
     return [UserApi upgradeForEnterpriseByName:name type:type brands:brands contact:contact openStartTime:openStartTime openEndTime:openEndTime lat:lat lon:lon province:province city:city county:county address:address logoFile:logoFile block:block];
 }
 
++(NSURLSessionDataTask *)getSimChargeOrders:(NSString*)page limit:(NSString*)limit block:(void (^)(SimChargeOrderResp *_SimChargeOrderResp, NSError *error)) block {
+    return [UserApi getSimChargeOrders:page limit:limit block:^(SimChargeOrderResp *_SimChargeOrderResp, NSError *error) {
+        if (_SimChargeOrderResp) {
+            [RealmManager clearMessageList];
+            if(_SimChargeOrderResp && _SimChargeOrderResp.list && _SimChargeOrderResp.list.count > 0){
+                NSArray *list = _SimChargeOrderResp.list;
+                [RealmManager saveMessageList:list];
+            }
+            block(_SimChargeOrderResp, nil);
+        } else {
+            block(nil, error);
+        }
+    }];
+}
+
 @end
