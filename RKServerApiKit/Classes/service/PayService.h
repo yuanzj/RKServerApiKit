@@ -21,7 +21,7 @@
 
 +(NSURLSessionDataTask *)getSimChargeGoodsWithBlock:(void (^)(SimChargeGoodResp *_PayGoodResp, NSError *error)) block;
 
-+(NSURLSessionDataTask *)createSimChargeOrder:(NSString*)imsi simChargeGoodId:(int)goodId price:(double)price block:(void (^)(NSString *orderId, NSError *error)) block;
++(NSURLSessionDataTask *)createSimChargeOrder:(NSString*)imsi simChargeGoodId:(int)goodId price:(double)price payment:(int)payment block:(void (^)(NSString *orderId, NSError *error)) block;
 
 +(NSURLSessionDataTask *)getDeposit:(NSString*)sort block:(void (^)(PayGoodResp *_PayGoodResp, NSError *error)) block;
 

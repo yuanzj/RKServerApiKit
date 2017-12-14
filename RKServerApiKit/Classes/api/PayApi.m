@@ -74,9 +74,9 @@
     
 }
 
-+(NSURLSessionDataTask *)createSimChargeOrder:(NSString*)imsi simChargeGoodId:(int)goodId price:(double)price block:(void (^)(NSString *orderId, NSError *error)) block{
++(NSURLSessionDataTask *)createSimChargeOrder:(NSString*)imsi simChargeGoodId:(int)goodId price:(double)price payment:(int)payment block:(void (^)(NSString *orderId, NSError *error)) block{
     
-    return [[AFAppDotNetAPIClient sharedClient] POST_JSON_text:@"api-order/v3.1/simchargeorders/" parameters:@{@"imsi":imsi,@"productId":@(goodId),@"price":@(price)} completionHandler:^(NSURLResponse *response, id JSON, NSError *error) {
+    return [[AFAppDotNetAPIClient sharedClient] POST_JSON_text:@"api-order/v3.1/simchargeorders/" parameters:@{@"imsi":imsi,@"productId":@(goodId),@"price":@(price),@"payment":@(payment)} completionHandler:^(NSURLResponse *response, id JSON, NSError *error) {
         if(block){
             if(JSON){
                 block( [[NSString alloc] initWithData:JSON encoding:NSUTF8StringEncoding] , nil);

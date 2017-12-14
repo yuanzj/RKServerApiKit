@@ -21,6 +21,7 @@
 @property (strong, nonatomic) NSString* userId;
 @property (strong, nonatomic) NSString* imsi;
 @property (strong, nonatomic) NSString* productId;
+@property (strong, nonatomic) NSString* payment;
 @property (strong, nonatomic) NSString* price;
 @property (strong, nonatomic) NSString* trxNo;
 @property (strong, nonatomic) SimChargeProduct* simChargeProductEntity;
