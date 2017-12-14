@@ -49,9 +49,9 @@
     }];
     
 }
-+(NSURLSessionDataTask *)createSimChargeOrder:(NSString*)imsi simChargeGoodId:(int)goodId price:(double)price block:(void (^)(NSString *orderId, NSError *error)) block{
++(NSURLSessionDataTask *)createSimChargeOrder:(NSString*)imsi simChargeGoodId:(int)goodId price:(double)price payment:(int)payment block:(void (^)(NSString *orderId, NSError *error)) block{
     
-    return [PayApi createSimChargeOrder:imsi simChargeGoodId:goodId price:price block:^(NSString *orderId, NSError *error) {
+    return [PayApi createSimChargeOrder:imsi simChargeGoodId:goodId price:price payment:payment block:^(NSString *orderId, NSError *error) {
         if (orderId) {
             block(orderId, nil);
         } else {

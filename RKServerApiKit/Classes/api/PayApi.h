@@ -33,7 +33,7 @@
 +(NSURLSessionDataTask *)getPayGoodsWithBlock:(void (^)(SimChargeGoodResp *_PayGoodResp, NSError *error)) block;
 
 
-+(NSURLSessionDataTask *)createSimChargeOrder:(NSString*)imsi simChargeGoodId:(int)goodId price:(double)price block:(void (^)(NSString *orderId, NSError *error)) block;
++(NSURLSessionDataTask *)createSimChargeOrder:(NSString*)imsi simChargeGoodId:(int)goodId price:(double)price payment:(int)payment block:(void (^)(NSString *orderId, NSError *error)) block;
 
 /**
  * 获取押金
