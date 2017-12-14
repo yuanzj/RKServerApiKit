@@ -23,7 +23,7 @@
 #import <CocoaSecurity/CocoaSecurity.h>
 
 #ifdef DEV_SERVER_MODEL
-static NSString * const AFAppDotNetAPIBaseURLString = @"http://cjl3.rokyinfo.net:7190/";
+static NSString * const AFAppDotNetAPIBaseURLString = @"http://cjl3.rokyinfo.net:8010/";
 #else
 static NSString * const AFAppDotNetAPIBaseURLString = @"http://cjl3.rokyinfo.net:7190/";
 #endif
@@ -67,6 +67,10 @@ static NSString * const AFAppDotNetAPIBaseURLString = @"http://cjl3.rokyinfo.net
 - (NSURLSessionDataTask*)POST_JSON:(NSString *)URLString
                         parameters:(id)parameters
                  completionHandler:(void (^)(NSURLResponse *response, id responseObject, NSError *error))completionHandler;
+
+- (NSURLSessionDataTask*)POST_JSON_text:(NSString *)URLString
+                             parameters:(id)parameters
+                      completionHandler:(void (^)(NSURLResponse *response, id responseObject, NSError *error))completionHandler;
 
 - (NSURLSessionDataTask*)POSTJSON_NOTRETRY:(NSString *)URLString
                    parameters:(id)parameters
