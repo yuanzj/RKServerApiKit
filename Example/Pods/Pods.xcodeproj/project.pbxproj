@@ -365,6 +365,16 @@
 		D340D2795F767D68E8CB7CCF95D73840 /* RLMConstants.h in Copy . Public Headers */ = {isa = PBXBuildFile; fileRef = 58CE4F7DAEBADC2FC2360A95F641D444 /* RLMConstants.h */; };
 		D3AA99FC5664E5F9F5D7E0B5E1B5A145 /* RLMSwiftSupport.m in Sources */ = {isa = PBXBuildFile; fileRef = F9974530C1548811D0416F4ACC4AB496 /* RLMSwiftSupport.m */; settings = {COMPILER_FLAGS = "-DREALM_HAVE_CONFIG -DREALM_COCOA_VERSION='@\"2.4.3\"' -D__ASSERTMACROS__ -DREALM_ENABLE_SYNC"; }; };
 		D427E45EEE4354A75746E017CBD991BD /* RLMObjectSchema_Private.h in Copy . Private Headers */ = {isa = PBXBuildFile; fileRef = 0FF6BA1EB9076324816DB0EB1AA0DF34 /* RLMObjectSchema_Private.h */; };
+		D4857E7A1FE211BE0037499D /* SimChargeOrderResp.h in Headers */ = {isa = PBXBuildFile; fileRef = D4857E781FE211BE0037499D /* SimChargeOrderResp.h */; };
+		D4857E7B1FE211BE0037499D /* SimChargeOrderResp.m in Sources */ = {isa = PBXBuildFile; fileRef = D4857E791FE211BE0037499D /* SimChargeOrderResp.m */; };
+		D4857E841FE211D30037499D /* SimChargeOrder.h in Headers */ = {isa = PBXBuildFile; fileRef = D4857E7C1FE211D20037499D /* SimChargeOrder.h */; };
+		D4857E851FE211D30037499D /* SimChargeProduct.m in Sources */ = {isa = PBXBuildFile; fileRef = D4857E7D1FE211D20037499D /* SimChargeProduct.m */; };
+		D4857E861FE211D30037499D /* RidePowerStatistic.h in Headers */ = {isa = PBXBuildFile; fileRef = D4857E7E1FE211D20037499D /* RidePowerStatistic.h */; };
+		D4857E871FE211D30037499D /* RideUsedTimeStatistic.m in Sources */ = {isa = PBXBuildFile; fileRef = D4857E7F1FE211D20037499D /* RideUsedTimeStatistic.m */; };
+		D4857E881FE211D30037499D /* RidePowerStatistic.m in Sources */ = {isa = PBXBuildFile; fileRef = D4857E801FE211D30037499D /* RidePowerStatistic.m */; };
+		D4857E891FE211D30037499D /* SimChargeOrder.m in Sources */ = {isa = PBXBuildFile; fileRef = D4857E811FE211D30037499D /* SimChargeOrder.m */; };
+		D4857E8A1FE211D30037499D /* RideUsedTimeStatistic.h in Headers */ = {isa = PBXBuildFile; fileRef = D4857E821FE211D30037499D /* RideUsedTimeStatistic.h */; };
+		D4857E8B1FE211D30037499D /* SimChargeProduct.h in Headers */ = {isa = PBXBuildFile; fileRef = D4857E831FE211D30037499D /* SimChargeProduct.h */; };
 		D4E80BD7EAAB83200183110578A80591 /* AFURLSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = EAE194A2DC4051AE0AC473AF8FB01D46 /* AFURLSessionManager.m */; };
 		D55C1F70DE356F71361018368EFE977A /* FailServerAddress.h in Headers */ = {isa = PBXBuildFile; fileRef = E927C4D04EC34776303D57696A38DC12 /* FailServerAddress.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D6E3EE9792D5C73C14CBDFEBD8D8912D /* RLMSyncUser.mm in Sources */ = {isa = PBXBuildFile; fileRef = 029E2756FB90D4F8DE22664A127439DC /* RLMSyncUser.mm */; settings = {COMPILER_FLAGS = "-DREALM_HAVE_CONFIG -DREALM_COCOA_VERSION='@\"2.4.3\"' -D__ASSERTMACROS__ -DREALM_ENABLE_SYNC"; }; };
@@ -926,6 +936,16 @@
 		D1F964045ED158E66D00A55200D33A6D /* RideDayStatisticDb.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = RideDayStatisticDb.m; sourceTree = "<group>"; };
 		D343D1A9F7AEBA728D86654E9A9AF446 /* UIImage+AFNetworking.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIImage+AFNetworking.h"; path = "UIKit+AFNetworking/UIImage+AFNetworking.h"; sourceTree = "<group>"; };
 		D464426592A1202073AE87FCCF4E4EB6 /* list_notifier.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = list_notifier.cpp; path = Realm/ObjectStore/src/impl/list_notifier.cpp; sourceTree = "<group>"; };
+		D4857E781FE211BE0037499D /* SimChargeOrderResp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SimChargeOrderResp.h; path = RKServerApiKit/Classes/resp/SimChargeOrderResp.h; sourceTree = "<group>"; };
+		D4857E791FE211BE0037499D /* SimChargeOrderResp.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SimChargeOrderResp.m; path = RKServerApiKit/Classes/resp/SimChargeOrderResp.m; sourceTree = "<group>"; };
+		D4857E7C1FE211D20037499D /* SimChargeOrder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SimChargeOrder.h; path = RKServerApiKit/Classes/bean/SimChargeOrder.h; sourceTree = "<group>"; };
+		D4857E7D1FE211D20037499D /* SimChargeProduct.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SimChargeProduct.m; path = RKServerApiKit/Classes/bean/SimChargeProduct.m; sourceTree = "<group>"; };
+		D4857E7E1FE211D20037499D /* RidePowerStatistic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RidePowerStatistic.h; path = RKServerApiKit/Classes/bean/RidePowerStatistic.h; sourceTree = "<group>"; };
+		D4857E7F1FE211D20037499D /* RideUsedTimeStatistic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RideUsedTimeStatistic.m; path = RKServerApiKit/Classes/bean/RideUsedTimeStatistic.m; sourceTree = "<group>"; };
+		D4857E801FE211D30037499D /* RidePowerStatistic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RidePowerStatistic.m; path = RKServerApiKit/Classes/bean/RidePowerStatistic.m; sourceTree = "<group>"; };
+		D4857E811FE211D30037499D /* SimChargeOrder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SimChargeOrder.m; path = RKServerApiKit/Classes/bean/SimChargeOrder.m; sourceTree = "<group>"; };
+		D4857E821FE211D30037499D /* RideUsedTimeStatistic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RideUsedTimeStatistic.h; path = RKServerApiKit/Classes/bean/RideUsedTimeStatistic.h; sourceTree = "<group>"; };
+		D4857E831FE211D30037499D /* SimChargeProduct.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SimChargeProduct.h; path = RKServerApiKit/Classes/bean/SimChargeProduct.h; sourceTree = "<group>"; };
 		D7279BE83D2BE07DF02621FF1C125BD7 /* RealmManager.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = RealmManager.h; sourceTree = "<group>"; };
 		DA6089E8DDCCB5061FA54458E2AFEF06 /* RLMSyncPermissionOffer.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = RLMSyncPermissionOffer.h; path = include/RLMSyncPermissionOffer.h; sourceTree = "<group>"; };
 		DB38C9E177E8BEA1CA0D9B1F88F28614 /* RLMProperty.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = RLMProperty.h; path = include/RLMProperty.h; sourceTree = "<group>"; };
@@ -1571,6 +1591,16 @@
 		B75940F040DE00686F3ACDD8D636F07A /* RKServerApiKit */ = {
 			isa = PBXGroup;
 			children = (
+				D4857E7E1FE211D20037499D /* RidePowerStatistic.h */,
+				D4857E801FE211D30037499D /* RidePowerStatistic.m */,
+				D4857E821FE211D30037499D /* RideUsedTimeStatistic.h */,
+				D4857E7F1FE211D20037499D /* RideUsedTimeStatistic.m */,
+				D4857E7C1FE211D20037499D /* SimChargeOrder.h */,
+				D4857E811FE211D30037499D /* SimChargeOrder.m */,
+				D4857E831FE211D30037499D /* SimChargeProduct.h */,
+				D4857E7D1FE211D20037499D /* SimChargeProduct.m */,
+				D4857E781FE211BE0037499D /* SimChargeOrderResp.h */,
+				D4857E791FE211BE0037499D /* SimChargeOrderResp.m */,
 				B9A33E6D95DB29107B651627E544D140 /* Resources */,
 				CA8B131BBD00485153124CA3A0A000EE /* RKServerApiKit */,
 				0476AD2B7620B630B304F9F49D14DBC5 /* Support Files */,
@@ -1965,6 +1995,8 @@
 				B77EFEEE1F60E197000B4C1A /* AFAppUploadAPIClient.h in Headers */,
 				2B0705CC26A4CBEE32A5A60284AED35B /* UIButton+AFNetworking.h in Headers */,
 				B77EFF001F60E1B5000B4C1A /* WxUserInfo.h in Headers */,
+				D4857E841FE211D30037499D /* SimChargeOrder.h in Headers */,
+				D4857E8A1FE211D30037499D /* RideUsedTimeStatistic.h in Headers */,
 				B77EFF181F60E1CF000B4C1A /* ThirdPartyApi.h in Headers */,
 				B77EFEBE1F60E15A000B4C1A /* SdkConfig.h in Headers */,
 				B77EFEC61F60E168000B4C1A /* UploadService.h in Headers */,
@@ -1973,12 +2005,15 @@
 				B77EFECA1F60E168000B4C1A /* PayService.h in Headers */,
 				E23B9A6F533461CB33C0FA6FB59E3AB2 /* UIKit+AFNetworking.h in Headers */,
 				F84DD74BB7F612DE372F8C051420DF72 /* UIProgressView+AFNetworking.h in Headers */,
+				D4857E7A1FE211BE0037499D /* SimChargeOrderResp.h in Headers */,
 				B77EFEE41F60E17D000B4C1A /* EbikeStoreResp.h in Headers */,
 				B77EFEDA1F60E17D000B4C1A /* TokenResponse.h in Headers */,
 				B77EFF041F60E1B5000B4C1A /* Order.h in Headers */,
 				B77EFEE01F60E17D000B4C1A /* GetAccessTokenResp.h in Headers */,
 				00C05031BBA5BA48A00FE41348F41BDA /* UIRefreshControl+AFNetworking.h in Headers */,
 				B77EFF081F60E1B5000B4C1A /* ErrorBean.h in Headers */,
+				D4857E8B1FE211D30037499D /* SimChargeProduct.h in Headers */,
+				D4857E861FE211D30037499D /* RidePowerStatistic.h in Headers */,
 				B77EFF0C1F60E1B5000B4C1A /* DiscountBean.h in Headers */,
 				51047C1945103943F70BEADE83725630 /* UIWebView+AFNetworking.h in Headers */,
 			);
@@ -2330,7 +2365,9 @@
 				EAF16633DB3C992CF975BE4A2932D41C /* AFHTTPSessionManager.m in Sources */,
 				A398D63C8DED664D99A864D79881A13C /* AFImageDownloader.m in Sources */,
 				B77EFEED1F60E197000B4C1A /* AFAppUploadAPIClient.m in Sources */,
+				D4857E7B1FE211BE0037499D /* SimChargeOrderResp.m in Sources */,
 				B77EFF051F60E1B5000B4C1A /* LoginedUser.m in Sources */,
+				D4857E871FE211D30037499D /* RideUsedTimeStatistic.m in Sources */,
 				B77EFEDF1F60E17D000B4C1A /* GetAccessTokenResp.m in Sources */,
 				649E78B5EA450FABDF5201E31F265FAB /* AFNetworkActivityIndicatorManager.m in Sources */,
 				B77EFF151F60E1CF000B4C1A /* UploadApi.m in Sources */,
@@ -2344,15 +2381,18 @@
 				B77EFF011F60E1B5000B4C1A /* PayGood.m in Sources */,
 				B77EFEEB1F60E197000B4C1A /* AFAppWxAPIClient.m in Sources */,
 				B77EFEFF1F60E1B5000B4C1A /* WxUserInfo.m in Sources */,
+				D4857E891FE211D30037499D /* SimChargeOrder.m in Sources */,
 				B77EFF091F60E1B5000B4C1A /* EbikeStore.m in Sources */,
 				B77EFEC71F60E168000B4C1A /* ThirdPartyService.m in Sources */,
 				B77EFEE11F60E17D000B4C1A /* ErrorResp.m in Sources */,
 				B77EFF191F60E1CF000B4C1A /* PayApi.m in Sources */,
 				B77EFF071F60E1B5000B4C1A /* ErrorBean.m in Sources */,
 				D4E80BD7EAAB83200183110578A80591 /* AFURLSessionManager.m in Sources */,
+				D4857E851FE211D30037499D /* SimChargeProduct.m in Sources */,
 				140F458AB7312414FC423FEED70A3733 /* UIActivityIndicatorView+AFNetworking.m in Sources */,
 				B77EFF0D1F60E1B5000B4C1A /* AccountDetail.m in Sources */,
 				B77EFEE31F60E17D000B4C1A /* EbikeStoreResp.m in Sources */,
+				D4857E881FE211D30037499D /* RidePowerStatistic.m in Sources */,
 				32076D3DD644045CF79DFFEBB6BFF3F2 /* UIButton+AFNetworking.m in Sources */,
 				F2D899C7AA0D7FC20160091BB9D31CF3 /* UIImageView+AFNetworking.m in Sources */,
 				B77EFEC91F60E168000B4C1A /* PayService.m in Sources */,
