@@ -12,6 +12,7 @@
 #import "ErrorResp.h"
 #import "DiscountResp.h"
 #import "SimChargeGoodResp.h"
+#import "CategoryResp.h"
 
 @interface PayService : NSObject
 
@@ -35,4 +36,5 @@
 
 +(NSURLSessionDataTask *)getSalesPromotions:(void (^)(DiscountResp *_DiscountResp, ErrorResp *errorResp, NSError *error)) block;
 
++(NSURLSessionDataTask *)getCategoryListWithBlock:(void (^)(CategoryResp *_PayGoodResp, NSError *error)) block;
 @end

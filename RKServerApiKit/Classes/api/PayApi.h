@@ -14,6 +14,7 @@
 #import "DiscountResp.h"
 #import "SimChargeGoodResp.h"
 #import "SimChargeGood.h"
+#import "CategoryResp.h"
 
 @interface PayApi : NSObject
 
@@ -61,5 +62,7 @@
  * 获取优惠活动
  */
 +(NSURLSessionDataTask *)getSalesPromotions:(void (^)(DiscountResp *_DiscountResp, ErrorResp *errorResp, NSError *error)) block;
+
++(NSURLSessionDataTask *)getCagetoryListWithBlock:(void (^)(CategoryResp *_PayGoodResp, NSError *error)) block;
 
 @end

@@ -49,6 +49,25 @@
     }];
     
 }
+
++(NSURLSessionDataTask *)getCategoryListWithBlock:(void (^)(CategoryResp *_PayGoodResp, NSError *error)) block{
+    
+    return [PayApi getCagetoryListWithBlock:^(CategoryResp *_PayGoodResp, NSError *error) {
+        if (_PayGoodResp) {
+            
+            NSArray* data = _PayGoodResp.page.list;
+            [RealmManager clearCategoryList];
+            if (data && data.count > 0) {
+                [RealmManager saveCategoryList:data];
+            }
+            
+            block(_PayGoodResp, nil);
+        } else {
+            block(nil, error);
+        }
+    }];
+}
+
 +(NSURLSessionDataTask *)createSimChargeOrder:(NSString*)imsi simChargeGoodId:(int)goodId price:(double)price payment:(int)payment block:(void (^)(NSString *orderId, NSError *error)) block{
     
     return [PayApi createSimChargeOrder:imsi simChargeGoodId:goodId price:price payment:payment block:^(NSString *orderId, NSError *error) {

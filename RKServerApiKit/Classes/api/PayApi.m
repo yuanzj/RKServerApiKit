@@ -74,6 +74,30 @@
     
 }
 
++(NSURLSessionDataTask *)getCagetoryListWithBlock:(void (^)(CategoryResp *_PayGoodResp, NSError *error)) block{
+    
+    return [[AFAppDotNetAPIClient sharedClient] GET:@"api-order/v3.1/category" parameters:nil completionHandler:^(NSURLResponse *response, id JSON, NSError *error) {
+        if(block){
+            if(JSON){
+                [CategoryPage mj_setupObjectClassInArray:^NSDictionary *{
+                    return @{
+                             @"list" : [RkCategory class]
+                             };
+                }];
+                CategoryResp *mPayGoodResp = [CategoryResp mj_objectWithKeyValues:JSON];
+                if(mPayGoodResp){
+                    block(mPayGoodResp, nil);
+                } else {
+                    block(nil, error);
+                }
+            } else {
+                block(nil, error);
+            }
+        }
+    }];
+    
+}
+
 +(NSURLSessionDataTask *)createSimChargeOrder:(NSString*)imsi simChargeGoodId:(int)goodId price:(double)price payment:(int)payment block:(void (^)(NSString *orderId, NSError *error)) block{
     
     return [[AFAppDotNetAPIClient sharedClient] POST_JSON_text:@"api-order/v3.1/simchargeorders/" parameters:@{@"imsi":imsi,@"productId":@(goodId),@"price":@(price),@"payment":@(payment)} completionHandler:^(NSURLResponse *response, id JSON, NSError *error) {
