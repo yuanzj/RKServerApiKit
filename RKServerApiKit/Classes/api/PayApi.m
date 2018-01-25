@@ -74,6 +74,30 @@
     
 }
 
++(NSURLSessionDataTask *)getCagetoryListWithBlock:(void (^)(CategoryResp *_PayGoodResp, NSError *error)) block{
+    
+    return [[AFAppDotNetAPIClient sharedClient] GET:@"api-order/v3.1/category" parameters:nil completionHandler:^(NSURLResponse *response, id JSON, NSError *error) {
+        if(block){
+            if(JSON){
+                [CategoryPage mj_setupObjectClassInArray:^NSDictionary *{
+                    return @{
+                             @"list" : [RkCategory class]
+                             };
+                }];
+                CategoryResp *mPayGoodResp = [CategoryResp mj_objectWithKeyValues:JSON];
+                if(mPayGoodResp){
+                    block(mPayGoodResp, nil);
+                } else {
+                    block(nil, error);
+                }
+            } else {
+                block(nil, error);
+            }
+        }
+    }];
+    
+}
+
 +(NSURLSessionDataTask *)createSimChargeOrder:(NSString*)imsi simChargeGoodId:(int)goodId price:(double)price payment:(int)payment block:(void (^)(NSString *orderId, NSError *error)) block{
     
     return [[AFAppDotNetAPIClient sharedClient] POST_JSON_text:@"api-order/v3.1/simchargeorders/" parameters:@{@"imsi":imsi,@"productId":@(goodId),@"price":@(price),@"payment":@(payment)} completionHandler:^(NSURLResponse *response, id JSON, NSError *error) {
@@ -200,6 +224,39 @@
                 }
             } else {
                 block(nil, nil, error);
+            }
+        }
+    }];
+}
+
++(NSURLSessionDataTask *)getTradePaymentOrders:(NSString*)page limit:(NSString*)limit excludeStatus:(NSString*)excludeStatus block:(void (^)(TradePaymentOrderResp *_TradePaymentOrderResp, NSError *error)) block {
+    
+    NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
+    
+    if (page) {
+        [params setObject:page forKey:@"page"];
+    }
+    
+    if (limit) {
+        [params setObject:limit forKey:@"limit"];
+    }
+    
+    if (excludeStatus) {
+        [params setObject:excludeStatus forKey:@"excludeStatus"];
+    }
+    
+    return [[AFAppDotNetAPIClient sharedClient] GET:@"api-pay/v3.1/tradepaymentorders" parameters:params completionHandler:^(NSURLResponse *response, id JSON, NSError *error) {
+        if(block){
+            if (JSON) {
+                [TradePaymentOrderResp mj_setupObjectClassInArray:^NSDictionary *{
+                    return @{
+                             @"list" : [TradePaymentOrder class]
+                             };
+                }];
+                TradePaymentOrderResp *mTradePaymentOrderResp = [TradePaymentOrderResp mj_objectWithKeyValues:JSON];
+                block(mTradePaymentOrderResp, error);
+            } else {
+                block(nil, error);
             }
         }
     }];

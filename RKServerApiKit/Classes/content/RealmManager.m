@@ -13,6 +13,7 @@
 #import "RideMilesStatisticDb.h"
 #import "PayGood.h"
 #import "SimChargeOrder.h"
+#import "TradePaymentOrder.h"
 
 @implementation RealmManager
 
@@ -165,6 +166,18 @@
     [realm beginWriteTransaction];
     [realm addObjects:_message];
     [realm commitWriteTransaction];
+}
+
++ (void)clearTradePaymentOrderList {
+    RLMResults<TradePaymentOrder *> *mTradePaymentOrder = [TradePaymentOrder allObjects];
+    
+    if (mTradePaymentOrder) {
+        
+        RLMRealm *realm = [RLMRealm defaultRealm];
+        [realm beginWriteTransaction];
+        [realm deleteObjects:mTradePaymentOrder];
+        [realm commitWriteTransaction];
+    }
 }
 
 + (void)clearMessageList{
@@ -479,6 +492,28 @@
 }
 
 + (void)saveSimChargeGoodList:(NSArray *)_PayGoodList{
+    //    // Get the default Realm
+    RLMRealm *realm = [RLMRealm defaultRealm];
+    
+    [realm beginWriteTransaction];
+    [realm addObjects:_PayGoodList];
+    [realm commitWriteTransaction];
+}
+
++ (void)clearCategoryList{
+    //    // Delete all objects from the realm
+    RLMResults<RkCategory *> *mPayGoodList = [RkCategory allObjects];
+    
+    if (mPayGoodList) {
+        
+        RLMRealm *realm = [RLMRealm defaultRealm];
+        [realm beginWriteTransaction];
+        [realm deleteObjects:mPayGoodList];
+        [realm commitWriteTransaction];
+    }
+}
+
++ (void)saveCategoryList:(NSArray *)_PayGoodList{
     //    // Get the default Realm
     RLMRealm *realm = [RLMRealm defaultRealm];
     

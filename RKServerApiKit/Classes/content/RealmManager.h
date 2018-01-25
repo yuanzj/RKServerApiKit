@@ -23,6 +23,7 @@
 #import "TokenResponse.h"
 #import "LoginedUser.h"
 #import "SimChargeGood.h"
+#import "CategoryResp.h"
 
 #define MAX_STORE_LOCATION_INFO 1000
 
@@ -127,5 +128,11 @@
 + (void)clearSimChargeGoodList;
 
 + (void)saveSimChargeGoodList:(NSArray *)_PayGoodList;
+
++ (void)clearCategoryList;
+
++ (void)saveCategoryList:(NSArray *)_PayGoodList;
+
++ (void)clearTradePaymentOrderList;
 
 @end

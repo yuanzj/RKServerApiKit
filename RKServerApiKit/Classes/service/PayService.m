@@ -49,6 +49,25 @@
     }];
     
 }
+
++(NSURLSessionDataTask *)getCategoryListWithBlock:(void (^)(CategoryResp *_PayGoodResp, NSError *error)) block{
+    
+    return [PayApi getCagetoryListWithBlock:^(CategoryResp *_PayGoodResp, NSError *error) {
+        if (_PayGoodResp) {
+            
+            NSArray* data = _PayGoodResp.page.list;
+            [RealmManager clearCategoryList];
+            if (data && data.count > 0) {
+                [RealmManager saveCategoryList:data];
+            }
+            
+            block(_PayGoodResp, nil);
+        } else {
+            block(nil, error);
+        }
+    }];
+}
+
 +(NSURLSessionDataTask *)createSimChargeOrder:(NSString*)imsi simChargeGoodId:(int)goodId price:(double)price payment:(int)payment block:(void (^)(NSString *orderId, NSError *error)) block{
     
     return [PayApi createSimChargeOrder:imsi simChargeGoodId:goodId price:price payment:payment block:^(NSString *orderId, NSError *error) {
@@ -102,6 +121,21 @@
 
 +(NSURLSessionDataTask *)getSalesPromotions:(void (^)(DiscountResp *_DiscountResp, ErrorResp *errorResp, NSError *error)) block {
     return [PayApi getSalesPromotions:block];
+}
+
++(NSURLSessionDataTask *)getTradePaymentOrders:(NSString*)page limit:(NSString*)limit excludeStatus:(NSString*)excludeStatus block:(void (^)(TradePaymentOrderResp *_TradePaymentOrderResp, NSError *error)) block {
+    return [PayApi getTradePaymentOrders:page limit:limit excludeStatus:excludeStatus block:^(TradePaymentOrderResp *_TradePaymentOrderResp, NSError *error) {
+        if (_TradePaymentOrderResp) {
+            [RealmManager clearTradePaymentOrderList];
+            if(_TradePaymentOrderResp && _TradePaymentOrderResp.list && _TradePaymentOrderResp.list.count > 0){
+                NSArray *list = _TradePaymentOrderResp.list;
+                [RealmManager saveMessageList:list];
+            }
+            block(_TradePaymentOrderResp, nil);
+        } else {
+            block(nil, error);
+        }
+    }];
 }
 
 @end
