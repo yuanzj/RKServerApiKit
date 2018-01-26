@@ -48,5 +48,6 @@
 @property (strong, nonatomic) NSString* salesPromotionId;
 @property (strong, nonatomic) NSString* settleRecordId;
 @property (strong, nonatomic) NSString* productName;
+@property (strong, nonatomic) NSString* merchantNoDesc;
 
 @end
