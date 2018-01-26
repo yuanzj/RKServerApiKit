@@ -229,4 +229,37 @@
     }];
 }
 
++(NSURLSessionDataTask *)getTradePaymentOrders:(NSString*)page limit:(NSString*)limit excludeStatus:(NSString*)excludeStatus block:(void (^)(TradePaymentOrderResp *_TradePaymentOrderResp, NSError *error)) block {
+    
+    NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
+    
+    if (page) {
+        [params setObject:page forKey:@"page"];
+    }
+    
+    if (limit) {
+        [params setObject:limit forKey:@"limit"];
+    }
+    
+    if (excludeStatus) {
+        [params setObject:excludeStatus forKey:@"excludeStatus"];
+    }
+    
+    return [[AFAppDotNetAPIClient sharedClient] GET:@"api-pay/v3.1/tradepaymentorders" parameters:params completionHandler:^(NSURLResponse *response, id JSON, NSError *error) {
+        if(block){
+            if (JSON) {
+                [TradePaymentOrderResp mj_setupObjectClassInArray:^NSDictionary *{
+                    return @{
+                             @"list" : [TradePaymentOrder class]
+                             };
+                }];
+                TradePaymentOrderResp *mTradePaymentOrderResp = [TradePaymentOrderResp mj_objectWithKeyValues:JSON];
+                block(mTradePaymentOrderResp, error);
+            } else {
+                block(nil, error);
+            }
+        }
+    }];
+}
+
 @end

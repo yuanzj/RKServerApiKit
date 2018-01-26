@@ -13,6 +13,7 @@
 #import "RideMilesStatisticDb.h"
 #import "PayGood.h"
 #import "SimChargeOrder.h"
+#import "TradePaymentOrder.h"
 
 @implementation RealmManager
 
@@ -165,6 +166,18 @@
     [realm beginWriteTransaction];
     [realm addObjects:_message];
     [realm commitWriteTransaction];
+}
+
++ (void)clearTradePaymentOrderList {
+    RLMResults<TradePaymentOrder *> *mTradePaymentOrder = [TradePaymentOrder allObjects];
+    
+    if (mTradePaymentOrder) {
+        
+        RLMRealm *realm = [RLMRealm defaultRealm];
+        [realm beginWriteTransaction];
+        [realm deleteObjects:mTradePaymentOrder];
+        [realm commitWriteTransaction];
+    }
 }
 
 + (void)clearMessageList{

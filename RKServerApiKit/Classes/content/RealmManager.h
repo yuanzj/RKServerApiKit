@@ -133,4 +133,6 @@
 
 + (void)saveCategoryList:(NSArray *)_PayGoodList;
 
++ (void)clearTradePaymentOrderList;
+
 @end
