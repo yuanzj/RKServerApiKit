@@ -41,4 +41,5 @@
 +(NSURLSessionDataTask *)getCategoryListWithBlock:(void (^)(CategoryResp *_PayGoodResp, NSError *error)) block;
 
 +(NSURLSessionDataTask *)getTradePaymentOrders:(NSString*)page limit:(NSString*)limit excludeStatus:(NSString*)excludeStatus block:(void (^)(TradePaymentOrderResp *_TradePaymentOrderResp, NSError *error)) block;
+
 @end
