@@ -188,4 +188,9 @@
  */
 +(NSURLSessionDataTask *)endEbike:(NSString*)orderId safeCode:(NSString*)safeCode block:(void (^)(NSURLResponse *response, ErrorResp *errorResp, NSError *error)) block;
 
+/**
+ * 获取ebike等的信息
+ */
++(NSURLSessionDataTask *)getEproductInfo:(NSString*)ueSn block:(void (^)(Eproduct *mEproduct, NSError *error)) block;
+
 @end

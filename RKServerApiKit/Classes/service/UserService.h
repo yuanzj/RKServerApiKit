@@ -208,8 +208,14 @@ extern NSString * const USER;
 
 +(NSURLSessionDataTask *)verifyCodeByToken:(NSString*)tokenString mobile:(NSString*)mobile block:(void (^)(NSURLResponse *response, ErrorResp *errorResp, NSError *error)) block;
 
-+(NSURLSessionDataTask *)upgradeForEnterpriseByName:(NSString*)name type:(NSString*)type brands:(NSString*)brands contact:(NSString*)contact openStartTime:(NSString*)openStartTime openEndTime:(NSString*)openEndTime lat:(NSString*)lat lon:(NSString*)lon province:(NSString*)province city:(NSString*)city county:(NSString*)county address:(NSString*)address logoFile:(UIImage*)logoFile block:(void (^)(NSURLResponse *response, ErrorResp *errorResp, NSError *error)) block;
++(NSURLSessionDataTask *)upgradeForEnterpriseByName:(NSString*)name type:(NSString*)type brands:(NSString*)brands contact:(NSString*)contact openStartTime:(NSString*)openStartTime openEndTime:(NSString*)openEndTime lat:(NSString*)lat lon:(NSString*)lon province:(NSString*)province city:(NSString*)city county:(NSString*)county address:(NSString*)address lonLatType:(NSString*)lonLatType logoFile:(UIImage*)logoFile block:(void (^)(NSURLResponse *response, ErrorResp *errorResp, NSError *error)) block;
 
 +(NSURLSessionDataTask *)getSimChargeOrders:(NSString*)page limit:(NSString*)limit block:(void (^)(SimChargeOrderResp *_SimChargeOrderResp, NSError *error)) block;
+
++(NSURLSessionDataTask *)uploadIDCertification:(UIImage*)frontFile backFile:(UIImage*)backFile handFile:(UIImage*)handFile block:(void (^)(NSURLResponse *response, ErrorResp *errorResp, NSError *error)) block;
+
++(NSURLSessionDataTask *)refreshToken:(void (^)(GetAuthTokenResp *_getAuthTokenResp, NSError *error)) block;
+
++(NSURLSessionDataTask *)getCities:(void (^)(NSArray *_cityArray, NSError *error)) block;
 
 @end

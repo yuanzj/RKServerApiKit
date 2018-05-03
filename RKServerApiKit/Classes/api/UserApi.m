@@ -11,6 +11,7 @@
 #import "EbikeStoreResp.h"
 #import "EbikeStore.h"
 #import "SimChargeOrder.h"
+#import "City.h"
 
 @implementation UserApi
 
@@ -683,7 +684,7 @@
     
 }
 
-+(NSURLSessionDataTask *)upgradeForEnterpriseByName:(NSString*)name type:(NSString*)type brands:(NSString*)brands contact:(NSString*)contact openStartTime:(NSString*)openStartTime openEndTime:(NSString*)openEndTime lat:(NSString*)lat lon:(NSString*)lon province:(NSString*)province city:(NSString*)city county:(NSString*)county address:(NSString*)address logoFile:(UIImage*)logoFile block:(void (^)(NSURLResponse *response, ErrorResp *errorResp, NSError *error)) block{
++(NSURLSessionDataTask *)upgradeForEnterpriseByName:(NSString*)name type:(NSString*)type brands:(NSString*)brands contact:(NSString*)contact openStartTime:(NSString*)openStartTime openEndTime:(NSString*)openEndTime lat:(NSString*)lat lon:(NSString*)lon province:(NSString*)province city:(NSString*)city county:(NSString*)county address:(NSString*)address lonLatType:(NSString*)lonLatType logoFile:(UIImage*)logoFile block:(void (^)(NSURLResponse *response, ErrorResp *errorResp, NSError *error)) block{
     
     NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
     if (name) {
@@ -722,6 +723,9 @@
     if (address) {
         [params setObject:address forKey:@"address"];
     }
+    if (lonLatType) {
+        [params setObject:lonLatType forKey:@"lonLatType"];
+    }
     
     return [[AFAppDotNetAPIClient sharedClient] UPLOAD:@"api-user/v3.1/users/upgrade2enterprise" parameters:params image:logoFile completionHandler:^(NSURLResponse *response, id JSON, NSError *error) {
         if(block){
@@ -758,6 +762,39 @@
                 SimChargeOrderResp *mSimChargeOrderResp = [SimChargeOrderResp mj_objectWithKeyValues:JSON];
                 block(mSimChargeOrderResp, error);
             } else {
+                block(nil, error);
+            }
+        }
+    }];
+}
+
++(NSURLSessionDataTask *)uploadIDCertification:(UIImage*)frontFile backFile:(UIImage*)backFile handFile:(UIImage*)handFile block:(void (^)(NSURLResponse *response, ErrorResp *errorResp, NSError *error)) block{
+    
+    NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
+    
+    return [[AFAppDotNetAPIClient sharedClient] UPLOAD:@"api-user/v3.1/users/certificationByIdNum" parameters:params image1:frontFile image2:backFile image3:handFile completionHandler:^(NSURLResponse *response, id JSON, NSError *error) {
+        if(block){
+            if (JSON) {
+                ErrorResp *mErrorResp = [ErrorResp mj_objectWithKeyValues:JSON];
+                block(response, mErrorResp, error);
+            } else {
+                block(response, nil, error);
+            }
+        }
+    }];
+}
+
++(NSURLSessionDataTask *)getCities:(void (^)(NSArray *_cityArray, NSError *error)) block {
+    return [[AFAppDotNetAPIClient sharedClient] GET:@"api-order/v3.1/areas/cities-4-app" parameters:nil completionHandler:^(NSURLResponse *response, id JSON, NSError *error) {
+        if(block){
+            if(JSON){
+                NSArray *cityArray = [City mj_objectArrayWithKeyValuesArray:JSON];
+                if(cityArray){
+                    block(cityArray, nil);
+                }else{
+                    block(nil, error);
+                }
+            }else{
                 block(nil, error);
             }
         }

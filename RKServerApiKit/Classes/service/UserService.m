@@ -8,6 +8,7 @@
 
 #import "UserService.h"
 #import "Validator.h"
+#import "City.h"
 
 @implementation UserService
 NSString * const USER = @"USER";
@@ -280,8 +281,8 @@ NSString * const USER = @"USER";
     return [UserApi verifyCodeByToken:tokenString mobile:mobile block:block];
 }
 
-+(NSURLSessionDataTask *)upgradeForEnterpriseByName:(NSString*)name type:(NSString*)type brands:(NSString*)brands contact:(NSString*)contact openStartTime:(NSString*)openStartTime openEndTime:(NSString*)openEndTime lat:(NSString*)lat lon:(NSString*)lon province:(NSString*)province city:(NSString*)city county:(NSString*)county address:(NSString*)address logoFile:(UIImage*)logoFile block:(void (^)(NSURLResponse *response, ErrorResp *errorResp, NSError *error)) block {
-    return [UserApi upgradeForEnterpriseByName:name type:type brands:brands contact:contact openStartTime:openStartTime openEndTime:openEndTime lat:lat lon:lon province:province city:city county:county address:address logoFile:logoFile block:block];
++(NSURLSessionDataTask *)upgradeForEnterpriseByName:(NSString*)name type:(NSString*)type brands:(NSString*)brands contact:(NSString*)contact openStartTime:(NSString*)openStartTime openEndTime:(NSString*)openEndTime lat:(NSString*)lat lon:(NSString*)lon province:(NSString*)province city:(NSString*)city county:(NSString*)county address:(NSString*)address lonLatType:(NSString*)lonLatType logoFile:(UIImage*)logoFile block:(void (^)(NSURLResponse *response, ErrorResp *errorResp, NSError *error)) block {
+    return [UserApi upgradeForEnterpriseByName:name type:type brands:brands contact:contact openStartTime:openStartTime openEndTime:openEndTime lat:lat lon:lon province:province city:city county:county address:address lonLatType:lonLatType logoFile:logoFile block:block];
 }
 
 +(NSURLSessionDataTask *)getSimChargeOrders:(NSString*)page limit:(NSString*)limit block:(void (^)(SimChargeOrderResp *_SimChargeOrderResp, NSError *error)) block {
@@ -297,6 +298,23 @@ NSString * const USER = @"USER";
             block(nil, error);
         }
     }];
+}
+
++(NSURLSessionDataTask *)uploadIDCertification:(UIImage*)frontFile backFile:(UIImage*)backFile handFile:(UIImage*)handFile block:(void (^)(NSURLResponse *response, ErrorResp *errorResp, NSError *error)) block {
+    return [UserApi uploadIDCertification:frontFile backFile:backFile handFile:handFile block:block];
+}
+
++(NSURLSessionDataTask *)refreshToken:(void (^)(GetAuthTokenResp *_getAuthTokenResp, NSError *error)) block {
+    LoginedUser *_LoginedUser = [RealmManager queryLoginedUser];
+    if (_LoginedUser.phoneNum && _LoginedUser.password) {
+        return [UserService loginGetToken:_LoginedUser.phoneNum password:_LoginedUser.password block:block];
+    } else {
+        return [UserService loginWithOpenPlatform:_LoginedUser.openType openId:_LoginedUser.openId nickName:_LoginedUser.nickname headimgUrl:_LoginedUser.headimgUrl gender:_LoginedUser.gender province:_LoginedUser.province city:_LoginedUser.city country:_LoginedUser.country block:block];
+    }
+}
+
++(NSURLSessionDataTask *)getCities:(void (^)(NSArray *_cityArray, NSError *error)) block {
+    return [UserApi getCities:block];
 }
 
 @end

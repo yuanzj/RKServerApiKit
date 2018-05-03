@@ -20,7 +20,7 @@
 @property (assign, nonatomic) double lat;
 @property (assign, nonatomic) double lon;
 @property (strong, nonatomic) NSString* brands;
-//1:骑多多 2：美团 3：饿了么
+//0：电动车经销商 1：骑士之家 2: 美团 3：饿了么 4:电池经销商 5:认证维修网点
 @property (assign, nonatomic) int type;
 @property (strong, nonatomic) NSString* status;
 @property (strong, nonatomic) NSString* userId;
@@ -29,5 +29,7 @@
 @property (strong, nonatomic) NSString* linkman;
 @property (strong, nonatomic) NSString* province;
 @property (strong, nonatomic) NSString* city;
+//0:GPS 1:BAIDU
+@property (assign, nonatomic) int lonLatType;
 
 @end
