@@ -23,9 +23,9 @@
 #import <CocoaSecurity/CocoaSecurity.h>
 
 #ifdef DEV_SERVER_MODEL
-static NSString * const AFAppDotNetAPIBaseURLString = @"http://cjl3.rokyinfo.net:7190/";
+static NSString * const AFAppDotNetAPIBaseURLString = @"http://cjl3.rokyinfo.net:7200/";
 #else
-static NSString * const AFAppDotNetAPIBaseURLString = @"http://cjl3.rokyinfo.net:7190/";
+static NSString * const AFAppDotNetAPIBaseURLString = @"http://cjl3.rokyinfo.net:7200/";
 #endif
 
 //#ifdef DEV_SERVER_MODEL
@@ -80,5 +80,12 @@ static NSString * const AFAppDotNetAPIBaseURLString = @"http://cjl3.rokyinfo.net
                    parameters:(id)parameters
                         image:(UIImage*)image
             completionHandler:(void (^)(NSURLResponse *response, id responseObject, NSError *error))completionHandler;
+
+- (NSURLSessionDataTask*)UPLOAD:(NSString *)URLString
+                     parameters:(id)parameters
+                          image1:(UIImage*)image1
+                         image2:(UIImage*)image2
+                         image3:(UIImage*)image3
+              completionHandler:(void (^)(NSURLResponse *response, id responseObject, NSError *error))completionHandler;
 
 @end

@@ -316,4 +316,11 @@
     return [UeApi endEbike:orderId safeCode:safeCode block:block];
 }
 
+/**
+ * 获取ebike等的信息
+ */
++(NSURLSessionDataTask *)getEproductInfo:(NSString*)ueSn block:(void (^)(Eproduct *mEproduct, NSError *error)) block {
+    return [UeApi getEproductInfo:ueSn block:block];
+}
+
 @end

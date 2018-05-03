@@ -659,4 +659,21 @@
     }];
 }
 
++(NSURLSessionDataTask *)getEproductInfo:(NSString*)ueSn block:(void (^)(Eproduct *mEproduct, NSError *error)) block {
+    return [[AFAppDotNetAPIClient sharedClient] GET:[@"/api-ebike/v3.1/ues/" stringByAppendingString:ueSn] parameters:nil completionHandler:^(NSURLResponse *response, id JSON, NSError *error) {
+        if(block){
+            if(JSON){
+                Eproduct *mEproduct = [Eproduct mj_objectWithKeyValues:JSON];
+                if(mEproduct){
+                    block(mEproduct, nil);
+                }else{
+                    block(nil, error);
+                }
+            }else{
+                block(nil, error);
+            }
+        }
+    }];
+}
+
 @end
