@@ -9,6 +9,8 @@
 
 @interface Eproduct : NSObject
 
+@property (copy, nonatomic) NSString* id;
+
 @property (copy, nonatomic) NSString* ueSn;
 /**
  * 对应的产品规格

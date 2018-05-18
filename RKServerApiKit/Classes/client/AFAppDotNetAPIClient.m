@@ -494,10 +494,10 @@
         NSData *imageData1 = UIImageJPEGRepresentation(image1, 0.5);
         [formData appendPartWithFileData:imageData1 name:@"frontFile" fileName:fileName1 mimeType:@"image/jpeg"];
         
-        NSString *str2 = [formatter stringFromDate:[NSDate date]];
-        NSString *fileName2 = [NSString stringWithFormat:@"%@.jpg", str2];
-        NSData *imageData2 = UIImageJPEGRepresentation(image2, 0.5);
-        [formData appendPartWithFileData:imageData2 name:@"backFile" fileName:fileName2 mimeType:@"image/jpeg"];
+//        NSString *str2 = [formatter stringFromDate:[NSDate date]];
+//        NSString *fileName2 = [NSString stringWithFormat:@"%@.jpg", str2];
+//        NSData *imageData2 = UIImageJPEGRepresentation(image2, 0.5);
+//        [formData appendPartWithFileData:imageData2 name:@"backFile" fileName:fileName2 mimeType:@"image/jpeg"];
         
         NSString *str3 = [formatter stringFromDate:[NSDate date]];
         NSString *fileName3 = [NSString stringWithFormat:@"%@.jpg", str3];

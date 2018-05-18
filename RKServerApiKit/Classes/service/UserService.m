@@ -112,7 +112,9 @@ NSString * const USER = @"USER";
     return [UserApi getUserDetailWithBlock:^(UserInfo *_userInfo, NSError *error){
         
         if (_userInfo) {
+            [UserInfo setUserInfo:nil];
             [RealmManager saveUserInfo:_userInfo];
+            [UserInfo setUserInfo:_userInfo];
             block(_userInfo, nil);
         } else {
             block(nil, error);

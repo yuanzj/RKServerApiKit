@@ -660,7 +660,7 @@
 }
 
 +(NSURLSessionDataTask *)getEproductInfo:(NSString*)ueSn block:(void (^)(Eproduct *mEproduct, NSError *error)) block {
-    return [[AFAppDotNetAPIClient sharedClient] GET:[@"/api-ebike/v3.1/ues/" stringByAppendingString:ueSn] parameters:nil completionHandler:^(NSURLResponse *response, id JSON, NSError *error) {
+    return [[AFAppDotNetAPIClient sharedClient] GET:[@"/api-order/v3.1/products/detail?ccuSn=" stringByAppendingString:ueSn] parameters:nil completionHandler:^(NSURLResponse *response, id JSON, NSError *error) {
         if(block){
             if(JSON){
                 Eproduct *mEproduct = [Eproduct mj_objectWithKeyValues:JSON];
