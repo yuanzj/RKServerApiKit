@@ -241,6 +241,10 @@ NSString * const USER = @"USER";
     return [UserApi getEbikeStores:leftBottomLat leftBottomLng:leftBottomLng rightTopLat:rightTopLat rightTopLng:rightTopLng type:type page:page limit:limit block:block];
 }
 
++(NSURLSessionDataTask *)getEbikeStoresWithPage:(NSString*)page limit:(NSString*)limit category:(NSString*)category block:(void (^)(EbikeStoreResp *_EbikeStoreResp, NSError *error)) block{
+    return [UserApi getEbikeStoresWithPage:page limit:limit category:category block:block];
+}
+
 +(NSURLSessionDataTask *)getEbikeStoresByProvice:(NSString*)provice city:(NSString*)city type:(NSString*)type page:(NSString*)page limit:(NSString*)limit block:(void (^)(EbikeStoreResp *_EbikeStoreResp, NSError *error)) block {
     return [UserApi getEbikeStoresByProvice:provice city:city type:type page:page limit:limit block:block];
 }

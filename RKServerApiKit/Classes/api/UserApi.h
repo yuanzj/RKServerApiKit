@@ -254,6 +254,12 @@
 +(NSURLSessionDataTask *)getEbikeStores:(NSString*)leftBottomLat leftBottomLng:(NSString*)leftBottomLng rightTopLat:(NSString*)rightTopLat rightTopLng:(NSString*)rightTopLng type:(NSString*)type page:(NSString*)page limit:(NSString*)limit block:(void (^)(EbikeStoreResp *_EbikeStoreResp, NSError *error)) block;
 
 /**
+ * 根据权限获取获取网点接口
+ */
++(NSURLSessionDataTask *)getEbikeStoresWithPage:(NSString*)page limit:(NSString*)limit category:(NSString*)category block:(void (^)(EbikeStoreResp *_EbikeStoreResp, NSError *error)) block;
+
+
+/**
  * 通过城市获取网点接口
  */
 +(NSURLSessionDataTask *)getEbikeStoresByProvice:(NSString*)provice city:(NSString*)city type:(NSString*)type page:(NSString*)page limit:(NSString*)limit block:(void (^)(EbikeStoreResp *_EbikeStoreResp, NSError *error)) block;

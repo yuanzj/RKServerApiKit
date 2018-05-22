@@ -7,8 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <Realm/Realm.h>
 
-@interface EbikeStore : NSObject
+@interface EbikeStore : RLMObject
 
 @property (assign, nonatomic) int id;
 @property (strong, nonatomic) NSString* name;
@@ -29,6 +30,7 @@
 @property (strong, nonatomic) NSString* linkman;
 @property (strong, nonatomic) NSString* province;
 @property (strong, nonatomic) NSString* city;
+@property (strong, nonatomic) NSString* code;
 //0:GPS 1:BAIDU
 @property (assign, nonatomic) int lonLatType;
 

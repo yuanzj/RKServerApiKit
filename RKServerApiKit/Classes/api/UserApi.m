@@ -574,6 +574,24 @@
     }];
 }
 
++(NSURLSessionDataTask *)getEbikeStoresWithPage:(NSString*)page limit:(NSString*)limit category:(NSString*)category block:(void (^)(EbikeStoreResp *_EbikeStoreResp, NSError *error)) block {
+    return [[AFAppDotNetAPIClient sharedClient] GET:@"api-user/v3.1/ebikestores/list-4-manager" parameters:@{@"showFlag":@"0", @"page":page, @"limit":limit, @"category":category} completionHandler:^(NSURLResponse *response, id JSON, NSError *error) {
+        if(block){
+            if (JSON) {
+                [EbikeStoreResp mj_setupObjectClassInArray:^NSDictionary *{
+                    return @{
+                             @"list" : [EbikeStore class]
+                             };
+                }];
+                EbikeStoreResp *mEbikeStoreResp = [EbikeStoreResp mj_objectWithKeyValues:JSON];
+                block(mEbikeStoreResp, error);
+            } else {
+                block(nil, error);
+            }
+        }
+    }];
+}
+
 +(NSURLSessionDataTask *)getEbikeStoresByProvice:(NSString*)province city:(NSString*)city type:(NSString*)type page:(NSString*)page limit:(NSString*)limit block:(void (^)(EbikeStoreResp *_EbikeStoreResp, NSError *error)) block {
     
     NSMutableDictionary *params = [[NSMutableDictionary alloc] init];

@@ -7,6 +7,7 @@
 //
 
 #import "BaseResponse.h"
+#import "EbikeStore.h"
 #import <Realm/Realm.h>
 
 @interface UserInfo : RLMObject
@@ -28,6 +29,8 @@
 @property (copy, nonatomic) NSString* modifyTime;
 @property (copy, nonatomic) NSString* roles;
 @property (copy, nonatomic) NSString* storeId;
+
+@property (strong, nonatomic) EbikeStore* ebikeStoreEntity;
 
 + (void)setUserInfo:(UserInfo *)_UserInfo;
 

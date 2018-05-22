@@ -16,10 +16,10 @@ PODS:
     - AFNetworking/NSURLSession
   - CocoaSecurity (1.2.4)
   - MJExtension (3.0.13)
-  - Realm (2.4.3):
-    - Realm/Headers (= 2.4.3)
-  - Realm/Headers (2.4.3)
-  - RKServerApiKit (3.1.6):
+  - Realm (3.5.0):
+    - Realm/Headers (= 3.5.0)
+  - Realm/Headers (3.5.0)
+  - RKServerApiKit (3.2.15):
     - AFNetworking (~> 3.1.0)
     - CocoaSecurity
     - MJExtension
@@ -30,15 +30,15 @@ DEPENDENCIES:
 
 EXTERNAL SOURCES:
   RKServerApiKit:
-    :path: "../"
+    :path: ../
 
 SPEC CHECKSUMS:
   AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
   CocoaSecurity: d288a6f87e0f363823d2cb83e753814a6944f71a
   MJExtension: 5932755f451458eefa24239358817f8d291240c7
-  Realm: e08d60b0048ccccd3949c8c28a92c4db5712d7e9
-  RKServerApiKit: 9a758a690050efc8722c4283a50b2793afc2b91a
+  Realm: 0378021c424e4e2bd6a0e63b27881e929d9b9ad1
+  RKServerApiKit: 177e619a3fa3460e7e3e1d90d4d68b7538135ab4
 
 PODFILE CHECKSUM: 8f6f5bdf202838ed6366166d3260820216feb7bf
 
-COCOAPODS: 1.2.0
+COCOAPODS: 1.4.0
