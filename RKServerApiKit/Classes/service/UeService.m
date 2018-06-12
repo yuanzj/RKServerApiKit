@@ -130,12 +130,12 @@
 /**
  * 最近7天耗电量统计
  */
-+(NSURLSessionDataTask *)ridePowerStatistic:(void (^)(NSArray *_RidePowerStatisticArray, NSError *error)) block {
-    return [UeApi ridePowerStatistic:^(NSArray *_RidePowerStatisticArray, NSError *error) {
++(NSURLSessionDataTask *)ridePowerStatistic:(NSString*)ueSn block:(void (^)(NSArray *_RidePowerStatisticArray, NSError *error)) block {
+    return [UeApi ridePowerStatistic:ueSn block:^(NSArray *_RidePowerStatisticArray, NSError *error) {
         if (_RidePowerStatisticArray) {
-             block(_RidePowerStatisticArray, nil);
+            block(_RidePowerStatisticArray, nil);
         } else {
-             block(nil, error);
+            block(nil, error);
         }
     }];
 }
@@ -156,8 +156,8 @@
 /**
  * 行车记录概要统计
  */
-+(NSURLSessionDataTask *)getRideRecord:(NSString*)startTime page:(NSString*)page limit:(NSString*)limit sort:(NSString*)sort block:(void (^)(RideRecordResponse *_RideSpeedStatistic, NSError *error)) block{
-    return [UeApi getRideRecord:startTime page:page limit:limit sort:sort block:^(RideRecordResponse *_RideRecordResponse, NSError *error) {
++(NSURLSessionDataTask *)getRideRecord:(NSString*)startTime page:(NSString*)page limit:(NSString*)limit sort:(NSString*)sort ueSn:(NSString*)ueSn block:(void (^)(RideRecordResponse *_RideSpeedStatistic, NSError *error)) block{
+    return [UeApi getRideRecord:startTime page:page limit:limit sort:sort ueSn:ueSn block:^(RideRecordResponse *_RideRecordResponse, NSError *error) {
         if (_RideRecordResponse) {
             if(_RideRecordResponse.state == RKSAPIResponseSuccess){
                 
