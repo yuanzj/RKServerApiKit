@@ -180,8 +180,8 @@
 /**
  * 最近7天耗电量统计
  */
-+(NSURLSessionDataTask *)ridePowerStatistic:(void (^)(NSArray *_RidePowerStatisticArray, NSError *error)) block{
-    return [[AFAppDotNetAPIClient sharedClient] GET:@"api-analyze/v3.1/statistics/day/power" parameters:nil completionHandler:^(NSURLResponse *response, id JSON, NSError *error) {
++(NSURLSessionDataTask *)ridePowerStatistic:(NSString*)ueSn block:(void (^)(NSArray *_RidePowerStatisticArray, NSError *error)) block{
+    return [[AFAppDotNetAPIClient sharedClient] GET:[NSString stringWithFormat:@"api-analyze/v3.1/statistics/day/power/%@",ueSn] parameters:nil completionHandler:^(NSURLResponse *response, id JSON, NSError *error) {
         if(block){
             if(JSON){
                 NSArray *ridePowerStatisticArray = [RidePowerStatistic mj_objectArrayWithKeyValuesArray:JSON];
@@ -220,7 +220,7 @@
 /**
  * 行车记录概要统计
  */
-+(NSURLSessionDataTask *)getRideRecord:(NSString*)startTime page:(NSString*)page limit:(NSString*)limit sort:(NSString*)sort block:(void (^)(RideRecordResponse *_RideSpeedStatistic, NSError *error)) block{
++(NSURLSessionDataTask *)getRideRecord:(NSString*)startTime page:(NSString*)page limit:(NSString*)limit sort:(NSString*)sort ueSn:(NSString*)ueSn block:(void (^)(RideRecordResponse *_RideSpeedStatistic, NSError *error)) block{
     
     NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
     
@@ -236,7 +236,11 @@
     if (sort) {
         [params setObject:sort forKey:@"sort"];
     }
-
+    
+    if (ueSn) {
+        [params setObject:ueSn forKey:@"ccuSn"];
+    }
+    
     return [[AFAppDotNetAPIClient sharedClient] GET:@"/api-analyze/v3.1/riderecords" parameters:params completionHandler:^(NSURLResponse *response, id JSON, NSError *error) {
         if(block){
             if(JSON){
@@ -258,7 +262,7 @@
             }
         }
     }];
-
+    
 }
 
 /**
