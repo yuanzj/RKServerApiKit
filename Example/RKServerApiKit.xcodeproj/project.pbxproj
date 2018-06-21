@@ -208,7 +208,6 @@
 				6003F587195388D20070C39A /* Frameworks */,
 				6003F588195388D20070C39A /* Resources */,
 				5479529F63214DA381B1F381 /* [CP] Embed Pods Frameworks */,
-				9F36B56B664D768D9CC229FF /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -227,8 +226,6 @@
 				6003F5AA195388D20070C39A /* Sources */,
 				6003F5AB195388D20070C39A /* Frameworks */,
 				6003F5AC195388D20070C39A /* Resources */,
-				777551BF9E8EAB9BD387A5AF /* [CP] Embed Pods Frameworks */,
-				A17155BB2980CF30893654B6 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -338,51 +335,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-RKServerApiKit_Example/Pods-RKServerApiKit_Example-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		777551BF9E8EAB9BD387A5AF /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-RKServerApiKit_Tests/Pods-RKServerApiKit_Tests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		9F36B56B664D768D9CC229FF /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-RKServerApiKit_Example/Pods-RKServerApiKit_Example-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		A17155BB2980CF30893654B6 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-RKServerApiKit_Tests/Pods-RKServerApiKit_Tests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		E81C02C1B08CB8346C10CBC0 /* [CP] Check Pods Manifest.lock */ = {
