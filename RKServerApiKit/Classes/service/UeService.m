@@ -48,6 +48,13 @@
 }
 
 /**
+ * 获取设备上报实时信息
+ */
++(NSURLSessionDataTask *)getBetteryDetail:(NSString*)ueSn block:(void (^)(BetteryDetailResp *_betteryDetailResponse, NSError *error)) block {
+    return [UeApi getBetteryDetail:ueSn block:block];
+}
+
+/**
  * 获取指定日期骑行统计
  */
 +(NSURLSessionDataTask *)rideDayStatistic:(NSString*)ueSn time:(NSString*)time block:(void (^)(RideDayStatisticResponse *_RideDayStatisticResponse, NSError *error)) block{

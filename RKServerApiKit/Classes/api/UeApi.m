@@ -96,6 +96,28 @@
 
 }
 
+
+/**
+ * 获取设备上报实时信息
+ */
++(NSURLSessionDataTask *)getBetteryDetail:(NSString*)ueSn block:(void (^)(BetteryDetailResp *_betteryDetailResponse, NSError *error)) block {
+    
+    return [[AFAppDotNetAPIClient sharedClient] GET:[NSString stringWithFormat:@"/api-ebike/v3.1/ues/%@/rt-info",ueSn] parameters:nil completionHandler:^(NSURLResponse *response, id responseObject, NSError *error) {
+        if(block){
+            if (responseObject) {
+                BetteryDetailResp *mBetteryDetailResp = [BetteryDetailResp mj_objectWithKeyValues:responseObject];
+                if(mBetteryDetailResp){
+                    block(mBetteryDetailResp, nil);
+                }else{
+                    block(nil, error);
+                }
+            } else {
+                block(nil, error);
+            }
+        }
+    }];
+}
+
 #pragma mark -
 #pragma mark 数据统计
 
