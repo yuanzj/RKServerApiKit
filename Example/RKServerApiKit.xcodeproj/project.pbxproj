@@ -61,7 +61,7 @@
 		6003F5B9195388D20070C39A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		6003F5BB195388D20070C39A /* Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Tests.m; sourceTree = "<group>"; };
 		606FC2411953D9B200FFA9A0 /* Tests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Tests-Prefix.pch"; sourceTree = "<group>"; };
-		84AAC96DE6E54CF53CB54722 /* RKServerApiKit.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = RKServerApiKit.podspec; path = ../RKServerApiKit.podspec; sourceTree = "<group>"; };
+		84AAC96DE6E54CF53CB54722 /* RKServerApiKit.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = RKServerApiKit.podspec; path = ../RKServerApiKit.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		873B8AEA1B1F5CCA007FD442 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		AF4D16D4F98630AF80DE64CC /* Pods-RKServerApiKit_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RKServerApiKit_Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-RKServerApiKit_Tests/Pods-RKServerApiKit_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		D99F86E4127ECA50C253E770 /* Pods_RKServerApiKit_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RKServerApiKit_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -208,7 +208,6 @@
 				6003F587195388D20070C39A /* Frameworks */,
 				6003F588195388D20070C39A /* Resources */,
 				5479529F63214DA381B1F381 /* [CP] Embed Pods Frameworks */,
-				9F36B56B664D768D9CC229FF /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -227,8 +226,6 @@
 				6003F5AA195388D20070C39A /* Sources */,
 				6003F5AB195388D20070C39A /* Frameworks */,
 				6003F5AC195388D20070C39A /* Resources */,
-				777551BF9E8EAB9BD387A5AF /* [CP] Embed Pods Frameworks */,
-				A17155BB2980CF30893654B6 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -338,51 +335,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-RKServerApiKit_Example/Pods-RKServerApiKit_Example-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		777551BF9E8EAB9BD387A5AF /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-RKServerApiKit_Tests/Pods-RKServerApiKit_Tests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		9F36B56B664D768D9CC229FF /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-RKServerApiKit_Example/Pods-RKServerApiKit_Example-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		A17155BB2980CF30893654B6 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-RKServerApiKit_Tests/Pods-RKServerApiKit_Tests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		E81C02C1B08CB8346C10CBC0 /* [CP] Check Pods Manifest.lock */ = {
