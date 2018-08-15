@@ -73,6 +73,7 @@
 #import "Validator.h"
 #import "AuthCodeResponse.h"
 #import "BaseResponse.h"
+#import "BetteryDetailResp.h"
 #import "CarFaultResponse.h"
 #import "CarStatusResponse.h"
 #import "CarVersionInfoResponse.h"

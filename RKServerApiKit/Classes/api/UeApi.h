@@ -30,6 +30,7 @@
 #import "CarVersionParams.h"
 #import "Order.h"
 #import "Eproduct.h"
+#import "BetteryDetailResp.h"
 
 @interface UeApi : NSObject
 
@@ -55,6 +56,11 @@
  * 获取中控设备详情
  */
 +(NSURLSessionDataTask *)getCCUDetail:(NSString*)ueSn block:(void (^)(CCUDetailResponse *_GPSDetailResponse, NSError *error)) block;
+
+/**
+ * 获取设备上报实时信息
+ */
++(NSURLSessionDataTask *)getBetteryDetail:(NSString*)ueSn block:(void (^)(BetteryDetailResp *_betteryDetailResponse, NSError *error)) block;
 
 
 #pragma mark -
