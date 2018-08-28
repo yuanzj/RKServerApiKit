@@ -24,6 +24,10 @@
 
 @end
 
+@implementation BCUVersion
+
+@end
+
 @implementation CarVersionInfo
 
 @end

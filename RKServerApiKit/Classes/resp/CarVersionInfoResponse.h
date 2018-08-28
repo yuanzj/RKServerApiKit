@@ -42,12 +42,21 @@
 
 @end
 
+@interface BCUVersion : NSObject
+
+@property (copy, nonatomic) NSString * bcuSn;
+@property (copy, nonatomic) NSString * bcuFirmwareVersion;
+@property (copy, nonatomic) NSString * bcuHardwareVersion;
+
+@end
+
 @interface CarVersionInfo : NSObject
 
 @property (strong, nonatomic) CCUVersion * ccu;
 @property (strong, nonatomic) ECUVersion * ecu;
 @property (strong, nonatomic) DCUVersion * dcu;
 @property (strong, nonatomic) PCUVersion * pcu;
+@property (strong, nonatomic) BCUVersion * bcu;
 
 @end
 
